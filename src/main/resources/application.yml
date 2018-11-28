@@ -21,12 +21,12 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
-#mybatis:
-#  mapper-locations: cn.mikey.eas.Mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
-#  type-aliases-package: cn.mikey.eas.Pojo # 注意：对应实体类的路径
-#  configuration:
-##  驼峰法命名
-#    map-underscore-to-camel-case: false
+mybatis:
+  mapper-locations: com.mikey.design.mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.mikey.design.entity # 注意：对应实体类的路径
+  configuration:
+#  驼峰法命名
+    map-underscore-to-camel-case: false
 #pagehelper分页插件
 pagehelper:
   helperDialect: mysql
@@ -37,4 +37,4 @@ pagehelper:
 logging:
   level:
     #Mapper所在的包
-    com.mikey.eas.Mapper: debug
+    com.mikey.design.Mapper: debug
