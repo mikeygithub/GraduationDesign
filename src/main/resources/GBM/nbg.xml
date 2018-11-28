@@ -19,34 +19,30 @@
         </javaTypeResolver>
 
         <!-- 指定javaBean生成的位置 -->
-        <javaModelGenerator targetPackage="com.mikey.design.gbm"
+        <javaModelGenerator targetPackage="com.mikey.design.MapperBackups.entity"
                             targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!--指定sql映射文件生成的位置 -->
-        <sqlMapGenerator targetPackage="com.mikey.design.gbm" targetProject=".\src\main\java">
+        <sqlMapGenerator targetPackage="com.mikey.design.MapperBackups.mapper" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 指定dao接口生成的位置，mapper接口 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.mikey.design.gbm" targetProject=".\src\main\java">
+                             targetPackage="com.mikey.design.MapperBackups.mapper" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
 
         <!-- table指定每个表的生成策略 -->
-        <table tableName="eas_user" domainObjectName="User"></table>
-        <table tableName="eas_class" domainObjectName="Class"></table>
-        <table tableName="eas_email" domainObjectName="Email"></table>
-        <table tableName="eas_menu" domainObjectName="Menu"></table>
-        <table tableName="eas_org" domainObjectName="Org"></table>
-        <table tableName="eas_role" domainObjectName="Role"></table>
-        <table tableName="eas_role_menu" domainObjectName="RoleToMenu"></table>
-        <table tableName="eas_user_org" domainObjectName="UserToOrg"></table>
-        <table tableName="eas_user_role" domainObjectName="UserToRole"></table>
+        <table tableName="des_student" domainObjectName="Student"></table>
+        <table tableName="des_admin" domainObjectName="Admin"></table>
+        <table tableName="des_design" domainObjectName="Design"></table>
+        <table tableName="des_teacher" domainObjectName="Teacher"></table>
+        <table tableName="des_wish" domainObjectName="Wish"></table>
 
     </context>
 </generatorConfiguration>

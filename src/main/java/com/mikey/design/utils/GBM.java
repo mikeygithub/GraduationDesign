@@ -24,7 +24,7 @@ public class GBM {
     public static void main(String[] args) throws Exception {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
-        File configFile = new File("classpath:/GBM/nbg.xml");
+        File configFile = new File("E:\\MIKEY\\MobileFile\\Image\\GraduationDesign\\src\\main\\resources\\GBM\\nbg.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
