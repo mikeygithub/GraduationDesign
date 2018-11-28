@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mikey.design.mapper.WishMapper">
+  <resultMap id="BaseResultMap" type="com.mikey.design.entity.Wish">
+    <id column="wish_id" jdbcType="INTEGER" property="wishId" />
+    <result column="wish_fist" jdbcType="VARCHAR" property="wishFist" />
+    <result column="wish_second" jdbcType="VARCHAR" property="wishSecond" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    wish_id, wish_fist, wish_second
+  </sql>
+  <select id="selectByExample" parameterType="com.mikey.design.entity.WishExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from des_wish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from des_wish
+    where wish_id = #{wishId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from des_wish
+    where wish_id = #{wishId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mikey.design.entity.WishExample">
+    delete from des_wish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mikey.design.entity.Wish">
+    insert into des_wish (wish_id, wish_fist, wish_second
+      )
+    values (#{wishId,jdbcType=INTEGER}, #{wishFist,jdbcType=VARCHAR}, #{wishSecond,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mikey.design.entity.Wish">
+    insert into des_wish
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wishId != null">
+        wish_id,
+      </if>
+      <if test="wishFist != null">
+        wish_fist,
+      </if>
+      <if test="wishSecond != null">
+        wish_second,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wishId != null">
+        #{wishId,jdbcType=INTEGER},
+      </if>
+      <if test="wishFist != null">
+        #{wishFist,jdbcType=VARCHAR},
+      </if>
+      <if test="wishSecond != null">
+        #{wishSecond,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mikey.design.entity.WishExample" resultType="java.lang.Long">
+    select count(*) from des_wish
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update des_wish
+    <set>
+      <if test="record.wishId != null">
+        wish_id = #{record.wishId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wishFist != null">
+        wish_fist = #{record.wishFist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wishSecond != null">
+        wish_second = #{record.wishSecond,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update des_wish
+    set wish_id = #{record.wishId,jdbcType=INTEGER},
+      wish_fist = #{record.wishFist,jdbcType=VARCHAR},
+      wish_second = #{record.wishSecond,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mikey.design.entity.Wish">
+    update des_wish
+    <set>
+      <if test="wishFist != null">
+        wish_fist = #{wishFist,jdbcType=VARCHAR},
+      </if>
+      <if test="wishSecond != null">
+        wish_second = #{wishSecond,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wish_id = #{wishId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mikey.design.entity.Wish">
+    update des_wish
+    set wish_fist = #{wishFist,jdbcType=VARCHAR},
+      wish_second = #{wishSecond,jdbcType=VARCHAR}
+    where wish_id = #{wishId,jdbcType=INTEGER}
+  </update>
+</mapper>
