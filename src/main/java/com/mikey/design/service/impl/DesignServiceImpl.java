@@ -27,7 +27,7 @@ public class DesignServiceImpl implements DesignService {
      */
     @Override
     public void addDesign(Design design) {
-
+        designMapper.insert(design);
     }
 
     /**
@@ -36,7 +36,7 @@ public class DesignServiceImpl implements DesignService {
      */
     @Override
     public void updateDesign(Design design) {
-
+        designMapper.updateByPrimaryKey(design);
     }
 
     /**
@@ -45,7 +45,7 @@ public class DesignServiceImpl implements DesignService {
      */
     @Override
     public void deleteDesign(int designId) {
-
+        designMapper.deleteByPrimaryKey(designId);
     }
 
     /**
@@ -54,6 +54,6 @@ public class DesignServiceImpl implements DesignService {
      */
     @Override
     public List<Design> getAllDesign() {
-        return null;
+        return designMapper.selectByExample(null);
     }
 }

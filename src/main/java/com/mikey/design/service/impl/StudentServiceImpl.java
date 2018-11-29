@@ -1,6 +1,7 @@
 package com.mikey.design.service.impl;
 
 import com.mikey.design.entity.Student;
+import com.mikey.design.entity.StudentExample;
 import com.mikey.design.mapper.StudentMapper;
 import com.mikey.design.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public void addStudent(Student student) {
-
+        studentMapper.insert(student);
     }
 
     /**
@@ -35,6 +36,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void updateStudent(Student student) {
 
+        studentMapper.updateByPrimaryKey(student);
     }
 
     /**
@@ -44,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(int studentId) {
 
+        studentMapper.deleteByPrimaryKey(studentId);
     }
 
     /**
@@ -52,6 +55,10 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public int getStudentNum() {
+        StudentExample studentExample=new StudentExample();
+        StudentExample.Criteria criteria = studentExample.createCriteria();
+//        criteria.
+
         return 0;
     }
 
@@ -62,5 +69,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void getStudent(int studentId) {
 
+        studentMapper.selectByPrimaryKey(studentId);
     }
 }

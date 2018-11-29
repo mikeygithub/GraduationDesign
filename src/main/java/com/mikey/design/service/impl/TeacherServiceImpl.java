@@ -35,6 +35,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void addTeacher(Teacher teacher) {
 
+        teacherMapper.insert(teacher);
     }
 
     /**
@@ -44,6 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void updateTeacherNum(Teacher teacher) {
 
+        teacherMapper.updateByPrimaryKey(teacher);
     }
 
     /**
@@ -53,5 +55,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void deleteTeacherNum(int teacherId) {
 
+        teacherMapper.deleteByPrimaryKey(teacherId);
     }
 }

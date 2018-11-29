@@ -4,7 +4,9 @@ import com.mikey.design.entity.Wish;
 import com.mikey.design.entity.WishExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface WishMapper {
     long countByExample(WishExample example);
 

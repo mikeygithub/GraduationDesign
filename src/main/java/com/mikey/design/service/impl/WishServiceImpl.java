@@ -29,6 +29,7 @@ public class WishServiceImpl implements WishService {
     @Override
     public void addWish(Wish wish) {
 
+        wishMapper.insert(wish);
     }
 
     /**
@@ -37,6 +38,7 @@ public class WishServiceImpl implements WishService {
      */
     @Override
     public void updateWish(Wish wish) {
+        wishMapper.updateByPrimaryKey(wish);
 
     }
 
@@ -47,7 +49,7 @@ public class WishServiceImpl implements WishService {
      */
     @Override
     public Wish getWish(int wishId) {
-        return null;
+        return wishMapper.selectByPrimaryKey(wishId);
     }
 
     /**
@@ -56,6 +58,6 @@ public class WishServiceImpl implements WishService {
      */
     @Override
     public List<Wish> getAllWish() {
-        return null;
+        return wishMapper.selectByExample(null);
     }
 }
