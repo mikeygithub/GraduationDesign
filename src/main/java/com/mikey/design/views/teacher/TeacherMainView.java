@@ -34,15 +34,16 @@ public class TeacherMainView extends JFrame {  //0.继承JFrame
         JPanel title=new JPanel();
         JPanel main=new JPanel();
 
-        //3. 添加各个组件
+
+        //3. 添加组件
         this.add(jButton, BorderLayout.CENTER);  //布局的中间
-        this.add(jButton2, BorderLayout.NORTH);  //布局的北边
+//        this.add(jButton2, BorderLayout.NORTH);  //布局的北边
         this.add(Menu, BorderLayout.WEST);   //布局的西边
-        this.add(jButton4, BorderLayout.EAST);   //布局的东边
-        this.add(jButton5, BorderLayout.SOUTH);  //布局的南边
+//        this.add(jButton4, BorderLayout.EAST);   //布局的东边
+//        this.add(jButton5, BorderLayout.SOUTH);  //布局的南边
 
         //4. 设置窗体属性
-        this.setTitle("演示边界布局管理器");
+        this.setTitle("毕业设计选题系统");
         this.setSize(500, 400);
         this.setLocation(300, 300);
         this.setVisible(true);
