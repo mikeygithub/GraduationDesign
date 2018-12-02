@@ -27,6 +27,7 @@ public class TeacherMainView extends JFrame {  //0.继承JFrame
         Menu.setLayout(new GridLayout(10,1,3,3));
         JButton jButton3_1 = new JButton("西边");
         JButton jButton4_1 = new JButton("东边");
+
         Menu.add(jButton3);
         Menu.add(jButton3_1);
         Menu.add(jButton4_1);
