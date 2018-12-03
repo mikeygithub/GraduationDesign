@@ -1,6 +1,7 @@
 package com.mikey.design.views.login;
 
 import com.mikey.design.listerner.LoginListener;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +15,10 @@ import java.awt.event.ActionEvent;
  * @date 2018/12/3 8:22
  * @Version 1.0
  */
+@Component
 public class Login extends JFrame {
 
-    public Login(){
+    public void shows(){
         JPanel login=new JPanel();
         this.add(login, BorderLayout.CENTER);
         this.setBounds(500,500,700,500);

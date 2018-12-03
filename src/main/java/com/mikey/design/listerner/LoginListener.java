@@ -11,6 +11,7 @@ import com.mikey.design.utils.ThreadLoaclUtil;
 import com.mikey.design.views.admin.AdminMainView;
 import com.mikey.design.views.student.StudentMainView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,7 @@ import java.awt.event.ActionEvent;
  * @date 2018/12/3 9:36
  * @Version 1.0
  */
+@Component
 public class LoginListener extends AbstractAction {
 
     @Autowired
@@ -61,9 +63,9 @@ public class LoginListener extends AbstractAction {
         /**
          * 无法通过自动注入，只能通过工具类获取
          */
-        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
-        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
-        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+//        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+//        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+//        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
 
 
         this.username=usernameField.getText().trim();//获取用户名
