@@ -6,6 +6,9 @@ import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.AdminService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
+import com.mikey.design.utils.ThreadLoaclUtil;
+import com.mikey.design.views.admin.AdminMainView;
+import com.mikey.design.views.student.StudentMainView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
@@ -58,6 +61,8 @@ public class LoginListener extends AbstractAction {
         this.password=new String(passwordField.getPassword()).trim();//获取密码
         this.role=group.getSelectedCheckbox().getLabel();
 
+        System.out.println("Message======>>>>>"+username+"==="+password+"==="+role);
+
         if(username.length()==0||password.length()==0){
             JOptionPane.showMessageDialog(null, "用户名密码不能为空");
             return;
@@ -69,8 +74,12 @@ public class LoginListener extends AbstractAction {
                 this.baseUserName=admin.getAdminName();
                 this.basePassWord=admin.getAdminPassword();
                 //身份认证
-                if(username.equals("admin")&&password.equals("123456")){//判断用户名和密码
+                if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
+                    System.out.println("登入成功------------》》》》");
                     //登录成功
+                    ThreadLoaclUtil.set(admin);//保存用户信息
+                    new AdminMainView();//进入管理员页面
+
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
@@ -81,8 +90,10 @@ public class LoginListener extends AbstractAction {
                 this.baseUserName=student.getStudentName();
                 this.basePassWord=student.getStudentPassword();
                 //身份认证
-                if(username.equals("admin")&&password.equals("123456")){//判断用户名和密码
+                if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
+                    ThreadLoaclUtil.set(student);//保存用户信息
+                    new StudentMainView();//进入学生页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
@@ -93,8 +104,10 @@ public class LoginListener extends AbstractAction {
                 this.baseUserName=teacher.getTeacherName();
                 this.basePassWord=teacher.getTeacherPassword();
                 //身份认证
-                if(username.equals("admin")&&password.equals("123456")){//判断用户名和密码
+                if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
+                    ThreadLoaclUtil.set(teacher);//保存用户信息
+                    new StudentMainView();//进入教师页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");

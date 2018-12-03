@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
  */
 public class Login extends JFrame {
 
-    Login(){
+    public Login(){
         JPanel login=new JPanel();
         this.add(login, BorderLayout.CENTER);
         this.setBounds(500,500,700,500);
@@ -89,12 +89,5 @@ public class Login extends JFrame {
 
 //        setResizable(false);//禁用最大化
         this.setVisible(true);
-    }
-
-
-
-
-    public static void main(String[] args){
-        new Login();
     }
 }
