@@ -6,6 +6,7 @@ import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.AdminService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
+import com.mikey.design.utils.SpringUtil;
 import com.mikey.design.utils.ThreadLoaclUtil;
 import com.mikey.design.views.admin.AdminMainView;
 import com.mikey.design.views.student.StudentMainView;
@@ -25,18 +26,18 @@ import java.awt.event.ActionEvent;
  */
 public class LoginListener extends AbstractAction {
 
-    private final static String ADMIN="admin";
-
-    private final static String STU="student";
-
-    private final static String TEA="teacher";
-
     @Autowired
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
     @Autowired
     private AdminService adminService;
+
+    private final static String ADMIN="admin";
+
+    private final static String STU="student";
+
+    private final static String TEA="teacher";
 
     private JTextField usernameField;
 
@@ -57,11 +58,18 @@ public class LoginListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        /**
+         * 无法通过自动注入，只能通过工具类获取
+         */
+        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+
+
         this.username=usernameField.getText().trim();//获取用户名
         this.password=new String(passwordField.getPassword()).trim();//获取密码
-        this.role=group.getSelectedCheckbox().getLabel();
+        this.role=group.getSelectedCheckbox().getLabel();//获取角色
 
-        System.out.println("Message======>>>>>"+username+"==="+password+"==="+role);
 
         if(username.length()==0||password.length()==0){
             JOptionPane.showMessageDialog(null, "用户名密码不能为空");
@@ -71,24 +79,26 @@ public class LoginListener extends AbstractAction {
         switch (role){
             case ADMIN://管理员登入
                 Admin admin=adminService.getAdmin(Integer.parseInt(username));
-                this.baseUserName=admin.getAdminName();
+System.out.println("Message=============="+adminService+"*******"+username+"*********"+password);
+                this.baseUserName=admin.getAdminId().toString();
                 this.basePassWord=admin.getAdminPassword();
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
-                    System.out.println("登入成功------------》》》》");
+                    System.out.println("管理员登入成功------------》》》》");
                     //登录成功
                     ThreadLoaclUtil.set(admin);//保存用户信息
                     new AdminMainView();//进入管理员页面
-
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
                 }
                 break;
             case STU://学生登入
-                Student student=studentService.getStudent(Integer.parseInt(username));
-                this.baseUserName=student.getStudentName();
+
+                Student student= this.studentService.getStudent(1);
+                this.baseUserName=student.getStudentId().toString();
                 this.basePassWord=student.getStudentPassword();
+                System.out.println(basePassWord+"/////"+baseUserName);
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
@@ -101,7 +111,7 @@ public class LoginListener extends AbstractAction {
                 break;
             case TEA://教师登入
                 Teacher teacher=teacherService.getTeacher(Integer.parseInt(username));
-                this.baseUserName=teacher.getTeacherName();
+                this.baseUserName=teacher.getTeacherId().toString();
                 this.basePassWord=teacher.getTeacherPassword();
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码

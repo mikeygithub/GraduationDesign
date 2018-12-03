@@ -1,7 +1,6 @@
 package com.mikey.design.views.login;
 
 import com.mikey.design.listerner.LoginListener;
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,7 +86,7 @@ public class Login extends JFrame {
         login.add(select);
         login.add(btn);
 
-//        setResizable(false);//禁用最大化
+        setResizable(false);//禁用最大化
         this.setVisible(true);
     }
 }

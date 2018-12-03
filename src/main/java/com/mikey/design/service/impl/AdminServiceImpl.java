@@ -39,11 +39,11 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 管理员信息
-     * @param AdminId
+     * @param adminId
      * @return
      */
     @Override
-    public Admin getAdmin(int AdminId) {
-        return null;
+    public Admin getAdmin(int adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
     }
 }
