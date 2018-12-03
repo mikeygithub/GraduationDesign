@@ -57,4 +57,9 @@ public class TeacherServiceImpl implements TeacherService {
 
         teacherMapper.deleteByPrimaryKey(teacherId);
     }
+
+    @Override
+    public Teacher getTeacher(int teacherId) {
+        return teacherMapper.selectByPrimaryKey(teacherId);
+    }
 }

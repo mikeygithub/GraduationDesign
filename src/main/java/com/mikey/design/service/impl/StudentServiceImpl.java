@@ -67,8 +67,8 @@ public class StudentServiceImpl implements StudentService {
      * @param studentId
      */
     @Override
-    public void getStudent(int studentId) {
+    public Student getStudent(int studentId) {
 
-        studentMapper.selectByPrimaryKey(studentId);
+       return studentMapper.selectByPrimaryKey(studentId);
     }
 }

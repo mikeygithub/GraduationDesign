@@ -15,4 +15,6 @@ public interface TeacherService {
     public void addTeacher(Teacher teacher);
     public void updateTeacherNum(Teacher teacher);
     public void deleteTeacherNum(int teacherId);
+    public Teacher getTeacher(int teacherId);
+
 }
