@@ -41,9 +41,9 @@ public class test1 extends JFrame {
         b_1 = new JButton("1");
         b_2 = new JButton("2");
         b_3 = new JButton("3");
-        b_1.setMargin(new Insets(2,2,2,2));
-        b_2.setMargin(new Insets(2,2,2,2));
-        b_3.setMargin(new Insets(2,2,2,2));
+//        b_1.setMargin(new Insets(2,2,2,2));
+//        b_2.setMargin(new Insets(2,2,2,2));
+//        b_3.setMargin(new Insets(2,2,2,2));
         p.add(button_1);
         p.add(b_1);
         p.add(b_2);
@@ -52,9 +52,9 @@ public class test1 extends JFrame {
         p_1 = new JPanel();
         p_2 = new JPanel();
         p_3 = new JPanel();
-        p_1.setBackground(Color.WHITE);
-        p_2.setBackground(Color.BLUE);
-        p_3.setBackground(Color.GREEN);
+//        p_1.setBackground(Color.WHITE);
+//        p_2.setBackground(Color.BLUE);
+//        p_3.setBackground(Color.GREEN);
         p_1.add(new JLabel("JPanel_1"));
         p_2.add(new JLabel("JPanel_2"));
         p_3.add(new JLabel("JPanel_3"));

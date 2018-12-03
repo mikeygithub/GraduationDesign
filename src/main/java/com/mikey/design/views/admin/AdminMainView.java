@@ -2,6 +2,7 @@ package com.mikey.design.views.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Mikey
@@ -62,17 +63,49 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
         center.setVisible(true);
         CardLayout cardLayout=new CardLayout(10,10);
         center.setLayout(cardLayout);
-        center.setBackground(Color.red);
+//        center.setBackground(Color.red);
 
-        JPanel wispPanel=new JPanel();
-        JPanel teacherPanel=new JPanel();
-        JPanel titlePanel=new JPanel();
-        JPanel updatePanel=new JPanel();
+        JPanel wispPanel=new JPanel();//志愿
+        wispPanel.setBackground(Color.yellow);
+        JPanel teacherPanel=new JPanel();//教师
+        teacherPanel.setBackground(Color.blue);
+        JPanel titlePanel=new JPanel();//课设题目
+        titlePanel.setBackground(Color.red);
+        JPanel updatePanel=new JPanel();//更新个人信息
+        updatePanel.setBackground(Color.black);
 
-        center.add(wispPanel);
-        center.add(teacherPanel);
-        center.add(titlePanel);
-        center.add(updatePanel);
+        menuChild1.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"wispPanel");
+                System.out.println("wispPanel");
+            }
+        });
+        menuChild2.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"teacherPanel");
+                System.out.println("teacherPanel");
+            }
+        });
+        menuChild3.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"titlePanel");
+                System.out.println("titlePanel");
+            }
+        });
+        menuChild4.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"updatePanel");
+                System.out.println("updatePanel");
+            }
+        });
+        center.add(wispPanel,"wispPanel");
+        center.add(teacherPanel,"teacherPanel");
+        center.add(titlePanel,"titlePanel");
+        center.add(updatePanel,"updatePanel");
 
         this.add(center, BorderLayout.CENTER);  //布局的中间
 
