@@ -11,6 +11,7 @@ import javax.swing.*;
  * @Version 1.0
  */
 public class WelcomeJpanel extends JPanel {
+
     public WelcomeJpanel() {
 
     }

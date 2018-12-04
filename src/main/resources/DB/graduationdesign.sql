@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 28/11/2018 14:56:07
+ Date: 04/12/2018 23:16:57
 */
 
 SET NAMES utf8mb4;
@@ -59,14 +59,15 @@ CREATE TABLE `des_student`  (
   `student_id` int(11) NOT NULL,
   `student_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `student_sex` int(11) NULL DEFAULT 0 COMMENT '0:未知，1：男。2：女',
-  `student_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `student_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '123456',
+  `student_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`student_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of des_student
 -- ----------------------------
-INSERT INTO `des_student` VALUES (1, 'student', 1, 'student');
+INSERT INTO `des_student` VALUES (1, '1', 1, 'student', NULL);
 
 -- ----------------------------
 -- Table structure for des_teacher
@@ -77,14 +78,15 @@ CREATE TABLE `des_teacher`  (
   `teacher_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `teacher_sex` int(11) NULL DEFAULT 0,
   `teacher_info` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `teacher_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `teacher_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '123456',
+  `teacher_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`teacher_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of des_teacher
 -- ----------------------------
-INSERT INTO `des_teacher` VALUES (1, 'teacher', 1, '教师信息简介', 'teacher');
+INSERT INTO `des_teacher` VALUES (1, 'teacher', 1, '教师信息简介', 'teacher', NULL);
 
 -- ----------------------------
 -- Table structure for des_wish
