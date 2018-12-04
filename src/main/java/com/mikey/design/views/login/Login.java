@@ -1,7 +1,6 @@
 package com.mikey.design.views.login;
 
-import com.mikey.design.listerner.LoginListener;
-import org.springframework.stereotype.Component;
+import com.mikey.design.listerner.common.LoginListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,13 +14,12 @@ import java.awt.event.ActionEvent;
  * @date 2018/12/3 8:22
  * @Version 1.0
  */
-@Component
 public class Login extends JFrame {
 
-    public void shows(){
+    public Login(){
         JPanel login=new JPanel();
         this.add(login, BorderLayout.CENTER);
-        this.setBounds(500,500,700,500);
+        this.setBounds(600,300,700,500);
         this.setTitle("毕业设计选题系统");
         this.setLocationRelativeTo(null);
         /**
@@ -67,7 +65,7 @@ public class Login extends JFrame {
          * btn
          */
         JButton loginbtn=new JButton("登入");
-        loginbtn.addActionListener(new LoginListener(nameJtextField,pwdJtextField,group));
+        loginbtn.addActionListener(new LoginListener(nameJtextField,pwdJtextField,group,this));
         JButton reset=new JButton("重置");
         JPanel btn=new JPanel();
         btn.add(loginbtn);

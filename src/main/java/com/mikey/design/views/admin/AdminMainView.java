@@ -1,5 +1,7 @@
 package com.mikey.design.views.admin;
 
+import com.mikey.design.listerner.common.LoginOut;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,24 +14,20 @@ import java.awt.event.ActionEvent;
  * @date 2018/11/30 19:37
  * @Version 1.0
  */
-public class AdminMainView extends JFrame {  //0.继承JFrame
-    //1. 定义组件
-    JButton jButton, jButton2,jButton3,jButton4,jButton5;
+public class AdminMainView extends JFrame {
 
-    public AdminMainView() {
-        //2. 创建组件
-        jButton = new JButton("中间");
-        jButton2 = new JButton("北边");
-        jButton4 = new JButton("东边");
-        jButton5 = new JButton("南边");
 
+    public AdminMainView() throws HeadlessException {
+    }
+
+    public AdminMainView(JFrame login) {
+        //创建组件
         JPanel Menu=new JPanel();
         Menu.setLayout(new GridLayout(10,1,3,3));
-        jButton3 = new JButton("");
-        JButton menuChild1 = new JButton("填报志愿");
-        JButton menuChild2 = new JButton("浏览教师");
-        JButton menuChild3 = new JButton("浏览题目");
-        JButton menuChild4 = new JButton("修改信息");
+        JButton menuChild1 = new JButton("浏览教师信息");
+        JButton menuChild2 = new JButton("浏览学生信息");
+        JButton menuChild3 = new JButton("志愿填报情况");
+        JButton menuChild4 = new JButton("统计志愿填报");
         JButton menuChild5 = new JButton("退出登入");
         Menu.add(menuChild1);
         Menu.add(menuChild2);
@@ -54,7 +52,7 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
         menuBar.add(viewMenu);
         menuBar.add(aboutMenu);
 
-        //3. 添加各个组件
+        //添加各个组件
         /*******************************************************************************/
         /**
          * 中间布局
@@ -63,7 +61,6 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
         center.setVisible(true);
         CardLayout cardLayout=new CardLayout(10,10);
         center.setLayout(cardLayout);
-//        center.setBackground(Color.red);
 
         JPanel wispPanel=new JPanel();//志愿
         wispPanel.setBackground(Color.yellow);
@@ -102,6 +99,8 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
                 System.out.println("updatePanel");
             }
         });
+        menuChild5.addActionListener(new LoginOut(login,this));
+
         center.add(wispPanel,"wispPanel");
         center.add(teacherPanel,"teacherPanel");
         center.add(titlePanel,"titlePanel");
@@ -118,7 +117,7 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
 //        this.add(jButton4, BorderLayout.EAST);   //布局的东边
 //        this.add(jButton5, BorderLayout.SOUTH);  //布局的南边
 
-        //4. 设置窗体属性
+        //设置窗体属性
         this.setTitle("毕业设计选题系统");
         this.setSize(700, 500);
         this.setLocation(600, 300);
@@ -126,7 +125,7 @@ public class AdminMainView extends JFrame {  //0.继承JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
-        AdminMainView testBorderLayout = new AdminMainView();
+        AdminMainView testBorderLayout = new AdminMainView(null);
 
     }
 }

@@ -1,4 +1,4 @@
-package com.mikey.design.listerner;
+package com.mikey.design.listerner.common;
 
 import com.mikey.design.entity.Admin;
 import com.mikey.design.entity.Student;
@@ -41,6 +41,8 @@ public class LoginListener extends AbstractAction {
 
     private final static String TEA="teacher";
 
+    private JFrame login;
+
     private JTextField usernameField;
 
     private JPasswordField passwordField;
@@ -63,9 +65,9 @@ public class LoginListener extends AbstractAction {
         /**
          * 无法通过自动注入，只能通过工具类获取
          */
-//        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
-//        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
-//        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
 
 
         this.username=usernameField.getText().trim();//获取用户名
@@ -89,7 +91,7 @@ System.out.println("Message=============="+adminService+"*******"+username+"****
                     System.out.println("管理员登入成功------------》》》》");
                     //登录成功
                     ThreadLoaclUtil.set(admin);//保存用户信息
-                    new AdminMainView();//进入管理员页面
+                    new AdminMainView(login);//进入管理员页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
@@ -100,26 +102,27 @@ System.out.println("Message=============="+adminService+"*******"+username+"****
                 Student student= this.studentService.getStudent(1);
                 this.baseUserName=student.getStudentId().toString();
                 this.basePassWord=student.getStudentPassword();
-                System.out.println(basePassWord+"/////"+baseUserName);
+
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
                     ThreadLoaclUtil.set(student);//保存用户信息
-                    new StudentMainView();//进入学生页面
+                    login.setVisible(false);
+                    new StudentMainView(login);//进入学生页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
                 }
                 break;
             case TEA://教师登入
-                Teacher teacher=teacherService.getTeacher(Integer.parseInt(username));
-                this.baseUserName=teacher.getTeacherId().toString();
-                this.basePassWord=teacher.getTeacherPassword();
+                    Teacher teacher=teacherService.getTeacher(Integer.parseInt(username));
+                    this.baseUserName=teacher.getTeacherId().toString();
+                    this.basePassWord=teacher.getTeacherPassword();
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
                     ThreadLoaclUtil.set(teacher);//保存用户信息
-                    new StudentMainView();//进入教师页面
+                    new StudentMainView(login);//进入教师页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");
@@ -131,9 +134,10 @@ System.out.println("Message=============="+adminService+"*******"+username+"****
     public LoginListener() {
     }
 
-    public LoginListener(JTextField username, JPasswordField passwordField, CheckboxGroup group) {
+    public LoginListener(JTextField username, JPasswordField passwordField, CheckboxGroup group,JFrame login) {
         this.usernameField = username;
         this.passwordField = passwordField;
         this.group=group;
+        this.login=login;
     }
 }
