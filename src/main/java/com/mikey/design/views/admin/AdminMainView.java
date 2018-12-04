@@ -28,16 +28,18 @@ public class AdminMainView extends JFrame {
         JButton menuChild2 = new JButton("浏览学生信息");
         JButton menuChild3 = new JButton("志愿填报情况");
         JButton menuChild4 = new JButton("统计志愿填报");
-        JButton menuChild5 = new JButton("退出登入");
+        JButton menuChild5 = new JButton("添加教师信息");
+        JButton menuChild6 = new JButton("添加学生信息");
+        JButton menuChild7 = new JButton("退出登入");
         Menu.add(menuChild1);
         Menu.add(menuChild2);
         Menu.add(menuChild3);
         Menu.add(menuChild4);
         Menu.add(menuChild5);
+        Menu.add(menuChild6);
+        Menu.add(menuChild7);
 
         Menu.setVisible(true);
-        JPanel title=new JPanel();
-        JPanel main=new JPanel();
         /**
          * 菜单栏
          */
@@ -53,75 +55,73 @@ public class AdminMainView extends JFrame {
         menuBar.add(aboutMenu);
 
         //添加各个组件
-        /*******************************************************************************/
-        /**
-         * 中间布局
-         */
         JPanel center=new JPanel();
         center.setVisible(true);
         CardLayout cardLayout=new CardLayout(10,10);
         center.setLayout(cardLayout);
 
-        JPanel wispPanel=new JPanel();//志愿
-        wispPanel.setBackground(Color.yellow);
-        JPanel teacherPanel=new JPanel();//教师
-        teacherPanel.setBackground(Color.blue);
-        JPanel titlePanel=new JPanel();//课设题目
-        titlePanel.setBackground(Color.red);
-        JPanel updatePanel=new JPanel();//更新个人信息
-        updatePanel.setBackground(Color.black);
+        JPanel lookTeacherJpanel=new LookTeacherJpanel();//浏览教师信息
+        JPanel lookStudentPanel=new LookStudentJpanel();//浏览学生信息
+        JPanel wishStatePanel=new JPanel();//志愿填报情况
+        JPanel countWishPanel=new JPanel();//统计志愿填报、填报人数、未填报人数
+        JPanel addStudentJpanel=new AddStudentJpanel();//课设题目
+        JPanel addTeacherJpanel=new AddTeacherJpanel();//更新个人信息
 
         menuChild1.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"wispPanel");
-                System.out.println("wispPanel");
+                cardLayout.show(center,"lookTeacherJpanel");
             }
         });
         menuChild2.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"teacherPanel");
-                System.out.println("teacherPanel");
+                cardLayout.show(center,"lookStudentPanel");
             }
         });
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"titlePanel");
-                System.out.println("titlePanel");
+                cardLayout.show(center,"wishStatePanel");
             }
         });
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"updatePanel");
-                System.out.println("updatePanel");
+                cardLayout.show(center,"countWishPanel");
             }
         });
-        menuChild5.addActionListener(new LoginOut(login,this));
+        menuChild5.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"addStudentJpanel");
+            }
+        });
+        menuChild6.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"addTeacherJpanel");
+            }
+        });
+        menuChild7.addActionListener(new LoginOut(login,this));
 
-        center.add(wispPanel,"wispPanel");
-        center.add(teacherPanel,"teacherPanel");
-        center.add(titlePanel,"titlePanel");
-        center.add(updatePanel,"updatePanel");
+        center.add(lookTeacherJpanel,"lookTeacherJpanel");
+        center.add(lookStudentPanel,"lookStudentPanel");
+        center.add(wishStatePanel,"wishStatePanel");
+        center.add(countWishPanel,"countWishPanel");
+        center.add(addStudentJpanel,"addStudentJpanel");
+        center.add(addTeacherJpanel,"addTeacherJpanel");
 
-        this.add(center, BorderLayout.CENTER);  //布局的中间
-
-
-        /****
-         *
-         */
-        this.add(menuBar, BorderLayout.NORTH);  //布局的北边
-        this.add(Menu, BorderLayout.WEST);   //布局的西边
-//        this.add(jButton4, BorderLayout.EAST);   //布局的东边
-//        this.add(jButton5, BorderLayout.SOUTH);  //布局的南边
+        this.add(center, BorderLayout.CENTER);  //中间
+        this.add(menuBar, BorderLayout.NORTH);  //北边
+        this.add(Menu, BorderLayout.WEST);   //西边
 
         //设置窗体属性
         this.setTitle("毕业设计选题系统");
         this.setSize(700, 500);
         this.setLocation(600, 300);
         this.setVisible(true);
+        setResizable(false);//禁用最大化
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
