@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 
 /**
  * @author Mikey
- * @Title:
- * @Description:
+ * @Title: 管理员页面
+ * @Description: 管理员操作面板
  * @Email:1625017540@qq.com
  * @date 2018/11/30 19:37
  * @Version 1.0

@@ -1,4 +1,4 @@
-package com.mikey.design.views.student;
+package com.mikey.design.views.common;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class UpPwdPanel extends JPanel {
         //3.重复新登入密码
         JPanel reNewPwdJpanel=new JPanel();
         JLabel reNewPwdJlabel=new JLabel("新登入密码：");
-        JTextField reNewPwdJtextField=new JTextField("请再次输入新登入密码");
+        JTextField reNewPwdJtextField=new JTextField("请再次输入新密码");
         reNewPwdJpanel.add(reNewPwdJlabel);
         reNewPwdJpanel.add(reNewPwdJtextField);
 

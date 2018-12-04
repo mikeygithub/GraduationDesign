@@ -1,6 +1,8 @@
 package com.mikey.design.views.teacher;
 
 import com.mikey.design.listerner.common.LoginOut;
+import com.mikey.design.views.common.UpPwdPanel;
+import com.mikey.design.views.common.UpdatePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,18 +23,18 @@ public class TeacherMainView extends JFrame {
         Menu.setLayout(new GridLayout(10,1,3,3));
         JButton menuChild1 = new JButton("添加毕业设计");
         JButton menuChild2 = new JButton("录取报名学生");
-        JButton menuChild3 = new JButton("查看报名学生");
+        JButton menuChild3 = new JButton("查看已录学生");
         JButton menuChild4 = new JButton("修改个人信息");
-        JButton menuChild5 = new JButton("退出登入");
+        JButton menuChild5 = new JButton("修改登入密码");
+        JButton menuChild6 = new JButton("退出登入");
         Menu.add(menuChild1);
         Menu.add(menuChild2);
         Menu.add(menuChild3);
         Menu.add(menuChild4);
         Menu.add(menuChild5);
+        Menu.add(menuChild6);
 
         Menu.setVisible(true);
-        JPanel title=new JPanel();
-        JPanel main=new JPanel();
         /**
          * 菜单栏
          */
@@ -54,49 +56,53 @@ public class TeacherMainView extends JFrame {
         CardLayout cardLayout=new CardLayout(10,10);
         center.setLayout(cardLayout);
 
-        JPanel wispPanel=new JPanel();//志愿
-        wispPanel.setBackground(Color.yellow);
-        JPanel teacherPanel=new JPanel();//教师
-        teacherPanel.setBackground(Color.blue);
-        JPanel titlePanel=new JPanel();//课设题目
-        titlePanel.setBackground(Color.red);
-        JPanel updatePanel=new JPanel();//更新个人信息
-        updatePanel.setBackground(Color.black);
+        JPanel addTitlePanel=new AddTitlePanel();//添加毕业设计题目
+
+        JPanel admitStudentsJpanel=new AdmitStudentsJpanel();//录取报名学生
+
+        JPanel alrealyAdmitJpanel=new AlrealyAdmitJpanel();//课设题目
+
+        JPanel updatePanel=new UpdatePanel();//更新个人信息
+
+        UpPwdPanel upPwdPanel=new UpPwdPanel();//修改密码
 
         menuChild1.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"wispPanel");
-                System.out.println("wispPanel");
+                cardLayout.show(center,"addTitlePanel");
             }
         });
         menuChild2.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"teacherPanel");
-                System.out.println("teacherPanel");
+                cardLayout.show(center,"admitStudentsJpanel");
             }
         });
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"titlePanel");
-                System.out.println("titlePanel");
+                cardLayout.show(center,"alrealyAdmitJpanel");
             }
         });
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(center,"updatePanel");
-                System.out.println("updatePanel");
             }
         });
-        menuChild5.addActionListener(new LoginOut(login,this));
+        menuChild5.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"upPwdPanel");
+            }
+        });
+        menuChild6.addActionListener(new LoginOut(login,this));
 
-        center.add(wispPanel,"wispPanel");
-        center.add(teacherPanel,"teacherPanel");
-        center.add(titlePanel,"titlePanel");
+        center.add(addTitlePanel,"addTitlePanel");
+        center.add(admitStudentsJpanel,"admitStudentsJpanel");
+        center.add(alrealyAdmitJpanel,"alrealyAdmitJpanel");
         center.add(updatePanel,"updatePanel");
+        center.add(upPwdPanel,"upPwdPanel");
 
         this.add(center, BorderLayout.CENTER);  //中间
         this.add(menuBar, BorderLayout.NORTH);  //北边
@@ -107,6 +113,7 @@ public class TeacherMainView extends JFrame {
         this.setSize(700, 500);
         this.setLocation(600, 300);
         this.setVisible(true);
+        setResizable(false);//禁用最大化
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {

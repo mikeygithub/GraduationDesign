@@ -1,4 +1,4 @@
-package com.mikey.design.views.student;
+package com.mikey.design.views.common;
 
 import com.mikey.design.entity.Student;
 import com.mikey.design.utils.ThreadLoaclUtil;
