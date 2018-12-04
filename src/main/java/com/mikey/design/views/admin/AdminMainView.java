@@ -62,7 +62,7 @@ public class AdminMainView extends JFrame {
 
         JPanel lookTeacherJpanel=new LookTeacherJpanel();//浏览教师信息
         JPanel lookStudentPanel=new LookStudentJpanel();//浏览学生信息
-        JPanel wishStatePanel=new JPanel();//志愿填报情况
+        JPanel wishStatePanel=new StudentWishStateJpanel();//志愿填报情况
         JPanel countWishPanel=new JPanel();//统计志愿填报、填报人数、未填报人数
         JPanel addStudentJpanel=new AddStudentJpanel();//课设题目
         JPanel addTeacherJpanel=new AddTeacherJpanel();//更新个人信息

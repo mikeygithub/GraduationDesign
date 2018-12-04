@@ -8,14 +8,14 @@ import java.awt.*;
 
 /**
  * @author Mikey
- * @Title:
- * @Description:
+ * @Title: 学生填报志愿情况
+ * @Description:  查看哪些学生是否已经填报志愿
  * @Email:1625017540@qq.com
  * @date 2018/12/4 23:30
  * @Version 1.0
  */
-public class LookStudentJpanel extends JPanel {
-    public LookStudentJpanel() {
+public class StudentWishStateJpanel extends JPanel {
+    public StudentWishStateJpanel() {
         setLayout(new BorderLayout());
         setBackground(Color.GRAY);
         /**
@@ -23,7 +23,7 @@ public class LookStudentJpanel extends JPanel {
          */
         JPanel titleJpanel=new JPanel();
         titleJpanel.setBackground(Color.GRAY);
-        JLabel title=new JLabel("学生信息列表");
+        JLabel title=new JLabel("学生填报志愿信息列表");
         title.setFont(new Font("宋体",Font.BOLD, 20));
         titleJpanel.add(title);
         add(titleJpanel,BorderLayout.NORTH);
@@ -33,29 +33,29 @@ public class LookStudentJpanel extends JPanel {
         JPanel teach=new JPanel(new BorderLayout());
         teach.setBackground(Color.red);
         //表头（列名）
-        Object[] columnNames = {"姓名", "性别", "联系方式"};
+        Object[] columnNames = {"姓名", "性别", "联系方式","是否已填报志愿"};
         //表格所有行数据
         Object[][] rowData = {
-                {"张三", 80, 80},
-                {"John", 70, 80},
-                {"Sue", 70, 70},
-                {"Jane", 80, 70},
-                {"Joe_01", 80, 70},
-                {"Joe_02", 80, 70},
-                {"Joe_03", 80, 70},
-                {"Joe_04", 80, 70},
-                {"Joe_05", 80, 70},
-                {"张三", 80, 80},
-                {"John", 70, 80},
-                {"Sue", 70, 70},
-                {"Jane", 80, 70},
-                {"Joe_01", 80, 70},
-                {"Joe_02", 80, 70},
-                {"Joe_03", 80, 70},
-                {"Joe_04", 80, 70},
-                {"Joe_05", 80, 21066},
-                {"Joe_04", 80,210},
-                {"Joe_05", 80, 21066}
+                {"Joe_01", 80, 70,"否"},
+                {"张三", 80, 80 ,"是"},
+                {"John", 70, 80,"是"},
+                {"Sue", 70, 70,"是"},
+                {"Joe_03", 80, 70,"否"},
+                {"Jane", 80, 70,"是"},
+                {"Joe_02", 80, 70,"否"},
+                {"Joe_01", 80, 70,"是"},
+                {"Joe_02", 80, 70,"是"},
+                {"Joe_05", 80, 21066,"否"},
+                {"Joe_03", 80, 70,"是"},
+                {"Joe_04", 80, 70,"是"},
+                {"Joe_04", 80, 70,"否"},
+                {"Joe_05", 80, 70,"是"},
+                {"张三", 80, 80,"是"},
+                {"John", 70, 80,"是"},
+                {"Sue", 70, 70,"是"},
+                {"Jane", 80, 70,"是"},
+                {"Joe_05", 80, 21066,"否"},
+                {"Joe_04", 80,210,"否"},
         };
         //表格
         JTable table=new JTable(rowData,columnNames);
