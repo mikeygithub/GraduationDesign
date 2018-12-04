@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
  */
 public class StudentMainView extends JFrame {  //0.继承JFrame
     public StudentMainView(JFrame login) {
-        //2. 创建组件
+        //创建组件
         JPanel Menu=new JPanel();
         Menu.setLayout(new GridLayout(10,1,3,3));
         JButton menuChild1 = new JButton("填报志愿");
@@ -53,41 +53,33 @@ public class StudentMainView extends JFrame {  //0.继承JFrame
         CardLayout cardLayout=new CardLayout(10,10);
         center.setLayout(cardLayout);
 
-        JPanel wispPanel=new JPanel();//志愿
-        wispPanel.setBackground(Color.yellow);
-        JPanel teacherPanel=new JPanel();//教师
-        teacherPanel.setBackground(Color.blue);
-        JPanel titlePanel=new JPanel();//课设题目
-        titlePanel.setBackground(Color.red);
-        JPanel updatePanel=new JPanel();//更新个人信息
-        updatePanel.setBackground(Color.black);
+        JPanel wispPanel=new WispPanel();//志愿
+        JPanel teacherPanel=new TeacherJpanel();//教师
+        JPanel titlePanel=new TeacherJpanel();//课设题目
+        JPanel updatePanel=new UpdatePanel();//更新个人信息
 
         menuChild1.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(center,"wispPanel");
-                System.out.println("填报志愿面板============》》》");
             }
         });
         menuChild2.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(center,"teacherPanel");
-                System.out.println("teacherPanel");
             }
         });
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(center,"titlePanel");
-                System.out.println("titlePanel");
             }
         });
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(center,"updatePanel");
-                System.out.println("updatePanel");
             }
         });
         menuChild5.addActionListener(new LoginOut(login,this));

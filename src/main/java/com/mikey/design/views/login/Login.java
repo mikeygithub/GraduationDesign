@@ -25,7 +25,7 @@ public class Login extends JFrame {
         /**
          * banner
          */
-        JPanel titleJpanel=new JPanel();//生成一个新的版面
+        JPanel titleJpanel=new JPanel();
         JLabel title=new JLabel("欢迎登陆毕业设计选题系统");
         title.setFont(new Font("华文彩云",Font.BOLD, 20));
         titleJpanel.add(title);
