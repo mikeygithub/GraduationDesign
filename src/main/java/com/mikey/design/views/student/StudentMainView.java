@@ -102,6 +102,5 @@ public class StudentMainView extends JFrame {  //0.继承JFrame
     }
     public static void main(String[] args) {
         StudentMainView testBorderLayout = new StudentMainView(null);
-
     }
 }
