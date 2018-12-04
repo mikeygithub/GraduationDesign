@@ -6,6 +6,7 @@
     <result column="student_name" jdbcType="VARCHAR" property="studentName" />
     <result column="student_sex" jdbcType="INTEGER" property="studentSex" />
     <result column="student_password" jdbcType="VARCHAR" property="studentPassword" />
+    <result column="student_phone" jdbcType="VARCHAR" property="studentPhone" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    student_id, student_name, student_sex, student_password
+    student_id, student_name, student_sex, student_password, student_phone
   </sql>
   <select id="selectByExample" parameterType="com.mikey.design.entity.StudentExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.mikey.design.entity.Student">
     insert into des_student (student_id, student_name, student_sex, 
-      student_password)
+      student_password, student_phone)
     values (#{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{studentSex,jdbcType=INTEGER}, 
-      #{studentPassword,jdbcType=VARCHAR})
+      #{studentPassword,jdbcType=VARCHAR}, #{studentPhone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mikey.design.entity.Student">
     insert into des_student
@@ -119,6 +120,9 @@
       <if test="studentPassword != null">
         student_password,
       </if>
+      <if test="studentPhone != null">
+        student_phone,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="studentPassword != null">
         #{studentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhone != null">
+        #{studentPhone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.studentPassword != null">
         student_password = #{record.studentPassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.studentPhone != null">
+        student_phone = #{record.studentPhone,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set student_id = #{record.studentId,jdbcType=INTEGER},
       student_name = #{record.studentName,jdbcType=VARCHAR},
       student_sex = #{record.studentSex,jdbcType=INTEGER},
-      student_password = #{record.studentPassword,jdbcType=VARCHAR}
+      student_password = #{record.studentPassword,jdbcType=VARCHAR},
+      student_phone = #{record.studentPhone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="studentPassword != null">
         student_password = #{studentPassword,jdbcType=VARCHAR},
       </if>
+      <if test="studentPhone != null">
+        student_phone = #{studentPhone,jdbcType=VARCHAR},
+      </if>
     </set>
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update des_student
     set student_name = #{studentName,jdbcType=VARCHAR},
       student_sex = #{studentSex,jdbcType=INTEGER},
-      student_password = #{studentPassword,jdbcType=VARCHAR}
+      student_password = #{studentPassword,jdbcType=VARCHAR},
+      student_phone = #{studentPhone,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
 </mapper>

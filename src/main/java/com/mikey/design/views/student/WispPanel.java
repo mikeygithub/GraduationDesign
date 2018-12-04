@@ -3,6 +3,7 @@ package com.mikey.design.views.student;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Mikey
@@ -21,6 +22,7 @@ public class WispPanel extends JPanel {
          * 标题
          */
         JPanel titleJpanel=new JPanel();
+        titleJpanel.setBackground(Color.LIGHT_GRAY);
         JLabel title=new JLabel("填报志愿");
         title.setFont(new Font("宋体",Font.BOLD, 20));
         titleJpanel.setLayout(new FlowLayout());
@@ -90,6 +92,15 @@ public class WispPanel extends JPanel {
         JPanel btnJpanel=new JPanel();
         JButton submint=new JButton("提交");
         JButton reset=new JButton("重置");
+        reset.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                teacherboBox.setSelectedIndex(0);
+                titleBox.setSelectedIndex(0);
+                teacherboBox2.setSelectedIndex(0);
+                titleBox2.setSelectedIndex(0);
+            }
+        });
         btnJpanel.add(submint);
         btnJpanel.add(reset);
 

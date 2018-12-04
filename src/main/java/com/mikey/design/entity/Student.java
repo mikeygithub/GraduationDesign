@@ -9,6 +9,8 @@ public class Student {
 
     private String studentPassword;
 
+    private String studentPhone;
+
     public Integer getStudentId() {
         return studentId;
     }
@@ -39,5 +41,13 @@ public class Student {
 
     public void setStudentPassword(String studentPassword) {
         this.studentPassword = studentPassword == null ? null : studentPassword.trim();
+    }
+
+    public String getStudentPhone() {
+        return studentPhone;
+    }
+
+    public void setStudentPhone(String studentPhone) {
+        this.studentPhone = studentPhone == null ? null : studentPhone.trim();
     }
 }

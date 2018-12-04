@@ -11,6 +11,8 @@ public class Teacher {
 
     private String teacherPassword;
 
+    private String teacherPhone;
+
     public Integer getTeacherId() {
         return teacherId;
     }
@@ -49,5 +51,13 @@ public class Teacher {
 
     public void setTeacherPassword(String teacherPassword) {
         this.teacherPassword = teacherPassword == null ? null : teacherPassword.trim();
+    }
+
+    public String getTeacherPhone() {
+        return teacherPhone;
+    }
+
+    public void setTeacherPhone(String teacherPhone) {
+        this.teacherPhone = teacherPhone == null ? null : teacherPhone.trim();
     }
 }

@@ -433,6 +433,76 @@ public class TeacherExample {
             addCriterion("teacher_password not between", value1, value2, "teacherPassword");
             return (Criteria) this;
         }
+
+        public Criteria andTeacherPhoneIsNull() {
+            addCriterion("teacher_phone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneIsNotNull() {
+            addCriterion("teacher_phone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneEqualTo(String value) {
+            addCriterion("teacher_phone =", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneNotEqualTo(String value) {
+            addCriterion("teacher_phone <>", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneGreaterThan(String value) {
+            addCriterion("teacher_phone >", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("teacher_phone >=", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneLessThan(String value) {
+            addCriterion("teacher_phone <", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneLessThanOrEqualTo(String value) {
+            addCriterion("teacher_phone <=", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneLike(String value) {
+            addCriterion("teacher_phone like", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneNotLike(String value) {
+            addCriterion("teacher_phone not like", value, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneIn(List<String> values) {
+            addCriterion("teacher_phone in", values, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneNotIn(List<String> values) {
+            addCriterion("teacher_phone not in", values, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneBetween(String value1, String value2) {
+            addCriterion("teacher_phone between", value1, value2, "teacherPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherPhoneNotBetween(String value1, String value2) {
+            addCriterion("teacher_phone not between", value1, value2, "teacherPhone");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
