@@ -223,8 +223,6 @@ public class WispPanel extends JPanel {
 //               }
             }
         });
-
-
         btnJpanel.add(submint);
         btnJpanel.add(reset);
 
