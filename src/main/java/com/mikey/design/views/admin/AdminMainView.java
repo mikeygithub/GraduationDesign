@@ -1,6 +1,7 @@
 package com.mikey.design.views.admin;
 
 import com.mikey.design.listerner.common.LoginOut;
+import com.mikey.design.views.common.WelcomeJpanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +64,7 @@ public class AdminMainView extends JFrame {
         JPanel lookTeacherJpanel=new LookTeacherJpanel();//浏览教师信息
         JPanel lookStudentPanel=new LookStudentJpanel();//浏览学生信息
         JPanel wishStatePanel=new StudentWishStateJpanel();//志愿填报情况
-        JPanel countWishPanel=new JPanel();//统计志愿填报、填报人数、未填报人数
+        JPanel countWishPanel=new WishDateCountJpanel();//统计志愿填报、填报人数、未填报人数
         JPanel addStudentJpanel=new AddStudentJpanel();//课设题目
         JPanel addTeacherJpanel=new AddTeacherJpanel();//更新个人信息
 
@@ -105,6 +106,7 @@ public class AdminMainView extends JFrame {
         });
         menuChild7.addActionListener(new LoginOut(login,this));
 
+        center.add(new WelcomeJpanel(),"welcomeJpanel");
         center.add(lookTeacherJpanel,"lookTeacherJpanel");
         center.add(lookStudentPanel,"lookStudentPanel");
         center.add(wishStatePanel,"wishStatePanel");

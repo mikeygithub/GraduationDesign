@@ -3,6 +3,7 @@ package com.mikey.design.views.teacher;
 import com.mikey.design.listerner.common.LoginOut;
 import com.mikey.design.views.common.UpPwdPanel;
 import com.mikey.design.views.common.UpdatePanel;
+import com.mikey.design.views.common.WelcomeJpanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,6 +99,7 @@ public class TeacherMainView extends JFrame {
         });
         menuChild6.addActionListener(new LoginOut(login,this));
 
+        center.add(new WelcomeJpanel(),"welcomeJpanel");
         center.add(addTitlePanel,"addTitlePanel");
         center.add(admitStudentsJpanel,"admitStudentsJpanel");
         center.add(alrealyAdmitJpanel,"alrealyAdmitJpanel");

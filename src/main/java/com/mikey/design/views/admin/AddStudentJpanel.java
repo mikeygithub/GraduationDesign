@@ -2,6 +2,7 @@ package com.mikey.design.views.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Mikey
@@ -28,8 +29,8 @@ public class AddStudentJpanel extends JPanel {
         mainJpanel.setLayout(new GridLayout(6,1));
         //1.名字
         JPanel username=new JPanel();
-        JLabel nameJlabel=new JLabel("用户名：");
-        JTextField nameJtextField=new JTextField("请输入学号或者工号");
+        JLabel nameJlabel=new JLabel("学生性名：");
+        JTextField nameJtextField=new JTextField("请输入学生性名");
         username.add(nameJlabel);
         username.add(nameJtextField);
         //2.性别
@@ -52,7 +53,21 @@ public class AddStudentJpanel extends JPanel {
         //提交按钮
         JPanel submits=new JPanel();
         JButton sunmit=new JButton("确认添加");
-        JButton reselt=new JButton("取消添加");
+        sunmit.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    //添加学生
+                JOptionPane.showMessageDialog(null, "添加成功/学号为：10005154");
+            }
+        });
+        JButton reselt=new JButton("重置输入");
+        reselt.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nameJtextField.setText("请输入学生性名");
+                phoneJtextField.setText("请输入电话号码或邮箱");
+            }
+        });
         submits.add(sunmit);
         submits.add(reselt);
 

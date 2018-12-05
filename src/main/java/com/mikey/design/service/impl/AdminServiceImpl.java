@@ -2,6 +2,9 @@ package com.mikey.design.service.impl;
 
 import com.mikey.design.entity.Admin;
 import com.mikey.design.mapper.AdminMapper;
+import com.mikey.design.mapper.DesignMapper;
+import com.mikey.design.mapper.StudentMapper;
+import com.mikey.design.mapper.TeacherMapper;
 import com.mikey.design.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,22 +22,40 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-    /**
-     * 统计教师信息
-     * @return
-     */
+    @Autowired
+    private DesignMapper designMapper;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
+
     @Override
-    public Object getTeacherMessage() {
-        return null;
+    public long getTeacherNum() {
+        return teacherMapper.countByExample(null);
     }
 
-    /**
-     * 统计学生信息
-     * @return
-     */
     @Override
-    public Object getStudentMessage() {
-        return null;
+    public long getStudentNum() {
+        return studentMapper.countByExample(null);
+    }
+
+    @Override
+    public long alreadyFillWishStudetnNum() {
+        //TODO:待完成查询
+        return 100l;
+    }
+
+    @Override
+    public long notFillWishStudetnNum() {
+        //TODO:待完成查询
+        return 0l;
+    }
+
+    @Override
+    public long allTitleNum() {
+        return designMapper.countByExample(null);
     }
 
     /**
