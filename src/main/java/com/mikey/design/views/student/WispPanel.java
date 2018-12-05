@@ -65,6 +65,7 @@ public class WispPanel extends JPanel {
     }
 
 
+
     /**
      * 展现视图
      * @throws HeadlessException
