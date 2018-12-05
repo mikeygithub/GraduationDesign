@@ -6,6 +6,8 @@ import com.mikey.design.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Mikey
  * @Title:
@@ -61,5 +63,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacher(int teacherId) {
         return teacherMapper.selectByPrimaryKey(teacherId);
+    }
+
+    @Override
+    public List<Teacher> getAllTeacher() {
+        return teacherMapper.selectByExample(null);
     }
 }

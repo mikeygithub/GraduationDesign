@@ -2,6 +2,8 @@ package com.mikey.design.service;
 
 import com.mikey.design.entity.Teacher;
 
+import java.util.List;
+
 /**
  * @author Mikey
  * @Title:
@@ -17,4 +19,5 @@ public interface TeacherService {
     public void deleteTeacherNum(int teacherId);
     public Teacher getTeacher(int teacherId);
 
+    List<Teacher> getAllTeacher();
 }

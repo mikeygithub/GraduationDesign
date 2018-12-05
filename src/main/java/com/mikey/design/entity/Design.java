@@ -3,6 +3,8 @@ package com.mikey.design.entity;
 public class Design {
     private Integer designId;
 
+    private Integer designOfTeacher;
+
     private String designTitle;
 
     private Integer designNum;
@@ -15,6 +17,14 @@ public class Design {
 
     public void setDesignId(Integer designId) {
         this.designId = designId;
+    }
+
+    public Integer getDesignOfTeacher() {
+        return designOfTeacher;
+    }
+
+    public void setDesignOfTeacher(Integer designOfTeacher) {
+        this.designOfTeacher = designOfTeacher;
     }
 
     public String getDesignTitle() {

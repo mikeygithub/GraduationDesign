@@ -164,6 +164,66 @@ public class DesignExample {
             return (Criteria) this;
         }
 
+        public Criteria andDesignOfTeacherIsNull() {
+            addCriterion("design_of_teacher is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherIsNotNull() {
+            addCriterion("design_of_teacher is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherEqualTo(Integer value) {
+            addCriterion("design_of_teacher =", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherNotEqualTo(Integer value) {
+            addCriterion("design_of_teacher <>", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherGreaterThan(Integer value) {
+            addCriterion("design_of_teacher >", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherGreaterThanOrEqualTo(Integer value) {
+            addCriterion("design_of_teacher >=", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherLessThan(Integer value) {
+            addCriterion("design_of_teacher <", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherLessThanOrEqualTo(Integer value) {
+            addCriterion("design_of_teacher <=", value, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherIn(List<Integer> values) {
+            addCriterion("design_of_teacher in", values, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherNotIn(List<Integer> values) {
+            addCriterion("design_of_teacher not in", values, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherBetween(Integer value1, Integer value2) {
+            addCriterion("design_of_teacher between", value1, value2, "designOfTeacher");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignOfTeacherNotBetween(Integer value1, Integer value2) {
+            addCriterion("design_of_teacher not between", value1, value2, "designOfTeacher");
+            return (Criteria) this;
+        }
+
         public Criteria andDesignTitleIsNull() {
             addCriterion("design_title is null");
             return (Criteria) this;

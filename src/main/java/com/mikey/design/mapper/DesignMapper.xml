@@ -3,6 +3,7 @@
 <mapper namespace="com.mikey.design.mapper.DesignMapper">
   <resultMap id="BaseResultMap" type="com.mikey.design.entity.Design">
     <id column="design_id" jdbcType="INTEGER" property="designId" />
+    <result column="design_of_teacher" jdbcType="INTEGER" property="designOfTeacher" />
     <result column="design_title" jdbcType="VARCHAR" property="designTitle" />
     <result column="design_num" jdbcType="INTEGER" property="designNum" />
     <result column="design_require" jdbcType="VARCHAR" property="designRequire" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    design_id, design_title, design_num, design_require
+    design_id, design_of_teacher, design_title, design_num, design_require
   </sql>
   <select id="selectByExample" parameterType="com.mikey.design.entity.DesignExample" resultMap="BaseResultMap">
     select
@@ -99,16 +100,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mikey.design.entity.Design">
-    insert into des_design (design_id, design_title, design_num, 
-      design_require)
-    values (#{designId,jdbcType=INTEGER}, #{designTitle,jdbcType=VARCHAR}, #{designNum,jdbcType=INTEGER}, 
-      #{designRequire,jdbcType=VARCHAR})
+    insert into des_design (design_id, design_of_teacher, design_title, 
+      design_num, design_require)
+    values (#{designId,jdbcType=INTEGER}, #{designOfTeacher,jdbcType=INTEGER}, #{designTitle,jdbcType=VARCHAR}, 
+      #{designNum,jdbcType=INTEGER}, #{designRequire,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mikey.design.entity.Design">
     insert into des_design
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="designId != null">
         design_id,
+      </if>
+      <if test="designOfTeacher != null">
+        design_of_teacher,
       </if>
       <if test="designTitle != null">
         design_title,
@@ -123,6 +127,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="designId != null">
         #{designId,jdbcType=INTEGER},
+      </if>
+      <if test="designOfTeacher != null">
+        #{designOfTeacher,jdbcType=INTEGER},
       </if>
       <if test="designTitle != null">
         #{designTitle,jdbcType=VARCHAR},
@@ -147,6 +154,9 @@
       <if test="record.designId != null">
         design_id = #{record.designId,jdbcType=INTEGER},
       </if>
+      <if test="record.designOfTeacher != null">
+        design_of_teacher = #{record.designOfTeacher,jdbcType=INTEGER},
+      </if>
       <if test="record.designTitle != null">
         design_title = #{record.designTitle,jdbcType=VARCHAR},
       </if>
@@ -164,6 +174,7 @@
   <update id="updateByExample" parameterType="map">
     update des_design
     set design_id = #{record.designId,jdbcType=INTEGER},
+      design_of_teacher = #{record.designOfTeacher,jdbcType=INTEGER},
       design_title = #{record.designTitle,jdbcType=VARCHAR},
       design_num = #{record.designNum,jdbcType=INTEGER},
       design_require = #{record.designRequire,jdbcType=VARCHAR}
@@ -174,6 +185,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.mikey.design.entity.Design">
     update des_design
     <set>
+      <if test="designOfTeacher != null">
+        design_of_teacher = #{designOfTeacher,jdbcType=INTEGER},
+      </if>
       <if test="designTitle != null">
         design_title = #{designTitle,jdbcType=VARCHAR},
       </if>
@@ -188,7 +202,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mikey.design.entity.Design">
     update des_design
-    set design_title = #{designTitle,jdbcType=VARCHAR},
+    set design_of_teacher = #{designOfTeacher,jdbcType=INTEGER},
+      design_title = #{designTitle,jdbcType=VARCHAR},
       design_num = #{designNum,jdbcType=INTEGER},
       design_require = #{designRequire,jdbcType=VARCHAR}
     where design_id = #{designId,jdbcType=INTEGER}

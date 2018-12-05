@@ -25,7 +25,7 @@ public class AlrealdFillWispPanel extends JPanel {
         add(titleJpanel,BorderLayout.NORTH);
 
         JPanel mainJpanel=new JPanel();//已经填报页面
-        JLabel alrealdFillWispJLable=new JLabel("你已经进行填报");
+        JLabel alrealdFillWispJLable=new JLabel("你已经进行填报了");
         mainJpanel.add(alrealdFillWispJLable);
         add(mainJpanel,BorderLayout.CENTER);
     }
