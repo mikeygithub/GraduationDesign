@@ -180,7 +180,6 @@ public class TitleJpanel extends JPanel {
                 }
             }
         });
-
         /**
          * 监听末页
          */
