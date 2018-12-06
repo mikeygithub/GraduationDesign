@@ -40,21 +40,35 @@ public class AlrealdFillWispPanel extends JPanel {
         Student self = (Student) ThreadLoaclUtil.get();//获取用户（学生）信息
         //第一志愿
         Design firstDesign=titleOfStudentService.getFirstWish(self.getStudentId());
-        theFirstWishName=firstDesign.getDesignTitle();
+        if (firstDesign!=null)theFirstWishName=firstDesign.getDesignTitle();
         //第二志愿
         Design secondDesign=titleOfStudentService.getSecondWish(self.getStudentId());
-        theSecondWishName=secondDesign.getDesignTitle();
+        if(secondDesign!=null)theSecondWishName=secondDesign.getDesignTitle();
         //获取志愿录取状态
-        adminState=admitStateArray[titleOfStudentService.getAdmitState(self.getStudentId())];
-
-        adminResult=titleOfStudentService.getAdmitDesign(self.getStudentId()).getDesignTitle();
+        if(firstDesign!=null&&secondDesign!=null)adminState=admitStateArray[titleOfStudentService.getAdmitState(self.getStudentId())];
+        //获取录取的志愿
+        if(adminState.equals("已经录取")&&firstDesign!=null&&secondDesign!=null)adminResult=titleOfStudentService.getAdmitDesign(self.getStudentId()).getDesignTitle();
     }
 
-    public AlrealdFillWispPanel(){
+//    /**
+////     * 构造函数
+////     */
+////    public AlrealdFillWispPanel(){
+////        getData();
+////        showView();
+////    }
+
+    /**
+     * 刷新数据
+     */
+    public void refreshData(){
         getData();
         showView();
     }
-    private void showView() {
+    /**
+     * 够造视图
+     */
+    public void showView() {
 
         //边缘布局
         setLayout(new BorderLayout());
@@ -102,7 +116,7 @@ public class AlrealdFillWispPanel extends JPanel {
         mainJpanel.add(secondJpanel);
         mainJpanel.add(stateJpanel);
 
-        if(adminResult.equals("已经录取"))mainJpanel.add(resultJpanel);
+        if(adminState.equals("已经录取"))mainJpanel.add(resultJpanel);
 
         add(mainJpanel,BorderLayout.CENTER);
 

@@ -78,7 +78,11 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
 
         List<TitleOfStudent> titleOfStudent= titleOfStudentMapper.selectByExample(titleOfStudentExample);
 
-        return designMapper.selectByPrimaryKey(titleOfStudent.get(0).getDesOfTitle());
+        if (titleOfStudent.size()>0) {
+            return designMapper.selectByPrimaryKey(titleOfStudent.get(0).getDesOfTitle());
+        }else {
+            return null;
+        }
     }
 
     /**
@@ -98,7 +102,11 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
 
         List<TitleOfStudent> titleOfStudent= titleOfStudentMapper.selectByExample(titleOfStudentExample);
 
-        return designMapper.selectByPrimaryKey(titleOfStudent.get(0).getDesOfTitle());
+        if (titleOfStudent.size()>0) {
+            return designMapper.selectByPrimaryKey(titleOfStudent.get(0).getDesOfTitle());
+        }else {
+            return null;
+        }
     }
 
     /**
@@ -115,12 +123,18 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
         criteria.andDesWishOrderEqualTo(0);//第一志愿
         List<TitleOfStudent> titleOfStudent=titleOfStudentMapper.selectByExample(titleOfStudentExample);
 
+        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==0)return 0;
+        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==1)return 1;
+
         TitleOfStudentExample titleOfStudentExample2 = new TitleOfStudentExample();
         TitleOfStudentExample.Criteria criteria2 = titleOfStudentExample.createCriteria();
         criteria2.andDesOfStuEqualTo(studentId);//当前学生志愿
         criteria2.andDesWishOrderEqualTo(1);//第二志愿
-        List<TitleOfStudent> titleOfStudent2= titleOfStudentMapper.selectByExample(titleOfStudentExample);
+        List<TitleOfStudent> titleOfStudent2= titleOfStudentMapper.selectByExample(titleOfStudentExample2);
 
+        if(titleOfStudent2.size()>0){
+            return titleOfStudent2.get(0).getDesState();
+        }
         return 0;
     }
 
@@ -131,6 +145,21 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
      */
     @Override
     public Design getAdmitDesign(Integer studentId) {
-        return null;
+
+        TitleOfStudentExample titleOfStudentExample = new TitleOfStudentExample();
+
+        TitleOfStudentExample.Criteria criteria = titleOfStudentExample.createCriteria();
+
+        criteria.andDesOfStuEqualTo(studentId);//当前学生志愿
+
+        criteria.andDesStateEqualTo(1);//已经录取
+
+        List<TitleOfStudent> titleOfStudent= titleOfStudentMapper.selectByExample(titleOfStudentExample);
+
+        if (titleOfStudent.size()>0){
+            return designMapper.selectByPrimaryKey(titleOfStudent.get(0).getDesOfTitle());
+        }else {
+            return null;
+        }
     }
 }

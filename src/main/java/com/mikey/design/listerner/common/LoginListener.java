@@ -83,7 +83,7 @@ public class LoginListener extends AbstractAction {
         switch (role){
             case ADMIN://管理员登入
                 Admin admin=adminService.getAdmin(Integer.parseInt(username));
-System.out.println("Message=============="+adminService+"*******"+username+"*********"+password);
+
                 this.baseUserName=admin.getAdminId().toString();
                 this.basePassWord=admin.getAdminPassword();
                 //身份认证
@@ -99,10 +99,9 @@ System.out.println("Message=============="+adminService+"*******"+username+"****
                 break;
             case STU://学生登入
 
-                Student student= this.studentService.getStudent(1);
+                Student student= this.studentService.getStudent(Integer.parseInt(username));
                 this.baseUserName=student.getStudentId().toString();
                 this.basePassWord=student.getStudentPassword();
-
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功

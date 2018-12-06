@@ -78,7 +78,8 @@ public class WispPanel extends JPanel {
         Student self = (Student) ThreadLoaclUtil.get();//获取用户（学生）信息
         TitleOfStudent firstTitleOfStudent = new TitleOfStudent();
         firstTitleOfStudent.setDesOfStu(self.getStudentId());
-        firstTitleOfStudent.setDesWishOrder(0);
+        firstTitleOfStudent.setDesWishOrder(0);//第一志愿
+        firstTitleOfStudent.setDesState(0);//待录取
         for (Design d:titleList){
             if (d.getDesignTitle().equals(titleBox.getSelectedItem().toString())){
                 firstTitleOfStudent.setDesOfTitle(d.getDesignId());
@@ -87,7 +88,8 @@ public class WispPanel extends JPanel {
 
         TitleOfStudent secondTitleOfStudent = new TitleOfStudent();
         secondTitleOfStudent.setDesOfStu(self.getStudentId());
-        secondTitleOfStudent.setDesWishOrder(1);
+        secondTitleOfStudent.setDesWishOrder(1);//第二志愿
+        secondTitleOfStudent.setDesState(0);//待录取
         for (Design d:titleList){
             if (d.getDesignTitle().equals(titleBox2.getSelectedItem().toString())){
                 secondTitleOfStudent.setDesOfTitle(d.getDesignId());

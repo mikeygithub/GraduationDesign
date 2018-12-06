@@ -4,7 +4,9 @@ import com.mikey.design.entity.Design;
 import com.mikey.design.entity.DesignExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface DesignMapper {
     long countByExample(DesignExample example);
 
