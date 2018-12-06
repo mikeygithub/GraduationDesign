@@ -205,7 +205,6 @@ public class TitleJpanel extends JPanel {
         page.add(nextPage);
         page.add(endPage);
         add(page,BorderLayout.SOUTH);
-
     }
 
     /**
