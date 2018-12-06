@@ -1,11 +1,15 @@
 package com.mikey.design.views.student;
 
 import com.mikey.design.entity.Design;
+import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
+import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.service.DesignService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
+import com.mikey.design.service.TitleOfStudentService;
 import com.mikey.design.utils.SpringUtil;
+import com.mikey.design.utils.ThreadLoaclUtil;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -27,6 +31,7 @@ public class WispPanel extends JPanel {
     private StudentService studentService;
     private TeacherService teacherService;
     private DesignService designService;
+    private TitleOfStudentService titleOfStudentService;
     private  List<Teacher> teacherList=null;
     private  List<Design> titleList=null;
 
@@ -37,6 +42,8 @@ public class WispPanel extends JPanel {
         studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
         teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
         designService= (DesignService) SpringUtil.getBean("designServiceImpl");
+        titleOfStudentService= (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
+
         this.teacherList=teacherService.getAllTeacher();//获取全部教师信息
         this.titleList=designService.getAllDesign();//获取全部毕设题目信息
     }
@@ -52,25 +59,61 @@ public class WispPanel extends JPanel {
     private boolean checkData(JComboBox teacherboBox, JComboBox teacherboBox2, JComboBox titleBox, JComboBox titleBox2){
 
         if(teacherboBox.getSelectedItem().toString().equals("请选择教师")||teacherboBox2.getSelectedItem().toString().equals("请选择教师")){
-            JOptionPane.showMessageDialog(titleBox2,"请选择教师！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"请选择教师！","系统提示",JOptionPane.INFORMATION_MESSAGE);
             return false;
-        }else if (titleBox.getSelectedItem().toString().equals(""))return false;
+        }else if (titleBox.getItemCount()==0||titleBox.getItemCount()==0){
+            JOptionPane.showMessageDialog(this,"该教师无毕设题目！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         return true;
     }
 
-    public WispPanel() throws HeadlessException {
+    /**
+     * 提交志愿
+     * @param titleBox
+     * @param titleBox2
+     * @return
+     */
+    private boolean submitWish(JComboBox titleBox, JComboBox titleBox2){
+        Student self = (Student) ThreadLoaclUtil.get();//获取用户（学生）信息
+        TitleOfStudent firstTitleOfStudent = new TitleOfStudent();
+        firstTitleOfStudent.setDesOfStu(self.getStudentId());
+        firstTitleOfStudent.setDesWishOrder(0);
+        for (Design d:titleList){
+            if (d.getDesignTitle().equals(titleBox.getSelectedItem().toString())){
+                firstTitleOfStudent.setDesOfTitle(d.getDesignId());
+            }
+        }
+
+        TitleOfStudent secondTitleOfStudent = new TitleOfStudent();
+        secondTitleOfStudent.setDesOfStu(self.getStudentId());
+        secondTitleOfStudent.setDesWishOrder(1);
+        for (Design d:titleList){
+            if (d.getDesignTitle().equals(titleBox2.getSelectedItem().toString())){
+                secondTitleOfStudent.setDesOfTitle(d.getDesignId());
+            }
+        }
+
+        titleOfStudentService.addTitleOfStudent(firstTitleOfStudent,secondTitleOfStudent);//保存到数据库
+
+        return true;
+    }
+    /**
+     * 构造方法初始化面板
+     * @throws HeadlessException
+     */
+    public WispPanel(JButton menuChild1) throws HeadlessException {
         getData();//获取数据信息
-        showView();//展现视图
+        showView(menuChild1);//展现视图
 
     }
-
-
+    public WispPanel() throws HeadlessException { }
 
     /**
      * 展现视图
      * @throws HeadlessException
      */
-    public void showView() throws HeadlessException {
+    public void showView(JButton menuChild1) throws HeadlessException {
 
         setLayout(new GridLayout(7,1));//七行一列网格布局
         /**
@@ -191,8 +234,10 @@ public class WispPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 teacherboBox.setSelectedIndex(0);
+                if(titleBox.getItemCount()==0)titleBox.addItem("请选择课设题目");
                 titleBox.setSelectedIndex(0);
                 teacherboBox2.setSelectedIndex(0);
+                if(titleBox2.getItemCount()==0)titleBox2.addItem("请选择课设题目");
                 titleBox2.setSelectedIndex(0);
             }
         });
@@ -207,22 +252,26 @@ public class WispPanel extends JPanel {
                 /**
                  * 数据校验
                  */
-//                if (checkData(teacherboBox,teacherboBox2,titleBox,titleBox2)){
-                System.out.println("Message======>"+teacherboBox.getSelectedItem().toString()+"//"+titleBox.getSelectedItem().toString());
+                if (checkData(teacherboBox,teacherboBox2,titleBox,titleBox2)){
                 /**
                  * 弹窗确认
                  */
-                int result = JOptionPane.showConfirmDialog(btnJpanel, "确认提交志愿？", "提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog(btnJpanel, "确认提交志愿？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                 /**
                  * 提交保存
                  */
                 if (result==0){
                     //保存志愿操作
-                    JOptionPane.showMessageDialog(btnJpanel,"提交成功！","系统提示",JOptionPane.INFORMATION_MESSAGE);
-                    System.out.println("志愿提交成功");
-                    //TODO:隐藏填报志愿面板
+                    if (submitWish(titleBox,titleBox2)){
+                        JOptionPane.showMessageDialog(btnJpanel,"提交成功！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                        System.out.println("志愿提交成功");
+                        //TODO:隐藏填报志愿面板
+                        menuChild1.doClick();
+                    }else {
+                        JOptionPane.showMessageDialog(btnJpanel,"提交失败、请联系系统管理员！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-//               }
+               }
             }
         });
         btnJpanel.add(submint);

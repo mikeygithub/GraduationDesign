@@ -5,6 +5,8 @@
     <id column="des_of_stu_id" jdbcType="INTEGER" property="desOfStuId" />
     <result column="des_of_stu" jdbcType="INTEGER" property="desOfStu" />
     <result column="des_of_title" jdbcType="INTEGER" property="desOfTitle" />
+    <result column="des_state" jdbcType="INTEGER" property="desState" />
+    <result column="des_wish_order" jdbcType="INTEGER" property="desWishOrder" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    des_of_stu_id, des_of_stu, des_of_title
+    des_of_stu_id, des_of_stu, des_of_title, des_state, des_wish_order
   </sql>
   <select id="selectByExample" parameterType="com.mikey.design.entity.TitleOfStudentExample" resultMap="BaseResultMap">
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mikey.design.entity.TitleOfStudent">
-    insert into des_title_of_student (des_of_stu_id, des_of_stu, des_of_title
-      )
-    values (#{desOfStuId,jdbcType=INTEGER}, #{desOfStu,jdbcType=INTEGER}, #{desOfTitle,jdbcType=INTEGER}
-      )
+    insert into des_title_of_student (des_of_stu_id, des_of_stu, des_of_title, 
+      des_state, des_wish_order)
+    values (#{desOfStuId,jdbcType=INTEGER}, #{desOfStu,jdbcType=INTEGER}, #{desOfTitle,jdbcType=INTEGER}, 
+      #{desState,jdbcType=INTEGER}, #{desWishOrder,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mikey.design.entity.TitleOfStudent">
     insert into des_title_of_student
@@ -115,6 +117,12 @@
       <if test="desOfTitle != null">
         des_of_title,
       </if>
+      <if test="desState != null">
+        des_state,
+      </if>
+      <if test="desWishOrder != null">
+        des_wish_order,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="desOfStuId != null">
@@ -125,6 +133,12 @@
       </if>
       <if test="desOfTitle != null">
         #{desOfTitle,jdbcType=INTEGER},
+      </if>
+      <if test="desState != null">
+        #{desState,jdbcType=INTEGER},
+      </if>
+      <if test="desWishOrder != null">
+        #{desWishOrder,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +160,12 @@
       <if test="record.desOfTitle != null">
         des_of_title = #{record.desOfTitle,jdbcType=INTEGER},
       </if>
+      <if test="record.desState != null">
+        des_state = #{record.desState,jdbcType=INTEGER},
+      </if>
+      <if test="record.desWishOrder != null">
+        des_wish_order = #{record.desWishOrder,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +175,9 @@
     update des_title_of_student
     set des_of_stu_id = #{record.desOfStuId,jdbcType=INTEGER},
       des_of_stu = #{record.desOfStu,jdbcType=INTEGER},
-      des_of_title = #{record.desOfTitle,jdbcType=INTEGER}
+      des_of_title = #{record.desOfTitle,jdbcType=INTEGER},
+      des_state = #{record.desState,jdbcType=INTEGER},
+      des_wish_order = #{record.desWishOrder,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +191,21 @@
       <if test="desOfTitle != null">
         des_of_title = #{desOfTitle,jdbcType=INTEGER},
       </if>
+      <if test="desState != null">
+        des_state = #{desState,jdbcType=INTEGER},
+      </if>
+      <if test="desWishOrder != null">
+        des_wish_order = #{desWishOrder,jdbcType=INTEGER},
+      </if>
     </set>
     where des_of_stu_id = #{desOfStuId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mikey.design.entity.TitleOfStudent">
     update des_title_of_student
     set des_of_stu = #{desOfStu,jdbcType=INTEGER},
-      des_of_title = #{desOfTitle,jdbcType=INTEGER}
+      des_of_title = #{desOfTitle,jdbcType=INTEGER},
+      des_state = #{desState,jdbcType=INTEGER},
+      des_wish_order = #{desWishOrder,jdbcType=INTEGER}
     where des_of_stu_id = #{desOfStuId,jdbcType=INTEGER}
   </update>
 </mapper>

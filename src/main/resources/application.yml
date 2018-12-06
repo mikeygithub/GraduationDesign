@@ -37,4 +37,4 @@ pagehelper:
 logging:
   level:
     #Mapper所在的包
-    com.mikey.design.Mapper: debug
+    com.mikey.design.mapper: debug

@@ -1,5 +1,11 @@
 package com.mikey.design.views.student;
 
+import com.mikey.design.entity.Design;
+import com.mikey.design.entity.Student;
+import com.mikey.design.service.TitleOfStudentService;
+import com.mikey.design.utils.SpringUtil;
+import com.mikey.design.utils.ThreadLoaclUtil;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +18,43 @@ import java.awt.*;
  * @Version 1.0
  */
 public class AlrealdFillWispPanel extends JPanel {
-    public AlrealdFillWispPanel() {
+
+    private  TitleOfStudentService titleOfStudentService;
+
+    private String[] admitStateArray={"待录取","已经录取","未录取"};//录取状态
+
+    private String theFirstWishName="";
+
+    private String theSecondWishName="";
+
+    private String adminState="";
+
+    private String adminResult="";
+
+
+    /**
+     * 获取志愿状态信息
+     */
+    private void getData(){
+        titleOfStudentService= (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
+        Student self = (Student) ThreadLoaclUtil.get();//获取用户（学生）信息
+        //第一志愿
+        Design firstDesign=titleOfStudentService.getFirstWish(self.getStudentId());
+        theFirstWishName=firstDesign.getDesignTitle();
+        //第二志愿
+        Design secondDesign=titleOfStudentService.getSecondWish(self.getStudentId());
+        theSecondWishName=secondDesign.getDesignTitle();
+        //获取志愿录取状态
+        adminState=admitStateArray[titleOfStudentService.getAdmitState(self.getStudentId())];
+
+        adminResult=titleOfStudentService.getAdmitDesign(self.getStudentId()).getDesignTitle();
+    }
+
+    public AlrealdFillWispPanel(){
+        getData();
+        showView();
+    }
+    private void showView() {
 
         //边缘布局
         setLayout(new BorderLayout());
@@ -25,8 +67,45 @@ public class AlrealdFillWispPanel extends JPanel {
         add(titleJpanel,BorderLayout.NORTH);
 
         JPanel mainJpanel=new JPanel();//已经填报页面
-        JLabel alrealdFillWispJLable=new JLabel("你已经进行填报了");
-        mainJpanel.add(alrealdFillWispJLable);
+        mainJpanel.setLayout(new GridLayout(6,1));
+
+        JPanel tip=new JPanel();
+        JLabel alrealdFillWispJLable=new JLabel("您已进行填报");
+        tip.add(alrealdFillWispJLable);
+
+        JPanel firstJpanel=new JPanel();
+        JLabel firstWispJLable=new JLabel("第一志愿：");
+        JLabel firstWispJLableInfo=new JLabel(theFirstWishName);
+        firstJpanel.add(firstWispJLable);
+        firstJpanel.add(firstWispJLableInfo);
+
+        JPanel secondJpanel=new JPanel();
+        JLabel secondWispJLable=new JLabel("第二志愿：");
+        JLabel secondWispJLableInfo=new JLabel(theSecondWishName);
+        secondJpanel.add(secondWispJLable);
+        secondJpanel.add(secondWispJLableInfo);
+
+        JPanel stateJpanel=new JPanel();
+        JLabel stateWispJLable=new JLabel("录取状态：");//0.待录取、1.待录取、2.已经录取
+        JLabel stateWispJLableInfo=new JLabel(adminState);
+        stateJpanel.add(stateWispJLable);
+        stateJpanel.add(stateWispJLableInfo);
+
+        JPanel resultJpanel=new JPanel();
+        JLabel resultWispJLable=new JLabel("录取的志愿：");
+        JLabel resultWispJLableInfo=new JLabel(adminResult);
+        resultJpanel.add(resultWispJLable);
+        resultJpanel.add(resultWispJLableInfo);
+
+        mainJpanel.add(tip);
+        mainJpanel.add(firstJpanel);
+        mainJpanel.add(secondJpanel);
+        mainJpanel.add(stateJpanel);
+
+        if(adminResult.equals("已经录取"))mainJpanel.add(resultJpanel);
+
         add(mainJpanel,BorderLayout.CENTER);
+
     }
+
 }

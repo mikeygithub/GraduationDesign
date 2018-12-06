@@ -283,6 +283,126 @@ public class TitleOfStudentExample {
             addCriterion("des_of_title not between", value1, value2, "desOfTitle");
             return (Criteria) this;
         }
+
+        public Criteria andDesStateIsNull() {
+            addCriterion("des_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateIsNotNull() {
+            addCriterion("des_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateEqualTo(Integer value) {
+            addCriterion("des_state =", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateNotEqualTo(Integer value) {
+            addCriterion("des_state <>", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateGreaterThan(Integer value) {
+            addCriterion("des_state >", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("des_state >=", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateLessThan(Integer value) {
+            addCriterion("des_state <", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateLessThanOrEqualTo(Integer value) {
+            addCriterion("des_state <=", value, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateIn(List<Integer> values) {
+            addCriterion("des_state in", values, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateNotIn(List<Integer> values) {
+            addCriterion("des_state not in", values, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateBetween(Integer value1, Integer value2) {
+            addCriterion("des_state between", value1, value2, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("des_state not between", value1, value2, "desState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderIsNull() {
+            addCriterion("des_wish_order is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderIsNotNull() {
+            addCriterion("des_wish_order is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderEqualTo(Integer value) {
+            addCriterion("des_wish_order =", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderNotEqualTo(Integer value) {
+            addCriterion("des_wish_order <>", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderGreaterThan(Integer value) {
+            addCriterion("des_wish_order >", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderGreaterThanOrEqualTo(Integer value) {
+            addCriterion("des_wish_order >=", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderLessThan(Integer value) {
+            addCriterion("des_wish_order <", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderLessThanOrEqualTo(Integer value) {
+            addCriterion("des_wish_order <=", value, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderIn(List<Integer> values) {
+            addCriterion("des_wish_order in", values, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderNotIn(List<Integer> values) {
+            addCriterion("des_wish_order not in", values, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderBetween(Integer value1, Integer value2) {
+            addCriterion("des_wish_order between", value1, value2, "desWishOrder");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesWishOrderNotBetween(Integer value1, Integer value2) {
+            addCriterion("des_wish_order not between", value1, value2, "desWishOrder");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

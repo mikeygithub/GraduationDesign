@@ -7,6 +7,10 @@ public class TitleOfStudent {
 
     private Integer desOfTitle;
 
+    private Integer desState;
+
+    private Integer desWishOrder;
+
     public Integer getDesOfStuId() {
         return desOfStuId;
     }
@@ -29,5 +33,21 @@ public class TitleOfStudent {
 
     public void setDesOfTitle(Integer desOfTitle) {
         this.desOfTitle = desOfTitle;
+    }
+
+    public Integer getDesState() {
+        return desState;
+    }
+
+    public void setDesState(Integer desState) {
+        this.desState = desState;
+    }
+
+    public Integer getDesWishOrder() {
+        return desWishOrder;
+    }
+
+    public void setDesWishOrder(Integer desWishOrder) {
+        this.desWishOrder = desWishOrder;
     }
 }
