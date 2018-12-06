@@ -50,14 +50,6 @@ public class AlrealdFillWispPanel extends JPanel {
         if(adminState.equals("已经录取")&&firstDesign!=null&&secondDesign!=null)adminResult=titleOfStudentService.getAdmitDesign(self.getStudentId()).getDesignTitle();
     }
 
-//    /**
-////     * 构造函数
-////     */
-////    public AlrealdFillWispPanel(){
-////        getData();
-////        showView();
-////    }
-
     /**
      * 刷新数据
      */

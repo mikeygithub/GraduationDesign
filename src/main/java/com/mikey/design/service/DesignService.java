@@ -1,5 +1,6 @@
 package com.mikey.design.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Design;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface DesignService {
     public void updateDesign(Design design);
     public void deleteDesign(int designId);
     public List<Design> getAllDesign();
+    PageInfo getDesignByPage(int currentPage, int pageSize);
 }

@@ -1,5 +1,7 @@
 package com.mikey.design.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Design;
 import com.mikey.design.mapper.DesignMapper;
 import com.mikey.design.service.DesignService;
@@ -55,5 +57,23 @@ public class DesignServiceImpl implements DesignService {
     @Override
     public List<Design> getAllDesign() {
         return designMapper.selectByExample(null);
+    }
+
+    /**
+     * 分页查询毕业设计题目
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo getDesignByPage(int currentPage, int pageSize) {
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<Design> allBook=designMapper.selectByExample(null);
+
+        PageInfo pageData = new PageInfo(allBook, pageSize);
+
+        return pageData;
     }
 }

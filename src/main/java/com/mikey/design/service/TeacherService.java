@@ -1,5 +1,6 @@
 package com.mikey.design.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Teacher;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public interface TeacherService {
     public void updateTeacherNum(Teacher teacher);
     public void deleteTeacherNum(int teacherId);
     public Teacher getTeacher(int teacherId);
-
     List<Teacher> getAllTeacher();
+    PageInfo getAllTeacherByPage(int currentPage, int pageSize);
 }

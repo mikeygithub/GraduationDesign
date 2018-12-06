@@ -1,5 +1,7 @@
 package com.mikey.design.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.mapper.TeacherMapper;
 import com.mikey.design.service.TeacherService;
@@ -60,13 +62,38 @@ public class TeacherServiceImpl implements TeacherService {
         teacherMapper.deleteByPrimaryKey(teacherId);
     }
 
+    /**
+     * 获取单个教师信息
+     * @param teacherId
+     * @return
+     */
     @Override
     public Teacher getTeacher(int teacherId) {
         return teacherMapper.selectByPrimaryKey(teacherId);
     }
 
-    @Override
-    public List<Teacher> getAllTeacher() {
+    /**
+     * 直接获取全部教师信息
+     * @return
+     */
+    public List<Teacher> getAllTeacher(){
         return teacherMapper.selectByExample(null);
+    }
+    /**
+     * 分页查询教师信息列表
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo getAllTeacherByPage(int currentPage,int pageSize) {
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<Teacher> teacherList=teacherMapper.selectByExample(null);
+
+        PageInfo pageData = new PageInfo(teacherList, pageSize);
+
+        return pageData;
     }
 }

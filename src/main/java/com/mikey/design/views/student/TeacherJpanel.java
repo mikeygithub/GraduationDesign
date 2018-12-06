@@ -1,10 +1,16 @@
 package com.mikey.design.views.student;
 
+import com.github.pagehelper.PageInfo;
+import com.mikey.design.entity.Teacher;
+import com.mikey.design.service.TeacherService;
 import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.utils.SpringUtil;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.List;
 
 /**
  * @author Mikey
@@ -15,7 +21,54 @@ import java.awt.*;
  * @Version 1.0
  */
 public class TeacherJpanel extends JPanel {
-    public TeacherJpanel() {
+    //service接口
+    private TeacherService teacherService;
+    //当前页
+    private int currentPage=1;
+    //每页显示条数
+    private int pageSize=20;
+
+    //表头（列名）
+    private Object[] columnNames = {"姓名", "性别", "联系方式", "教师简介"};
+    //列表内容
+    private Object[][] rowData=new Object[20][4];
+    //分页
+    private PageInfo pageData;
+
+    public void getData(){
+        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        //进行分页、每页显示20行信息
+        pageData = teacherService.getAllTeacherByPage(currentPage,pageSize);
+
+        rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";
+
+
+        List<Teacher> teacherList=pageData.getList();//获取数据
+
+        clearData(rowData);//清除数据
+
+        if (teacherList.size()>0){
+            int i=0;
+                for(Teacher t:teacherList){//赋值
+                    rowData[i][0]=t.getTeacherName();
+                    rowData[i][1]=t.getTeacherSex()==0?'女':'男';
+                    rowData[i][2]=t.getTeacherPhone();
+                    rowData[i][3]=t.getTeacherInfo();
+                i++;
+            }
+        }
+
+    }
+
+    private void clearData(Object[][] rowData) {
+        for (int i=0;i<rowData.length;i++){
+            for(int j=0;j<4;j++){
+                rowData[i][j]="";
+            }
+        }
+    }
+
+    public void showView() {
         setLayout(new BorderLayout());
         setBackground(Color.GRAY);
         /**
@@ -31,43 +84,24 @@ public class TeacherJpanel extends JPanel {
          * 教师列表
          */
         JPanel teach=new JPanel(new BorderLayout());
+
         teach.setBackground(Color.red);
-        //表头（列名）
-        Object[] columnNames = {"姓名", "性别", "题目", "联系方式", "教师简介"};
-        //表格所有行数据
-        Object[][] rowData = {
-                {"张三", 80, 80, 80, 2400000000000000000l},
-                {"John", 70, 80, 90, 240},
-                {"Sue", 70, 70, 70, 210},
-                {"Jane", 80, 70, 60, 210},
-                {"Joe_01", 80, 70, 60, 210},
-                {"Joe_02", 80, 70, 60, 210},
-                {"Joe_03", 80, 70, 60, 210},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 210},
-                {"张三", 80, 80, 80, 2400000000000000000l},
-                {"John", 70, 80, 90, 240},
-                {"Sue", 70, 70, 70, 210},
-                {"Jane", 80, 70, 60, 210},
-                {"Joe_01", 80, 70, 60, 210},
-                {"Joe_02", 80, 70, 60, 210},
-                {"Joe_03", 80, 70, 60, 210},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 21066},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 21066}
-        };
+
         //表格
         JTable table=new JTable(rowData,columnNames);
 
-        table.setEnabled(false);
+        table.setEnabled(false);//设置表格不可编辑
 
-        MyTableCellRenderer renderer=new MyTableCellRenderer();
+        MyTableCellRenderer renderer=new MyTableCellRenderer();//进行渲染
 
-        for (int i=0;i<columnNames.length;i++){
-            TableColumn tableColumn=table.getColumn(columnNames[i]);
-            tableColumn.setCellRenderer(renderer);
+        if (rowData.length>0){//判断是否有值
+
+            for (int i=0;i<columnNames.length;i++){
+                TableColumn tableColumn=table.getColumn(columnNames[i]);
+                tableColumn.setCellRenderer(renderer);
+            }
         }
+
 
         teach.add(table.getTableHeader(),BorderLayout.NORTH);
         teach.add(table,BorderLayout.CENTER);
@@ -81,6 +115,81 @@ public class TeacherJpanel extends JPanel {
         JButton nextPage=new JButton("下一页");
         JButton endPage=new JButton("末页");
 
+        /**
+         * 监听首页
+         */
+        firstPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentPage==1||pageData.getPageNum()==1){
+                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage=1;//设置为第一页
+                    getData();//刷新数据
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+        /**
+         * 监听上一页
+         */
+        upPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
+                if (currentPage==1||pageData.getPageNum()==1){
+                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage--;//设置为上一页
+                    getData();
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+        /**
+         * 监听下页
+         */
+        nextPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (pageData.getPageNum()==pageData.getPages()){
+                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage++;//设置为下一页
+                    getData();
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+
+        /**
+         * 监听末页
+         */
+        endPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pageData.getPageNum()==pageData.getPages()){
+                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage=pageData.getPages();//设置为末页
+                    getData();
+                    //更新表格
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+
+
+
         JPanel page=new JPanel();
         page.add(firstPage);
         page.add(upPage);
@@ -89,30 +198,13 @@ public class TeacherJpanel extends JPanel {
         add(page,BorderLayout.SOUTH);
 
 
-//         public void actionPerformed(ActionEvent e) {
-//         				if(e.getActionCommand().equals("首页")){
-//         					showTable(1);
-//                                        }
-//
-//         	            if(e.getActionCommand().equals("上一页")){
-//         	            	if(getCurrentPage()<=1){
-//         	            		setCurrentPage(2);
-//                            }
-//         	            	showTable(getCurrentPage()-1);
-//                        }
-//
-//         	            if(e.getActionCommand().equals("下一页")){
-//         	            	if(getCurrentPage()<getLastPage()){
-//         	            		showTable(getCurrentPage()+1);
-//                            }else{
-//         	            		showTable(getLastPage());
-//                            }
-//                        }
-//
-//         	            if(e.getActionCommand().equals("末页")){
-//         	            	showTable(getLastPage());
-//                        }			}
-//         		}
+    }
 
+    /**
+     * 刷新面板数据
+     */
+    public void refreshData(){
+        getData();//获取数据
+        showView();//展现视图
     }
 }
