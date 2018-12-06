@@ -201,7 +201,6 @@ public class TitleJpanel extends JPanel {
         });
 
 
-
         JPanel page=new JPanel();
         page.add(firstPage);
         page.add(upPage);
