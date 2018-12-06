@@ -59,10 +59,11 @@ public class TitleJpanel extends JPanel {
             int i=0;
             for(Design d:designList){//赋值
                 rowData[i][0]=d.getDesignTitle();
-//                teacherList.
-
-
-                rowData[i][1]=d.getDesignOfTeacher()==0?'女':'男';
+                for (Teacher t:teacherList){
+                    if (t.getTeacherId()==d.getDesignOfTeacher()){
+                        rowData[i][1]=t.getTeacherName();
+                    }
+                }
                 rowData[i][2]=d.getDesignNum();
                 rowData[i][3]=d.getDesignRequire();
                 i++;
@@ -149,9 +150,9 @@ public class TitleJpanel extends JPanel {
         upPage.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
+
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage--;//设置为上一页
@@ -169,7 +170,7 @@ public class TitleJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage++;//设置为下一页
@@ -187,7 +188,7 @@ public class TitleJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页
