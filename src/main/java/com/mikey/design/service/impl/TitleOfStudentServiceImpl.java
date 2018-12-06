@@ -122,7 +122,6 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
         List<TitleOfStudent> titleOfStudent2= titleOfStudentMapper.selectByExample(titleOfStudentExample);
 
         return 0;
-
     }
 
     /**
