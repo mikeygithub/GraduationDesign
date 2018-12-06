@@ -61,6 +61,7 @@ public class TitleJpanel extends JPanel {
                 rowData[i][0]=d.getDesignTitle();
 //                teacherList.
 
+
                 rowData[i][1]=d.getDesignOfTeacher()==0?'女':'男';
                 rowData[i][2]=d.getDesignNum();
                 rowData[i][3]=d.getDesignRequire();
