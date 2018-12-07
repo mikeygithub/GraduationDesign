@@ -1,6 +1,9 @@
 package com.mikey.design.views.teacher;
 
+import com.github.pagehelper.PageInfo;
+import com.mikey.design.entity.Teacher;
 import com.mikey.design.listerner.teacher.AdmitStudentButtonListener;
+import com.mikey.design.service.DesignService;
 import com.mikey.design.utils.MyTableCellRenderer;
 import com.mikey.design.views.renderer.AdmitStudentButtonRenderer;
 
@@ -17,11 +20,27 @@ import java.awt.*;
  * @Version 1.0
  */
 public class AdmitStudentsJpanel  extends JPanel {
+
+    //service接口
+    private DesignService designService;
+    //当前页
+    private int currentPage=1;
+    //每页显示条数
+    private int pageSize=20;
+    //表头（列名）
+    private Object[] columnNames = {"姓名", "性别", "题目","志愿类型","联系方式", "操作"};
+    //列表内容
+    private Object[][] rowData=new Object[20][6];
+    //分页
+    private PageInfo pageData;
+
+    private Teacher selfTeacher;
+
+
     public AdmitStudentsJpanel() throws HeadlessException {
 
         //获取当前登入用户信息
-//        Student student = (Student) ThreadLoaclUtil.get();
-//        System.out.println("Login Student Message======>>>>>>>"+student.getStudentName());
+//        Student student = (Teacher) ThreadLoaclUtil.get();
 
         //边缘布局
         setLayout(new BorderLayout());
@@ -37,30 +56,29 @@ public class AdmitStudentsJpanel  extends JPanel {
 
         JPanel students=new JPanel(new BorderLayout());
         students.setBackground(Color.red);
-        //表头（列名）
-        Object[] columnNames = {"姓名", "性别", "题目", "联系方式", "操作"};
+
         //表格所有行数据
         Object[][] rowData = {
-                {"张三", 80, 80, 80, 24},
-                {"John", 70, 80, 90, 240},
-                {"Sue", 70, 70, 70, 210},
-                {"Jane", 80, 70, 60, 210},
-                {"Joe_01", 80, 70, 60, 210},
-                {"Joe_02", 80, 70, 60, 210},
-                {"Joe_03", 80, 70, 60, 210},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 210},
-                {"张三", 80, 80, 80, 24},
-                {"John", 70, 80, 90, 240},
-                {"Sue", 70, 70, 70, 210},
-                {"Jane", 80, 70, 60, 210},
-                {"Joe_01", 80, 70, 60, 210},
-                {"Joe_02", 80, 70, 60, 210},
-                {"Joe_03", 80, 70, 60, 210},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 21066},
-                {"Joe_04", 80, 70, 60, 210},
-                {"Joe_05", 80, 70, 60, 21066}
+                {"张三", 80, 80,  80,80, 24},
+                {"John", 70, 80, 80, 90, 240},
+                {"Sue", 70, 70, 70, 80, 210},
+                {"Jane", 80, 70, 60, 80, 210},
+                {"Joe_01", 80, 70, 60,80,210},
+                {"Joe_02", 80, 70, 60,80,210},
+                {"Joe_03", 80, 70, 60,80,210},
+                {"Joe_04", 80, 70, 60,80,210},
+                {"Joe_05", 80, 70, 60,80,210},
+                {"张三", 80, 80, 80,  80,24},
+                {"John", 70, 80, 90,  80,240},
+                {"Sue", 70, 70, 70,  80,210},
+                {"Jane", 80, 70, 60, 80, 210},
+                {"Joe_01", 80, 70, 60, 80, 210},
+                {"Joe_02", 80, 70, 60, 80, 210},
+                {"Joe_03", 80, 70, 60, 80, 210},
+                {"Joe_04", 80, 70, 60, 80, 210},
+                {"Joe_05", 80, 70, 60, 80, 21066},
+                {"Joe_04", 80, 70, 60,  80,210},
+                {"Joe_05", 80, 70, 60,  80,21066}
         };
         //表格
         JTable table=new AdmitStudentTable(rowData,columnNames);
@@ -73,10 +91,10 @@ public class AdmitStudentsJpanel  extends JPanel {
             TableColumn tableColumn=table.getColumn(columnNames[i]);
             tableColumn.setCellRenderer(renderer);
         }
-        table.getColumnModel().getColumn(4).setCellEditor(
+        table.getColumnModel().getColumn(5).setCellEditor(
                 new AdmitStudentButtonListener());
 
-        table.getColumnModel().getColumn(4).setCellRenderer(
+        table.getColumnModel().getColumn(5).setCellRenderer(
                 new AdmitStudentButtonRenderer());
 
         students.add(table.getTableHeader(),BorderLayout.NORTH);

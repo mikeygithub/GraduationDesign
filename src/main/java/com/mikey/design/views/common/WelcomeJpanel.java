@@ -3,7 +3,7 @@ package com.mikey.design.views.common;
 import com.mikey.design.entity.Admin;
 import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
-import com.mikey.design.utils.ThreadLoaclUtil;
+import com.mikey.design.utils.ThreadLocallUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class WelcomeJpanel extends JPanel {
     public WelcomeJpanel() {
 
         //获取当前登入用户信息
-        Object loginUser = ThreadLoaclUtil.get();
+        Object loginUser = ThreadLocallUtil.get();
 
         //判断角色类型
         if(loginUser instanceof Student){//学生

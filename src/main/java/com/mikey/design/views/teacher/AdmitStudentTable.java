@@ -17,7 +17,7 @@ public class AdmitStudentTable extends JTable {
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        if (column==4){
+        if (column==5){//放行第五列可编辑
             return true;
         }else {
         return false;

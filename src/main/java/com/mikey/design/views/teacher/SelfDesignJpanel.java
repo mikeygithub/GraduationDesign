@@ -6,7 +6,7 @@ import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.DesignService;
 import com.mikey.design.utils.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLoaclUtil;
+import com.mikey.design.utils.ThreadLocallUtil;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -29,7 +29,7 @@ public class SelfDesignJpanel extends JPanel {
     private int currentPage=1;
     //每页显示条数
     private int pageSize=20;
-    //表头（列名）
+    //表头（列名）TODO:待添加剩余人数
     private Object[] columnNames = {"毕设题目", "毕设人数", "毕设需求"};
     //列表内容
     private Object[][] rowData=new Object[20][3];
@@ -40,7 +40,7 @@ public class SelfDesignJpanel extends JPanel {
 
     public void getData(){
 
-        selfTeacher= (Teacher) ThreadLoaclUtil.get();//获取当前登入的教师信息
+        selfTeacher= (Teacher) ThreadLocallUtil.get();//获取当前登入的教师信息
 
         designService = (DesignService) SpringUtil.getBean("designServiceImpl");
 
@@ -184,7 +184,7 @@ public class SelfDesignJpanel extends JPanel {
                     JOptionPane.showMessageDialog(null,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
-                    currentPage=pageData.getPages();//设置为末页
+                    currentPage=pageData.getPages();//末页
                     getData();
                     //更新表格
                     table.validate();
