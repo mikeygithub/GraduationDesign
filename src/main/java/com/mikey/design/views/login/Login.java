@@ -32,7 +32,7 @@ public class Login extends JFrame {
 
 
         login.setLayout(new GridLayout(7,1));//网格布局
-        JLabel nameJlabel=new JLabel("用户名：");
+        JLabel nameJlabel=new JLabel("学号/工号：");
 //        nameJlabel.setBounds(10,10,300,18);
         JTextField nameJtextField=new JTextField("请输入学号或者工号");
 //        nameJtextField.setBounds(310, 10, 300, 18);

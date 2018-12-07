@@ -10,6 +10,7 @@ import com.mikey.design.utils.SpringUtil;
 import com.mikey.design.utils.ThreadLoaclUtil;
 import com.mikey.design.views.admin.AdminMainView;
 import com.mikey.design.views.student.StudentMainView;
+import com.mikey.design.views.teacher.TeacherMainView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -75,7 +76,7 @@ public class LoginListener extends AbstractAction {
         this.role=group.getSelectedCheckbox().getLabel();//获取角色
 
 
-        if(username.length()==0||password.length()==0){
+        if(username.length()==0||password.length()==0||username.equals("请输入学号或者工号")){
             JOptionPane.showMessageDialog(null, "用户名密码不能为空");
             return;
         }
@@ -91,6 +92,7 @@ public class LoginListener extends AbstractAction {
                     System.out.println("管理员登入成功------------》》》》");
                     //登录成功
                     ThreadLoaclUtil.set(admin);//保存用户信息
+                    login.setVisible(false);
                     new AdminMainView(login);//进入管理员页面
                 }
                 else{
@@ -120,8 +122,9 @@ public class LoginListener extends AbstractAction {
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
-                    ThreadLoaclUtil.set(teacher);//保存用户信息
-                    new StudentMainView(login);//进入教师页面
+                    ThreadLoaclUtil.set(teacher);//保存登入用户信息
+                    login.setVisible(false);
+                    new TeacherMainView(login);//进入教师页面
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "用户名或密码错误");

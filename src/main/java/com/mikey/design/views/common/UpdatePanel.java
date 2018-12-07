@@ -38,7 +38,7 @@ public class UpdatePanel extends JPanel {
     //手机号码
     public static final String REGEX_MOBILE ="^[1](([3][0-9])|([4][5,7,9])|([5][^4,6,9])|([6][6])|([7][3,5,6,7,8])|([8][0-9])|([9][8,9]))[0-9]{8}$";
     //用户名
-    public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{2,10}$";
+    public static final String REGEX_USERNAME = "^[\u4E00-\u9FA5]{2,10}$";
 
     public void getData(){
         //获取当前登入用户信息
@@ -195,9 +195,9 @@ public class UpdatePanel extends JPanel {
      */
     private boolean checkData(JTextField nameJtextField,JComboBox sexboBox, JTextField phoneJtextField){
 
-        String userName=nameJtextField.getText();//
+        String userName=nameJtextField.getText().trim();//
         int userSex=sexboBox.getSelectedIndex();//获取性别
-        String userPhone=phoneJtextField.getText();//获取电话
+        String userPhone=phoneJtextField.getText().trim();//获取电话
 
         if (userName.equals("")||userName.length()<1){
             JOptionPane.showMessageDialog(this,"请输入用户名","系统提示",JOptionPane.INFORMATION_MESSAGE);
@@ -210,7 +210,7 @@ public class UpdatePanel extends JPanel {
         }
 
         if(Pattern.matches(REGEX_USERNAME,userName)==false){
-            JOptionPane.showMessageDialog(this,"用户名由2-10字母数字下划线组成","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"用户名由2-10汉字组成","系统提示",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if(Pattern.matches(REGEX_MOBILE,userPhone)==false){

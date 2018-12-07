@@ -116,6 +116,15 @@ public class UpPwdPanel extends JPanel {
         mainJpanel.add(submits);
         add(mainJpanel,BorderLayout.CENTER);
 
+        reselt.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                oldPwdTextField.setText("请输入原登入密码");
+                newPwdJtextField.setText("请输入新登入密码");
+                reNewPwdJtextField.setText("请再次输入新密码");
+            }
+        });
+
 
         sunmit.addActionListener(new AbstractAction() {
             @Override

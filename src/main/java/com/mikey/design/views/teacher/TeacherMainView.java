@@ -94,6 +94,7 @@ public class TeacherMainView extends JFrame {
         menuChild5.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((UpPwdPanel) upPwdPanel).refreshData();//刷新数据
                 cardLayout.show(center,"upPwdPanel");
             }
         });

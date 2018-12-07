@@ -1,5 +1,8 @@
 package com.mikey.design.views.common;
 
+import com.mikey.design.entity.Admin;
+import com.mikey.design.entity.Student;
+import com.mikey.design.entity.Teacher;
 import com.mikey.design.utils.ThreadLoaclUtil;
 
 import javax.swing.*;
@@ -14,13 +17,22 @@ import java.awt.*;
  * @Version 1.0
  */
 public class WelcomeJpanel extends JPanel {
+    //登入用户
+    public String LOGINUSERNAME="";
 
     public WelcomeJpanel() {
 
         //获取当前登入用户信息
-//        Student student = (Student) ThreadLoaclUtil.get();
-//        System.out.println("Login Student Message======>>>>>>>"+student.getStudentName());
+        Object loginUser = ThreadLoaclUtil.get();
 
+        //判断角色类型
+        if(loginUser instanceof Student){//学生
+            LOGINUSERNAME=((Student) loginUser).getStudentName();
+        }else if (loginUser instanceof Teacher){//教师
+            LOGINUSERNAME=((Teacher) loginUser).getTeacherName();
+        }else if (loginUser instanceof Admin){//管理员
+            LOGINUSERNAME=((Admin) loginUser).getAdminName();
+        }
 
         //边缘布局
         setLayout(new BorderLayout());
@@ -32,12 +44,11 @@ public class WelcomeJpanel extends JPanel {
         titleJpanel.add(title);
         add(titleJpanel,BorderLayout.NORTH);
 
-        //更改个人信息
+        //个人信息
         JPanel mainJpanel=new JPanel();
 
         JPanel userMessageJpanel=new JPanel();
-//        JLabel usernameJtable=new JLabel("欢迎用户："+student.getStudentName());
-        JLabel usernameJlable=new JLabel("欢迎用户：");
+        JLabel usernameJlable=new JLabel("欢迎用户："+LOGINUSERNAME);
         userMessageJpanel.add(usernameJlable);
         mainJpanel.add(userMessageJpanel);
 
