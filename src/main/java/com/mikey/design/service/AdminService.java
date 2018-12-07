@@ -46,4 +46,10 @@ public interface AdminService {
      * @return
      */
     public Admin getAdmin(int AdminId);
+
+    /**
+     * 更新数据
+     * @param admin
+     */
+    public void updataAdmin(Admin admin);
 }

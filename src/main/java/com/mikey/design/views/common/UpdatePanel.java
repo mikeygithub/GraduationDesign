@@ -1,10 +1,18 @@
 package com.mikey.design.views.common;
 
+import com.mikey.design.entity.Admin;
 import com.mikey.design.entity.Student;
+import com.mikey.design.entity.Teacher;
+import com.mikey.design.service.AdminService;
+import com.mikey.design.service.StudentService;
+import com.mikey.design.service.TeacherService;
+import com.mikey.design.utils.SpringUtil;
 import com.mikey.design.utils.ThreadLoaclUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
 
 /**
  * @author Mikey
@@ -15,11 +23,56 @@ import java.awt.*;
  * @Version 1.0
  */
 public class UpdatePanel extends JPanel {
+    //学生
+    private StudentService studentService;
+    //教师
+    private TeacherService teacherService;
+    //管理员
+    private AdminService adminService;
+    //当前登入用户名
+    private String loginUserName="";
+    //当前登入用性别
+    private int loginUserSex;//0：女、1：男
+    //当前登入用户联系方式
+    private String loginUserPhone="";
+    //手机号码
+    public static final String REGEX_MOBILE ="^[1](([3][0-9])|([4][5,7,9])|([5][^4,6,9])|([6][6])|([7][3,5,6,7,8])|([8][0-9])|([9][8,9]))[0-9]{8}$";
+    //用户名
+    public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{2,10}$";
+
+    public void getData(){
+        //获取当前登入用户信息
+        Object loginUser = ThreadLoaclUtil.get();
+
+        //判断角色类型
+        if(loginUser instanceof Student){//学生
+            loginUserName=((Student) loginUser).getStudentName();
+            loginUserSex=((Student) loginUser).getStudentSex();
+            loginUserPhone=((Student) loginUser).getStudentPhone();
+        }else if (loginUser instanceof Teacher){//教师
+            loginUserName=((Teacher) loginUser).getTeacherName();
+            loginUserSex=((Teacher) loginUser).getTeacherSex();
+            loginUserPhone=((Teacher) loginUser).getTeacherPhone();
+        }else if (loginUser instanceof Admin){//管理员
+            loginUserName=((Admin) loginUser).getAdminName();
+            loginUserSex=((Admin) loginUser).getAdminSex();
+            loginUserPhone=((Admin) loginUser).getAdminPhone();
+        }
+    }
+
     public UpdatePanel() throws HeadlessException {
 
+        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+
+
+
         //获取当前登入用户信息
-//        Student student = (Student) ThreadLoaclUtil.get();
-//        System.out.println("Login Student Message======>>>>>>>"+student.getStudentName());
+        Object loginUser = ThreadLoaclUtil.get();
+
+        getData();//获取数据
+
 
         //边缘布局
         setLayout(new BorderLayout());
@@ -37,22 +90,24 @@ public class UpdatePanel extends JPanel {
         //1.名字
         JPanel username=new JPanel();
         JLabel nameJlabel=new JLabel("用户名：");
-        JTextField nameJtextField=new JTextField("请输入学号或者工号");
+        JTextField nameJtextField=new JTextField(loginUserName);
         username.add(nameJlabel);
         username.add(nameJtextField);
         //2.性别
         JPanel sex=new JPanel();
         JLabel sexJlabel=new JLabel("性别：");
-        JComboBox teacherboBox=new JComboBox();//下拉框
-        teacherboBox.addItem("男");
-        teacherboBox.addItem("女");
+        JComboBox sexboBox=new JComboBox();//下拉框
+        sexboBox.addItem("女");
+        sexboBox.addItem("男");
         sex.add(sexJlabel);
-        sex.add(teacherboBox);
+        sex.add(sexboBox);
+        //显示性别
+        sexboBox.setSelectedIndex(loginUserSex);
 
         //3.联系电话
         JPanel phone=new JPanel();
         JLabel phoneJlabel=new JLabel("联系方式：");
-        JTextField phoneJtextField=new JTextField("请输入电话号码或邮箱");
+        JTextField phoneJtextField=new JTextField(loginUserPhone);
         phone.add(phoneJlabel);
         phone.add(phoneJtextField);
 
@@ -64,11 +119,104 @@ public class UpdatePanel extends JPanel {
         submits.add(sunmit);
         submits.add(reselt);
 
-
         mainJpanel.add(username);
         mainJpanel.add(sex);
         mainJpanel.add(phone);
         mainJpanel.add(submits);
         add(mainJpanel,BorderLayout.CENTER);
+
+        //确认更改
+        sunmit.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (checkData(nameJtextField,sexboBox,phoneJtextField)) {
+
+                    int result = JOptionPane.showConfirmDialog(null, "确认更改信息？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                    /**
+                     * 提交保存
+                     */
+                    if (result == 0) {
+
+                        if (loginUser instanceof Student) {//学生
+                            ((Student) loginUser).setStudentName(nameJtextField.getText());
+                            ((Student) loginUser).setStudentSex(sexboBox.getSelectedIndex());
+                            ((Student) loginUser).setStudentPhone(phoneJtextField.getText());
+
+                            studentService.updateStudent((Student) loginUser);//更新
+
+                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+
+                            getData();//获取数据
+
+                            return;
+
+                        } else if (loginUser instanceof Teacher) {//教师
+                            //TODO:待添加教师info
+                            ((Teacher) loginUser).setTeacherName(nameJtextField.getText());
+                            ((Teacher) loginUser).setTeacherSex(sexboBox.getSelectedIndex());
+                            ((Teacher) loginUser).setTeacherPhone(phoneJtextField.getText());
+
+                            teacherService.updateTeacherNum((Teacher) loginUser);
+
+                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+
+                            getData();//获取数据
+
+                            return;
+
+                        } else if (loginUser instanceof Admin) {//管理员
+
+                            ((Admin) loginUser).setAdminName(nameJtextField.getText());
+                            ((Admin) loginUser).setAdminSex(sexboBox.getSelectedIndex());
+                            ((Admin) loginUser).setAdminPhone(phoneJtextField.getText());
+
+                            adminService.updataAdmin((Admin) loginUser);
+
+                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+
+                            getData();//获取数据
+
+                            return;
+
+                        }
+                    }
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 数据校验
+     * @param nameJtextField
+     * @param sexboBox
+     * @param phoneJtextField
+     * @return
+     */
+    private boolean checkData(JTextField nameJtextField,JComboBox sexboBox, JTextField phoneJtextField){
+
+        String userName=nameJtextField.getText();//
+        int userSex=sexboBox.getSelectedIndex();//获取性别
+        String userPhone=phoneJtextField.getText();//获取电话
+
+        if (userName.equals("")||userName.length()<1){
+            JOptionPane.showMessageDialog(this,"请输入用户名","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+
+        if (userPhone.equals("")||userPhone.length()<1){
+            JOptionPane.showMessageDialog(this,"请输入联系电话","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+
+        if(Pattern.matches(REGEX_USERNAME,userName)==false){
+            JOptionPane.showMessageDialog(this,"用户名由2-10字母数字下划线组成","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if(Pattern.matches(REGEX_MOBILE,userPhone)==false){
+            JOptionPane.showMessageDialog(this,"请输入正确的移动电话号码","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
     }
 }

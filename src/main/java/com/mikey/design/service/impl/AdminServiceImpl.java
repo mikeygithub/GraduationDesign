@@ -67,4 +67,9 @@ public class AdminServiceImpl implements AdminService {
     public Admin getAdmin(int adminId) {
         return adminMapper.selectByPrimaryKey(adminId);
     }
+
+    @Override
+    public void updataAdmin(Admin admin) {
+        adminMapper.updateByPrimaryKey(admin);
+    }
 }

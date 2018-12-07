@@ -9,6 +9,8 @@ public class Admin {
 
     private String adminPassword;
 
+    private String adminPhone;
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -39,5 +41,13 @@ public class Admin {
 
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword == null ? null : adminPassword.trim();
+    }
+
+    public String getAdminPhone() {
+        return adminPhone;
+    }
+
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone == null ? null : adminPhone.trim();
     }
 }
