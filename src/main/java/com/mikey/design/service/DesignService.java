@@ -19,4 +19,5 @@ public interface DesignService {
     public void deleteDesign(int designId);
     public List<Design> getAllDesign();
     PageInfo getDesignByPage(int currentPage, int pageSize);
+    PageInfo getSelfDesignByPage(int teacherId,int currentPage, int pageSize);//教师获取自己的毕设题目列表
 }

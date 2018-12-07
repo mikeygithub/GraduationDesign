@@ -23,17 +23,19 @@ public class TeacherMainView extends JFrame {
         JPanel Menu=new JPanel();
         Menu.setLayout(new GridLayout(10,1,3,3));
         JButton menuChild1 = new JButton("添加毕业设计");
-        JButton menuChild2 = new JButton("录取报名学生");
-        JButton menuChild3 = new JButton("查看已录学生");
-        JButton menuChild4 = new JButton("修改个人信息");
-        JButton menuChild5 = new JButton("修改登入密码");
-        JButton menuChild6 = new JButton("退出登入");
+        JButton menuChild2 = new JButton("我的毕设题目");
+        JButton menuChild3 = new JButton("录取报名学生");
+        JButton menuChild4 = new JButton("查看已录学生");
+        JButton menuChild5 = new JButton("修改个人信息");
+        JButton menuChild6 = new JButton("修改登入密码");
+        JButton menuChild7 = new JButton("退出登入");
         Menu.add(menuChild1);
         Menu.add(menuChild2);
         Menu.add(menuChild3);
         Menu.add(menuChild4);
         Menu.add(menuChild5);
         Menu.add(menuChild6);
+        Menu.add(menuChild7);
 
         Menu.setVisible(true);
         /**
@@ -59,6 +61,8 @@ public class TeacherMainView extends JFrame {
 
         JPanel addTitlePanel=new AddTitlePanel();//添加毕业设计题目
 
+        JPanel selfDesignJpanel  = new SelfDesignJpanel();//查看我的毕设题目
+
         JPanel admitStudentsJpanel=new AdmitStudentsJpanel();//录取报名学生
 
         JPanel alrealyAdmitJpanel=new AlrealyAdmitJpanel();//课设题目
@@ -76,31 +80,39 @@ public class TeacherMainView extends JFrame {
         menuChild2.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"admitStudentsJpanel");
+                ((SelfDesignJpanel) selfDesignJpanel).refreshData();
+                cardLayout.show(center,"selfDesignJpanel");
             }
         });
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"alrealyAdmitJpanel");
+                cardLayout.show(center,"admitStudentsJpanel");
             }
         });
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(center,"updatePanel");
+                cardLayout.show(center,"alrealyAdmitJpanel");
             }
         });
         menuChild5.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(center,"updatePanel");
+            }
+        });
+        menuChild6.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ((UpPwdPanel) upPwdPanel).refreshData();//刷新数据
                 cardLayout.show(center,"upPwdPanel");
             }
         });
-        menuChild6.addActionListener(new LoginOut(login,this));
+        menuChild7.addActionListener(new LoginOut(login,this));
 
         center.add(new WelcomeJpanel(),"welcomeJpanel");
+        center.add(selfDesignJpanel,"selfDesignJpanel");
         center.add(addTitlePanel,"addTitlePanel");
         center.add(admitStudentsJpanel,"admitStudentsJpanel");
         center.add(alrealyAdmitJpanel,"alrealyAdmitJpanel");
