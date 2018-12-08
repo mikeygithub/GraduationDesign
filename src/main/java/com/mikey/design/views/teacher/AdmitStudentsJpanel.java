@@ -18,6 +18,7 @@ import com.mikey.design.views.renderer.AdmitStudentButtonRenderer;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 /**
@@ -57,6 +58,8 @@ public class AdmitStudentsJpanel  extends JPanel {
     private List<TitleOfStudent>  titleOfStudentList;
 
     public void getData(){
+        //获取当前登入用户信息
+        selfTeacher = (Teacher) ThreadLocalUtil.get();
         designService = (DesignService) SpringUtil.getBean("designServiceImpl");
         studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
         teacherService=(TeacherService) SpringUtil.getBean("teacherServiceImpl");
@@ -64,19 +67,29 @@ public class AdmitStudentsJpanel  extends JPanel {
 
         pageData=teacherService.getWillAdmitStudentMes(selfTeacher.getTeacherId(),currentPage,pageSize);//通过教师id获取志愿填报情况
 
-        System.out.println("Message="+pageData.getList());
-
         titleOfStudentList=pageData.getList();
+
         System.out.println("MESSAGE------->>>>>>>"+titleOfStudentList.size());
+
+        clearRowData(rowData);//清空数据表格
+        /**
+         * 将数据填充到表格等待渲染
+         */
+        for (int i=0;i<titleOfStudentList.size();i++){
+            for (TitleOfStudent t:titleOfStudentList){
+                rowData[i][0]=t.getStudent().getStudentName();
+                rowData[i][1]=t.getStudent().getStudentSex()==0?'女':'男';
+                rowData[i][2]=t.getDesign().getDesignTitle();
+                rowData[i][3]=t.getDesWishOrder()==0?"第一志愿":"第二志愿";
+                rowData[i][4]=t.getStudent().getStudentPhone();
+                break;
+            }
+        }
 
     }
 
-    public AdmitStudentsJpanel() throws HeadlessException {
+    public  void showView() throws HeadlessException {
 
-        //获取当前登入用户信息
-        selfTeacher = (Teacher) ThreadLocalUtil.get();
-
-        getData();
         //边缘布局
         setLayout(new BorderLayout());
         //banner
@@ -93,7 +106,10 @@ public class AdmitStudentsJpanel  extends JPanel {
         students.setBackground(Color.red);
 
         //默认表格数据
-        rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";rowData[0][4]="暂无";rowData[0][5]="暂无";
+        if (titleOfStudentList.size()<1){
+            rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";rowData[0][4]="暂无";rowData[0][5]="暂无";
+        }
+
         //表格
         JTable table=new AdmitStudentTable(rowData,columnNames);
 
@@ -123,12 +139,108 @@ public class AdmitStudentsJpanel  extends JPanel {
         JButton nextPage=new JButton("下一页");
         JButton endPage=new JButton("末页");
 
+        /**
+         * 监听首页
+         */
+        firstPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (currentPage==1||pageData.getPageNum()==1){
+                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage=1;//设置为第一页
+                    getData();//刷新数据
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+        /**
+         * 监听上一页
+         */
+        upPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
+                if (currentPage==1||pageData.getPageNum()==1){
+                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage--;//设置为上一页
+                    getData();
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+        /**
+         * 监听下页
+         */
+        nextPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (pageData.getPageNum()==pageData.getPages()){
+                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage++;//设置为下一页
+                    getData();
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+
+        /**
+         * 监听末页
+         */
+        endPage.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pageData.getPageNum()==pageData.getPages()){
+                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else {
+                    currentPage=pageData.getPages();//设置为末页
+                    getData();
+                    //更新表格
+                    table.validate();
+                    table.updateUI();
+                }
+            }
+        });
+
+
+
         JPanel page=new JPanel();
         page.add(firstPage);
         page.add(upPage);
         page.add(nextPage);
         page.add(endPage);
         add(page,BorderLayout.SOUTH);
-        setVisible(true);
+
+
+    }
+
+    /**
+     * 清空数据表格
+     * @param rowData
+     */
+    public void clearRowData(Object[][] rowData){
+        for (int i=0;i<rowData.length;i++){
+            for (int j=0;j<rowData[i].length;j++){
+                rowData[i][j]="";
+            }
+        }
+    }
+
+    /**
+     * 刷新面板数据
+     */
+    public void refreshData(){
+        getData();//获取数据
+        showView();//展现视图
     }
 }
