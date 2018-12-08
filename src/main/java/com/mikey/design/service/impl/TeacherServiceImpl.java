@@ -52,7 +52,6 @@ public class TeacherServiceImpl implements TeacherService {
 
         teacherMapper.updateByPrimaryKey(teacher);
     }
-
     /**
      * 删除教师
      * @param teacherId
