@@ -75,14 +75,15 @@ public class AdmitStudentsJpanel  extends JPanel {
         /**
          * 将数据填充到表格等待渲染
          */
-        for (int i=0;i<titleOfStudentList.size();i++){
+        if (titleOfStudentList.size()>0){
+            int i=0;
             for (TitleOfStudent t:titleOfStudentList){
                 rowData[i][0]=t.getStudent().getStudentName();
                 rowData[i][1]=t.getStudent().getStudentSex()==0?'女':'男';
                 rowData[i][2]=t.getDesign().getDesignTitle();
                 rowData[i][3]=t.getDesWishOrder()==0?"第一志愿":"第二志愿";
                 rowData[i][4]=t.getStudent().getStudentPhone();
-                break;
+                i++;
             }
         }
 
