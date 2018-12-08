@@ -1,6 +1,7 @@
 package com.mikey.design.service.impl;
 
 import com.mikey.design.entity.Design;
+import com.mikey.design.entity.DesignExample;
 import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.entity.TitleOfStudentExample;
 import com.mikey.design.mapper.DesignMapper;
@@ -26,6 +27,7 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
 
     @Autowired
     private DesignMapper designMapper;
+
 
     /**
      * 添加志愿
@@ -161,5 +163,28 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
         }else {
             return null;
         }
+    }
+
+    /**
+     *
+     * @param teacherId
+     * @return
+     */
+    @Override
+    public List<TitleOfStudent> getByTeacherId(Integer teacherId) {
+
+        DesignExample designExample = new DesignExample();
+
+        DesignExample.Criteria criteria = designExample.createCriteria();
+
+        criteria.andDesignOfTeacherEqualTo(teacherId);
+
+        List<Design> designList = designMapper.selectByExample(designExample);//查询出当前教师的所有毕业设计题目
+
+        if (designList.size()>0){
+
+        }
+
+        return null;
     }
 }

@@ -4,7 +4,7 @@ import com.mikey.design.entity.Design;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.DesignService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +35,7 @@ public class AddTitlePanel extends JPanel {
     public AddTitlePanel() throws HeadlessException {
 
         //获取当前登入用户信息
-        Teacher teacher = (Teacher) ThreadLocallUtil.get();
+        Teacher teacher = (Teacher) ThreadLocalUtil.get();
 
         //边缘布局
         setLayout(new BorderLayout());

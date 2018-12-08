@@ -1,6 +1,6 @@
 package com.mikey.design.listerner.common;
 
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +21,7 @@ public class LoginOut extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         mainjFrame.setVisible(false);//关闭登入面板
-        ThreadLocallUtil.remove();//移除登入的用户
+        ThreadLocalUtil.remove();//移除登入的用户
         System.out.println("用户退出登入成功================》》》》》》");
         loginjFrame.setVisible(true);//开启登入面板
     }

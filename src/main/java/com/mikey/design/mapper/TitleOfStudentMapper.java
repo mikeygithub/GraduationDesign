@@ -4,9 +4,7 @@ import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.entity.TitleOfStudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface TitleOfStudentMapper {
     long countByExample(TitleOfStudentExample example);
 

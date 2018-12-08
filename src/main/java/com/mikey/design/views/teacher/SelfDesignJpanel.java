@@ -6,7 +6,7 @@ import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.DesignService;
 import com.mikey.design.utils.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -40,7 +40,7 @@ public class SelfDesignJpanel extends JPanel {
 
     public void getData(){
 
-        selfTeacher= (Teacher) ThreadLocallUtil.get();//获取当前登入的教师信息
+        selfTeacher= (Teacher) ThreadLocalUtil.get();//获取当前登入的教师信息
 
         designService = (DesignService) SpringUtil.getBean("designServiceImpl");
 

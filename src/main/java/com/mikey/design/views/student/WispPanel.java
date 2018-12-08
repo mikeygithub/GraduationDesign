@@ -9,7 +9,7 @@ import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
 import com.mikey.design.service.TitleOfStudentService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -75,7 +75,7 @@ public class WispPanel extends JPanel {
      * @return
      */
     private boolean submitWish(JComboBox titleBox, JComboBox titleBox2){
-        Student self = (Student) ThreadLocallUtil.get();//获取用户（学生）信息
+        Student self = (Student) ThreadLocalUtil.get();//获取用户（学生）信息
         TitleOfStudent firstTitleOfStudent = new TitleOfStudent();
         firstTitleOfStudent.setDesOfStu(self.getStudentId());
         firstTitleOfStudent.setDesWishOrder(0);//第一志愿

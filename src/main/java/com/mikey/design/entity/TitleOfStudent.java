@@ -50,4 +50,23 @@ public class TitleOfStudent {
     public void setDesWishOrder(Integer desWishOrder) {
         this.desWishOrder = desWishOrder;
     }
+    private Student student;
+
+    private Design design;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Design getDesign() {
+        return design;
+    }
+
+    public void setDesign(Design design) {
+        this.design = design;
+    }
 }

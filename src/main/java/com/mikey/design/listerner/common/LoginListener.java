@@ -7,7 +7,7 @@ import com.mikey.design.service.AdminService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 import com.mikey.design.views.admin.AdminMainView;
 import com.mikey.design.views.student.StudentMainView;
 import com.mikey.design.views.teacher.TeacherMainView;
@@ -91,7 +91,7 @@ public class LoginListener extends AbstractAction {
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     System.out.println("管理员登入成功------------》》》》");
                     //登录成功
-                    ThreadLocallUtil.set(admin);//保存用户信息
+                    ThreadLocalUtil.set(admin);//保存用户信息
                     login.setVisible(false);
                     new AdminMainView(login);//进入管理员页面
                 }
@@ -107,7 +107,7 @@ public class LoginListener extends AbstractAction {
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
-                    ThreadLocallUtil.set(student);//保存用户信息
+                    ThreadLocalUtil.set(student);//保存用户信息
                     login.setVisible(false);
                     new StudentMainView(login);//进入学生页面
                 }
@@ -122,7 +122,7 @@ public class LoginListener extends AbstractAction {
                 //身份认证
                 if(username.equals(baseUserName)&&password.equals(basePassWord)){//判断用户名和密码
                     //登录成功
-                    ThreadLocallUtil.set(teacher);//保存登入用户信息
+                    ThreadLocalUtil.set(teacher);//保存登入用户信息
                     login.setVisible(false);
                     new TeacherMainView(login);//进入教师页面
                 }

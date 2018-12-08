@@ -1,8 +1,12 @@
 package com.mikey.design.mapper;
 
+import com.github.pagehelper.PageInfo;
+import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.entity.TeacherExample;
 import java.util.List;
+
+import com.mikey.design.entity.TitleOfStudent;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -29,4 +33,6 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    List<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId);
 }

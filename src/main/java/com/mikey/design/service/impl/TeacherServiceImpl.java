@@ -2,7 +2,9 @@ package com.mikey.design.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
+import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.mapper.TeacherMapper;
 import com.mikey.design.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +95,23 @@ public class TeacherServiceImpl implements TeacherService {
         List<Teacher> teacherList=teacherMapper.selectByExample(null);
 
         PageInfo pageData = new PageInfo(teacherList, pageSize);
+
+        return pageData;
+    }
+
+    /**
+     * 获取将要被录取的学生信息
+     * @param teacherId
+     * @return
+     */
+    @Override
+    public PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize){
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<TitleOfStudent> titleOfStudentList=teacherMapper.getWillAdmitStudentMes(teacherId);
+
+        PageInfo pageData=new PageInfo(titleOfStudentList,pageSize);
 
         return pageData;
     }

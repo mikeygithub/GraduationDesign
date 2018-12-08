@@ -1,15 +1,24 @@
 package com.mikey.design.views.teacher;
 
 import com.github.pagehelper.PageInfo;
+import com.mikey.design.entity.Design;
+import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
+import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.listerner.teacher.AdmitStudentButtonListener;
 import com.mikey.design.service.DesignService;
+import com.mikey.design.service.StudentService;
+import com.mikey.design.service.TeacherService;
+import com.mikey.design.service.TitleOfStudentService;
 import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.utils.SpringUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 import com.mikey.design.views.renderer.AdmitStudentButtonRenderer;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.util.List;
 
 /**
  * @author Mikey
@@ -20,9 +29,14 @@ import java.awt.*;
  * @Version 1.0
  */
 public class AdmitStudentsJpanel  extends JPanel {
-
     //service接口
     private DesignService designService;
+    //service接口
+    private StudentService studentService;
+    //service接口
+    private TeacherService teacherService;
+    //service接口
+    private TitleOfStudentService titleOfStudentService;
     //当前页
     private int currentPage=1;
     //每页显示条数
@@ -33,15 +47,36 @@ public class AdmitStudentsJpanel  extends JPanel {
     private Object[][] rowData=new Object[20][6];
     //分页
     private PageInfo pageData;
-
+    //当前登入教师
     private Teacher selfTeacher;
+    //当前教师的毕设题目列表
+    private List<Design>  designList;
+    //填报当前教师的毕设题目学生列表
+    private List<Student>  studentList;
+    //当前教师的毕设题目列表
+    private List<TitleOfStudent>  titleOfStudentList;
 
+    public void getData(){
+        designService = (DesignService) SpringUtil.getBean("designServiceImpl");
+        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+        teacherService=(TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        titleOfStudentService = (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
+
+        pageData=teacherService.getWillAdmitStudentMes(selfTeacher.getTeacherId(),currentPage,pageSize);//通过教师id获取志愿填报情况
+
+        System.out.println("Message="+pageData.getList());
+
+        titleOfStudentList=pageData.getList();
+        System.out.println("MESSAGE------->>>>>>>"+titleOfStudentList.size());
+
+    }
 
     public AdmitStudentsJpanel() throws HeadlessException {
 
         //获取当前登入用户信息
-//        Student student = (Teacher) ThreadLoaclUtil.get();
+        selfTeacher = (Teacher) ThreadLocalUtil.get();
 
+        getData();
         //边缘布局
         setLayout(new BorderLayout());
         //banner
@@ -57,33 +92,10 @@ public class AdmitStudentsJpanel  extends JPanel {
         JPanel students=new JPanel(new BorderLayout());
         students.setBackground(Color.red);
 
-        //表格所有行数据
-        Object[][] rowData = {
-                {"张三", 80, 80,  80,80, 24},
-                {"John", 70, 80, 80, 90, 240},
-                {"Sue", 70, 70, 70, 80, 210},
-                {"Jane", 80, 70, 60, 80, 210},
-                {"Joe_01", 80, 70, 60,80,210},
-                {"Joe_02", 80, 70, 60,80,210},
-                {"Joe_03", 80, 70, 60,80,210},
-                {"Joe_04", 80, 70, 60,80,210},
-                {"Joe_05", 80, 70, 60,80,210},
-                {"张三", 80, 80, 80,  80,24},
-                {"John", 70, 80, 90,  80,240},
-                {"Sue", 70, 70, 70,  80,210},
-                {"Jane", 80, 70, 60, 80, 210},
-                {"Joe_01", 80, 70, 60, 80, 210},
-                {"Joe_02", 80, 70, 60, 80, 210},
-                {"Joe_03", 80, 70, 60, 80, 210},
-                {"Joe_04", 80, 70, 60, 80, 210},
-                {"Joe_05", 80, 70, 60, 80, 21066},
-                {"Joe_04", 80, 70, 60,  80,210},
-                {"Joe_05", 80, 70, 60,  80,21066}
-        };
+        //默认表格数据
+        rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";rowData[0][4]="暂无";rowData[0][5]="暂无";
         //表格
         JTable table=new AdmitStudentTable(rowData,columnNames);
-
-//        table.setEnabled(false);
 
         MyTableCellRenderer renderer=new MyTableCellRenderer();
 

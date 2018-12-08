@@ -6,6 +6,7 @@
     <result column="design_of_teacher" jdbcType="INTEGER" property="designOfTeacher" />
     <result column="design_title" jdbcType="VARCHAR" property="designTitle" />
     <result column="design_num" jdbcType="INTEGER" property="designNum" />
+    <result column="design_fill_num" jdbcType="INTEGER" property="designFillNum" />
     <result column="design_require" jdbcType="VARCHAR" property="designRequire" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    design_id, design_of_teacher, design_title, design_num, design_require
+    design_id, design_of_teacher, design_title, design_num, design_fill_num, design_require
   </sql>
   <select id="selectByExample" parameterType="com.mikey.design.entity.DesignExample" resultMap="BaseResultMap">
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.mikey.design.entity.Design">
     insert into des_design (design_id, design_of_teacher, design_title, 
-      design_num, design_require)
+      design_num, design_fill_num, design_require
+      )
     values (#{designId,jdbcType=INTEGER}, #{designOfTeacher,jdbcType=INTEGER}, #{designTitle,jdbcType=VARCHAR}, 
-      #{designNum,jdbcType=INTEGER}, #{designRequire,jdbcType=VARCHAR})
+      #{designNum,jdbcType=INTEGER}, #{designFillNum,jdbcType=INTEGER}, #{designRequire,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mikey.design.entity.Design">
     insert into des_design
@@ -119,6 +122,9 @@
       </if>
       <if test="designNum != null">
         design_num,
+      </if>
+      <if test="designFillNum != null">
+        design_fill_num,
       </if>
       <if test="designRequire != null">
         design_require,
@@ -136,6 +142,9 @@
       </if>
       <if test="designNum != null">
         #{designNum,jdbcType=INTEGER},
+      </if>
+      <if test="designFillNum != null">
+        #{designFillNum,jdbcType=INTEGER},
       </if>
       <if test="designRequire != null">
         #{designRequire,jdbcType=VARCHAR},
@@ -163,6 +172,9 @@
       <if test="record.designNum != null">
         design_num = #{record.designNum,jdbcType=INTEGER},
       </if>
+      <if test="record.designFillNum != null">
+        design_fill_num = #{record.designFillNum,jdbcType=INTEGER},
+      </if>
       <if test="record.designRequire != null">
         design_require = #{record.designRequire,jdbcType=VARCHAR},
       </if>
@@ -177,6 +189,7 @@
       design_of_teacher = #{record.designOfTeacher,jdbcType=INTEGER},
       design_title = #{record.designTitle,jdbcType=VARCHAR},
       design_num = #{record.designNum,jdbcType=INTEGER},
+      design_fill_num = #{record.designFillNum,jdbcType=INTEGER},
       design_require = #{record.designRequire,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -194,6 +207,9 @@
       <if test="designNum != null">
         design_num = #{designNum,jdbcType=INTEGER},
       </if>
+      <if test="designFillNum != null">
+        design_fill_num = #{designFillNum,jdbcType=INTEGER},
+      </if>
       <if test="designRequire != null">
         design_require = #{designRequire,jdbcType=VARCHAR},
       </if>
@@ -205,6 +221,7 @@
     set design_of_teacher = #{designOfTeacher,jdbcType=INTEGER},
       design_title = #{designTitle,jdbcType=VARCHAR},
       design_num = #{designNum,jdbcType=INTEGER},
+      design_fill_num = #{designFillNum,jdbcType=INTEGER},
       design_require = #{designRequire,jdbcType=VARCHAR}
     where design_id = #{designId,jdbcType=INTEGER}
   </update>

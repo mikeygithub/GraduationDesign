@@ -2,6 +2,7 @@ package com.mikey.design.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Teacher;
+import com.mikey.design.entity.TitleOfStudent;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface TeacherService {
     public Teacher getTeacher(int teacherId);
     List<Teacher> getAllTeacher();
     PageInfo getAllTeacherByPage(int currentPage, int pageSize);
+    PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize);
 }

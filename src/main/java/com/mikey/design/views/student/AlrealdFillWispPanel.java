@@ -4,7 +4,7 @@ import com.mikey.design.entity.Design;
 import com.mikey.design.entity.Student;
 import com.mikey.design.service.TitleOfStudentService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +37,7 @@ public class AlrealdFillWispPanel extends JPanel {
      */
     private void getData(){
         titleOfStudentService= (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
-        Student self = (Student) ThreadLocallUtil.get();//获取用户（学生）信息
+        Student self = (Student) ThreadLocalUtil.get();//获取用户（学生）信息
         //第一志愿
         Design firstDesign=titleOfStudentService.getFirstWish(self.getStudentId());
         if (firstDesign!=null)theFirstWishName=firstDesign.getDesignTitle();

@@ -3,6 +3,8 @@ package com.mikey.design.service;
 import com.mikey.design.entity.Design;
 import com.mikey.design.entity.TitleOfStudent;
 
+import java.util.List;
+
 /**
  * @author Mikey
  * @Title:
@@ -20,4 +22,6 @@ public interface TitleOfStudentService {
     Integer getAdmitState(Integer studentId);//获取录取状态
 
     Design getAdmitDesign(Integer studentId);
+
+    List<TitleOfStudent> getByTeacherId(Integer teacherId);
 }

@@ -354,6 +354,66 @@ public class DesignExample {
             return (Criteria) this;
         }
 
+        public Criteria andDesignFillNumIsNull() {
+            addCriterion("design_fill_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumIsNotNull() {
+            addCriterion("design_fill_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumEqualTo(Integer value) {
+            addCriterion("design_fill_num =", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumNotEqualTo(Integer value) {
+            addCriterion("design_fill_num <>", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumGreaterThan(Integer value) {
+            addCriterion("design_fill_num >", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("design_fill_num >=", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumLessThan(Integer value) {
+            addCriterion("design_fill_num <", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumLessThanOrEqualTo(Integer value) {
+            addCriterion("design_fill_num <=", value, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumIn(List<Integer> values) {
+            addCriterion("design_fill_num in", values, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumNotIn(List<Integer> values) {
+            addCriterion("design_fill_num not in", values, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumBetween(Integer value1, Integer value2) {
+            addCriterion("design_fill_num between", value1, value2, "designFillNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDesignFillNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("design_fill_num not between", value1, value2, "designFillNum");
+            return (Criteria) this;
+        }
+
         public Criteria andDesignRequireIsNull() {
             addCriterion("design_require is null");
             return (Criteria) this;

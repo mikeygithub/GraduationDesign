@@ -9,6 +9,8 @@ public class Design {
 
     private Integer designNum;
 
+    private Integer designFillNum;
+
     private String designRequire;
 
     public Integer getDesignId() {
@@ -41,6 +43,14 @@ public class Design {
 
     public void setDesignNum(Integer designNum) {
         this.designNum = designNum;
+    }
+
+    public Integer getDesignFillNum() {
+        return designFillNum;
+    }
+
+    public void setDesignFillNum(Integer designFillNum) {
+        this.designFillNum = designFillNum;
     }
 
     public String getDesignRequire() {

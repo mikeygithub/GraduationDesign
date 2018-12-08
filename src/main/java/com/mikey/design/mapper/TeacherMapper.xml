@@ -225,4 +225,33 @@
       teacher_phone = #{teacherPhone,jdbcType=VARCHAR}
     where teacher_id = #{teacherId,jdbcType=INTEGER}
   </update>
+  <select id="getWillAdmitStudentMes" parameterType="java.lang.Integer" resultMap="WillAdmitStudentMesMap">
+    SELECT * FROM des_title_of_student dt,des_design dd,des_student ds
+    WHERE dt.des_of_title=design_id
+    AND dt.des_of_stu=ds.student_id
+    AND dt.des_state=0
+    AND dd.design_of_teacher=#{teacherId}
+  </select>
+  <resultMap id="WillAdmitStudentMesMap" type="com.mikey.design.entity.TitleOfStudent">
+      <id column="des_of_stu_id" jdbcType="INTEGER" property="desOfStuId" />
+      <result column="des_of_stu" jdbcType="INTEGER" property="desOfStu" />
+      <result column="des_of_title" jdbcType="INTEGER" property="desOfTitle" />
+      <result column="des_state" jdbcType="INTEGER" property="desState" />
+      <result column="des_wish_order" jdbcType="INTEGER" property="desWishOrder" />
+    <association property="student" javaType="com.mikey.design.entity.Student">
+      <id column="student_id" jdbcType="INTEGER" property="studentId" />
+      <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+      <result column="student_sex" jdbcType="INTEGER" property="studentSex" />
+      <result column="student_password" jdbcType="VARCHAR" property="studentPassword" />
+      <result column="student_phone" jdbcType="VARCHAR" property="studentPhone" />
+    </association>
+    <association property="design" javaType="com.mikey.design.entity.Design">
+      <id column="design_id" jdbcType="INTEGER" property="designId" />
+      <result column="design_of_teacher" jdbcType="INTEGER" property="designOfTeacher" />
+      <result column="design_title" jdbcType="VARCHAR" property="designTitle" />
+      <result column="design_num" jdbcType="INTEGER" property="designNum" />
+      <result column="design_fill_num" jdbcType="INTEGER" property="designFillNum" />
+      <result column="design_require" jdbcType="VARCHAR" property="designRequire" />
+    </association>
+  </resultMap>
 </mapper>

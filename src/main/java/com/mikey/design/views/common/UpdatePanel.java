@@ -7,7 +7,7 @@ import com.mikey.design.service.AdminService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocallUtil;
+import com.mikey.design.utils.ThreadLocalUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +42,7 @@ public class UpdatePanel extends JPanel {
 
     public void getData(){
         //获取当前登入用户信息
-        Object loginUser = ThreadLocallUtil.get();
+        Object loginUser = ThreadLocalUtil.get();
 
         //判断角色类型
         if(loginUser instanceof Student){//学生
@@ -69,7 +69,7 @@ public class UpdatePanel extends JPanel {
 
 
         //获取当前登入用户信息
-        Object loginUser = ThreadLocallUtil.get();
+        Object loginUser = ThreadLocalUtil.get();
 
         getData();//获取数据
 

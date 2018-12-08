@@ -8,7 +8,7 @@ package com.mikey.design.utils;
  * @date 2018/12/3 20:11
  * @Version 1.0
  */
-public class ThreadLocallUtil {
+public class ThreadLocalUtil {
     public static ThreadLocal<Object> threadLocal=new ThreadLocal<Object>();
 
     /**
