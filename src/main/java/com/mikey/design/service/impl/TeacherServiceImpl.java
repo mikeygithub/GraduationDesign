@@ -43,7 +43,6 @@ public class TeacherServiceImpl implements TeacherService {
 
         teacherMapper.insert(teacher);
     }
-
     /**
      * 修改教师
      * @param teacher
