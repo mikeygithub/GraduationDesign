@@ -45,7 +45,7 @@ public class AdmitStudentsJpanel  extends JPanel {
     //表头（列名）
     private Object[] columnNames = {"姓名", "性别", "题目","志愿类型","联系方式", "操作"};
     //列表内容
-    private Object[][] rowData=new Object[20][6];
+    private Object[][] rowData;//=new Object[20][6];
     //分页
     private PageInfo pageData;
     //当前登入教师
@@ -56,6 +56,8 @@ public class AdmitStudentsJpanel  extends JPanel {
     private List<Student>  studentList;
     //当前教师的毕设题目列表
     private List<TitleOfStudent>  titleOfStudentList;
+    //数据表格
+    private  JTable table;
 
     public void getData(){
         //获取当前登入用户信息
@@ -70,6 +72,8 @@ public class AdmitStudentsJpanel  extends JPanel {
         titleOfStudentList=pageData.getList();
 
         System.out.println("MESSAGE------->>>>>>>"+titleOfStudentList.size());
+
+        rowData=new Object[pageData.getSize()][6];
 
         clearRowData(rowData);//清空数据表格
         /**
@@ -112,7 +116,7 @@ public class AdmitStudentsJpanel  extends JPanel {
         }
 
         //表格
-        JTable table=new AdmitStudentTable(rowData,columnNames);
+        table=new AdmitStudentTable(rowData,columnNames);
 
         MyTableCellRenderer renderer=new MyTableCellRenderer();
 
@@ -120,11 +124,13 @@ public class AdmitStudentsJpanel  extends JPanel {
             TableColumn tableColumn=table.getColumn(columnNames[i]);
             tableColumn.setCellRenderer(renderer);
         }
-        table.getColumnModel().getColumn(5).setCellEditor(
-                new AdmitStudentButtonListener());
+//        if (titleOfStudentList.size()>0) {
+            table.getColumnModel().getColumn(5).setCellEditor(
+                    new AdmitStudentButtonListener(table, titleOfStudentList, this));
 
-        table.getColumnModel().getColumn(5).setCellRenderer(
-                new AdmitStudentButtonRenderer());
+            table.getColumnModel().getColumn(5).setCellRenderer(
+                    new AdmitStudentButtonRenderer());
+//        }
 
         students.add(table.getTableHeader(),BorderLayout.NORTH);
         students.add(table,BorderLayout.CENTER);
@@ -132,7 +138,9 @@ public class AdmitStudentsJpanel  extends JPanel {
         add(students,BorderLayout.CENTER);
         //列表结束
 
-
+        //属性视图
+        table.validate();
+        table.updateUI();
 
         //分页按钮
         JButton firstPage=new JButton("首页");
@@ -151,7 +159,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage=1;//设置为第一页
-                    getData();//刷新数据
+                    refreshData();//刷新数据
                     table.validate();
                     table.updateUI();
                 }
@@ -169,7 +177,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage--;//设置为上一页
-                    getData();
+                    refreshData();//刷新数据
                     table.validate();
                     table.updateUI();
                 }
@@ -187,7 +195,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage++;//设置为下一页
-                    getData();
+                    refreshData();//刷新数据
                     table.validate();
                     table.updateUI();
                 }
@@ -205,7 +213,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页
-                    getData();
+                    refreshData();//刷新数据
                     //更新表格
                     table.validate();
                     table.updateUI();
@@ -243,5 +251,7 @@ public class AdmitStudentsJpanel  extends JPanel {
     public void refreshData(){
         getData();//获取数据
         showView();//展现视图
+        table.validate();
+        table.updateUI();
     }
 }

@@ -231,6 +231,7 @@
     AND dt.des_of_stu=ds.student_id
     AND dt.des_state=0
     AND dd.design_of_teacher=#{teacherId}
+    ORDER BY des_wish_order
   </select>
   <resultMap id="WillAdmitStudentMesMap" type="com.mikey.design.entity.TitleOfStudent">
       <id column="des_of_stu_id" jdbcType="INTEGER" property="desOfStuId" />

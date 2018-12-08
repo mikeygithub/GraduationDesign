@@ -15,12 +15,13 @@ import java.util.List;
  * @Version 1.0
  */
 public interface TeacherService {
-    public int getTeacherNum();
-    public void addTeacher(Teacher teacher);
+    public int getTeacherNum();//获取教师人数
+    public void addTeacher(Teacher teacher);//添加教师
     public void updateTeacherNum(Teacher teacher);
     public void deleteTeacherNum(int teacherId);
     public Teacher getTeacher(int teacherId);
     List<Teacher> getAllTeacher();
-    PageInfo getAllTeacherByPage(int currentPage, int pageSize);
-    PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize);
+    PageInfo getAllTeacherByPage(int currentPage, int pageSize);//分页获取所有教师
+    PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize);//通过教师id获取全部志愿信息分页
+//    List<TitleOfStudent>  getWillAdmitStudentMes();//通过教师id获取全部志愿信息不分页
 }

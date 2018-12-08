@@ -187,4 +187,17 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
 
         return null;
     }
+
+    /**
+     * 录取志愿
+     * @param titleOfStudent
+     */
+    @Override
+    public void admitStudentWish(TitleOfStudent titleOfStudent) {
+
+        titleOfStudent.setDesState(1);//录取
+
+        titleOfStudentMapper.updateByPrimaryKey(titleOfStudent);//提交更新
+
+    }
 }
