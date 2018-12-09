@@ -263,9 +263,36 @@
     AND des_state = 1
     AND dd.design_of_teacher=#{teacherId}
   </select>
+  <!--获取学生填报志愿状态-->
   <select id="getAllStudentWishStateForAdmin" resultMap="WillAdmitStudentMesMap">
-    SELECT * FROM des_title_of_student dt,des_student ds,des_design  dd
-    WHERE dt.des_of_stu=ds.student_id
-    AND dd.design_id=dt.des_of_title
+    SELECT
+    *
+    FROM
+     des_student
+     LEFT JOIN
+     des_title_of_student dtos
+     ON
+     des_student.student_id = dtos.des_of_stu
+     GROUP BY
+     student_id
+     ORDER BY
+     des_state
+  </select>
+  <!--//统计已经填报志愿的人数个数-->
+  <!--long getAlreadyFillWishStudentNum();-->
+  <select id="getAlreadyFillWishStudentNum" resultType="java.lang.Long">
+SELECT COUNT(*) FROM (SELECT *
+from des_student left join des_title_of_student dtos
+on des_student.student_id = dtos.des_of_stu
+where des_of_stu_id is not null
+GROUP BY student_id) AS tbl
+  </select>
+  <!--//统计未填报志愿人数个数-->
+  <!--long getNotFillWishStudentNum();-->
+  <select id="getNotFillWishStudentNum" resultType="java.lang.Long">
+  SELECT count(student_id)
+  FROM des_student LEFT JOIN des_title_of_student dtos
+  ON des_student.student_id = dtos.des_of_stu
+  WHERE des_of_stu_id IS NULL
   </select>
 </mapper>

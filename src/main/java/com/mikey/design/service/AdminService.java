@@ -24,18 +24,6 @@ public interface AdminService {
     public long getStudentNum();
 
     /**
-     * 统计已经填报志愿的学生个数
-     * @return
-     */
-    public long alreadyFillWishStudetnNum() ;
-
-    /**
-     * 统计未填报志愿的学生个数
-     * @return
-     */
-    public long notFillWishStudetnNum() ;
-
-    /**
      * 统计所有毕设题目总数
      * @return
      */
@@ -52,4 +40,16 @@ public interface AdminService {
      * @param admin
      */
     public void updataAdmin(Admin admin);
+
+    /**
+     * 统计已经填报志愿的学生个数
+     * @return
+     */
+    long getAlreadyFillWishStudentNum();
+
+    /**
+     * 统计未填报志愿的学生个数
+     * @return
+     */
+    long getNotFillWishStudentNum();
 }

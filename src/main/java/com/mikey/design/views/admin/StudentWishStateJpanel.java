@@ -1,11 +1,9 @@
 package com.mikey.design.views.admin;
 
 import com.github.pagehelper.PageInfo;
-import com.mikey.design.entity.Student;
-import com.mikey.design.entity.Teacher;
-import com.mikey.design.service.StudentService;
+import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.service.TeacherService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 
 import javax.swing.*;
@@ -23,40 +21,40 @@ import java.util.List;
  * @Version 1.0
  */
 public class StudentWishStateJpanel extends JPanel {
-        Object[] columnNames = {"姓名", "性别", "联系方式","是否已填报志愿"};
-
     //service接口
     private TeacherService teacherService;
     //当前页
     private int currentPage=1;
     //每页显示条数
     private int pageSize=20;
-
     //表头（列名）
-    private Object[] columnNames = {"姓名", "性别", "联系方式"};
+    private Object[] columnNames = {"姓名", "性别", "联系方式","是否已填报志愿"};
     //列表内容
-    private Object[][] rowData=new Object[20][3];
+    private Object[][] rowData=new Object[20][4];
     //分页
     private PageInfo pageData;
-    //sssssssssss
+
     public void getData(){
         teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
         //进行分页、每页显示20行信息
-        pageData = teacherService.g(currentPage,pageSize);
+        pageData = teacherService.getAllStudentWishStateForAdmin(currentPage,pageSize);
 
-        rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";
+        List<TitleOfStudent> titleOfStudentList=pageData.getList();//获取数据
+
+        if (titleOfStudentList.size()<1){
+            rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";;rowData[0][3]="暂无";
+        }
 
 
-        List<Student> studentList=pageData.getList();//获取数据
+        clearData(rowData);//初始化表格
 
-        clearData(rowData);//清除数据
-
-        if (studentList.size()>0){
+        if (titleOfStudentList.size()>0){
             int i=0;
-            for(Student s:studentList){//赋值
-                rowData[i][0]=s.getStudentName();
-                rowData[i][1]=s.getStudentSex()==0?'女':'男';
-                rowData[i][2]=s.getStudentPhone();
+            for(TitleOfStudent t:titleOfStudentList){//赋值
+                rowData[i][0]=t.getStudent().getStudentName();
+                rowData[i][1]=t.getStudent().getStudentSex()==0?'女':'男';
+                rowData[i][2]=t.getStudent().getStudentPhone();
+                rowData[i][3]=t.getDesOfStuId()==null?"未填报":"已经填报";
                 i++;
             }
         }
@@ -125,7 +123,7 @@ public class StudentWishStateJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=1;//设置为第一页
@@ -143,7 +141,7 @@ public class StudentWishStateJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage--;//设置为上一页
@@ -161,7 +159,7 @@ public class StudentWishStateJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage++;//设置为下一页
@@ -179,7 +177,7 @@ public class StudentWishStateJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页

@@ -37,4 +37,10 @@ public interface TeacherMapper {
     List<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId);
     //获取当前教师已经录取的学生信息
     List<TitleOfStudent> getAllAlreayAdmitStudent(Integer teacherId);
+    //获取学生填报志愿状态
+    List<TitleOfStudent> getAllStudentWishStateForAdmin();
+    //统计已经填报志愿的人数个数
+    long getAlreadyFillWishStudentNum();
+    //统计未填报志愿人数个数
+    long getNotFillWishStudentNum();
 }

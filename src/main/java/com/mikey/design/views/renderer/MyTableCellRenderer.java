@@ -1,4 +1,4 @@
-package com.mikey.design.utils;
+package com.mikey.design.views.renderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -36,7 +36,7 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 //            maxPreferredHeight = Math.max(maxPreferredHeight, getPreferredSize().height);
 //        }
 //
-//        if (table.getRowHeight(row) != maxPreferredHeight)  // 少了这行则处理器瞎忙
+//        if (table.getRowHeight(row) != maxPreferredHeight)
 //            table.setRowHeight(row, maxPreferredHeight);
 //
 //        setText(value == null ? "" : value.toString());

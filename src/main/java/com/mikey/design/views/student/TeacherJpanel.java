@@ -3,7 +3,7 @@ package com.mikey.design.views.student;
 import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.TeacherService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 
 import javax.swing.*;
@@ -176,7 +176,7 @@ public class TeacherJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已经到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页

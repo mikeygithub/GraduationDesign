@@ -19,4 +19,11 @@ public interface StudentService {
     public Student getStudent(int studentId);
 
     PageInfo getAllTeacherByPage(int currentPage, int pageSize);
+
+    /**
+     * 通过手机号回显学号
+     * @param studentPhone
+     * @return
+     */
+    Student getStudentByPhone(String studentPhone);
 }

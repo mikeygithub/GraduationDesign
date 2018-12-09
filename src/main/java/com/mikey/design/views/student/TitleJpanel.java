@@ -5,7 +5,7 @@ import com.mikey.design.entity.Design;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.service.DesignService;
 import com.mikey.design.service.TeacherService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 
 import javax.swing.*;

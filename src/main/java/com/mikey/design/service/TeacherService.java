@@ -25,4 +25,8 @@ public interface TeacherService {
     PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize);//通过教师id获取全部志愿信息分页
     //获取当前教师已经录取的学生信息
     PageInfo<TitleOfStudent>  getAllAlreayAdmitStudent(Integer teacherId, int currentPage, int pageSize);
+    //获取学生填报志愿状态
+    PageInfo<TitleOfStudent>  getAllStudentWishStateForAdmin(int currentPage, int pageSize);
+    //通过手机号回显新增教师
+    Teacher getStudentByPhone(String teacherPhone);
 }

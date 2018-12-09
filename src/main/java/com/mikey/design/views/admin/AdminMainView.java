@@ -29,8 +29,8 @@ public class AdminMainView extends JFrame {
         JButton menuChild2 = new JButton("浏览学生信息");
         JButton menuChild3 = new JButton("志愿填报情况");
         JButton menuChild4 = new JButton("统计志愿填报");
-        JButton menuChild5 = new JButton("添加教师信息");
-        JButton menuChild6 = new JButton("添加学生信息");
+        JButton menuChild5 = new JButton("添加学生信息");
+        JButton menuChild6 = new JButton("添加教师信息");
         JButton menuChild7 = new JButton("退出登入");
         Menu.add(menuChild1);
         Menu.add(menuChild2);
@@ -85,12 +85,14 @@ public class AdminMainView extends JFrame {
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((StudentWishStateJpanel) wishStatePanel).refreshData();
                 cardLayout.show(center,"wishStatePanel");
             }
         });
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((WishDateCountJpanel) countWishPanel).refreshData();
                 cardLayout.show(center,"countWishPanel");
             }
         });

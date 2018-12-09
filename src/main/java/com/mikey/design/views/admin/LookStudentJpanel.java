@@ -3,8 +3,7 @@ package com.mikey.design.views.admin;
 import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Student;
 import com.mikey.design.service.StudentService;
-import com.mikey.design.service.TeacherService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 
 import javax.swing.*;

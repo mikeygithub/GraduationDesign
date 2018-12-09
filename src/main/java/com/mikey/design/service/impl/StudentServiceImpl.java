@@ -61,9 +61,8 @@ public class StudentServiceImpl implements StudentService {
     public int getStudentNum() {
         StudentExample studentExample=new StudentExample();
         StudentExample.Criteria criteria = studentExample.createCriteria();
-//        criteria.
 
-        return 0;
+        return (int) studentMapper.countByExample(null);
     }
 
     /**
@@ -86,5 +85,26 @@ public class StudentServiceImpl implements StudentService {
         PageInfo pageData = new PageInfo(allBook, pageSize);
 
         return pageData;
+    }
+
+    /**
+     * 通过手机号回显id
+     * @param studentPhone
+     * @return
+     */
+    @Override
+    public Student getStudentByPhone(String studentPhone) {
+
+        StudentExample studentExample = new StudentExample();
+
+        StudentExample.Criteria criteria = studentExample.createCriteria();
+
+        criteria.andStudentPhoneEqualTo(studentPhone);
+        
+        List<Student> studentsList = studentMapper.selectByExample(studentExample);
+        
+        if (studentsList.size()>0)return studentsList.get(0);
+        
+        return new Student();
     }
 }

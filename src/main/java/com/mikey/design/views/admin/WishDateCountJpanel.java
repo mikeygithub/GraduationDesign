@@ -1,5 +1,9 @@
 package com.mikey.design.views.admin;
 
+import com.mikey.design.service.AdminService;
+import com.mikey.design.service.TeacherService;
+import com.mikey.design.utils.SpringUtil;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +16,33 @@ import java.awt.*;
  * @Version 1.0
  */
 public class WishDateCountJpanel extends JPanel {
-    public WishDateCountJpanel() {
+    //总学生人数
+    private String ALL_STUDENT_NUM="暂无";
+    //已经填报人数
+    private String ALREADY_STUDENT_NUM="暂无";
+    //未填报人数
+    private String ALL_NOT_FILL_STUDENT_NUM="暂无";
+    //教师人数
+    private String ALL_TEACHER_NUM="暂无";
+    //毕业设计题目总数
+    private String ALL_DESIGN_TITLE_NUM="暂无";
+    //service接口
+    private TeacherService teacherService;
+    //
+    private AdminService adminService;
+
+    public void getData(){
+        teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+        ALL_STUDENT_NUM=String.valueOf(adminService.getStudentNum());
+        ALREADY_STUDENT_NUM=String.valueOf(adminService.getAlreadyFillWishStudentNum());
+        ALL_NOT_FILL_STUDENT_NUM=String.valueOf(adminService.getNotFillWishStudentNum());
+        ALL_TEACHER_NUM=String.valueOf(adminService.getTeacherNum());
+        ALL_DESIGN_TITLE_NUM=String.valueOf(adminService.allTitleNum());
+
+    }
+
+    public void showView() {
         //边缘布局
         setLayout(new BorderLayout());
         //banner
@@ -29,32 +59,32 @@ public class WishDateCountJpanel extends JPanel {
         //1.总学生人数
         JPanel studentNumJpanel=new JPanel();
         JLabel nameJlabel=new JLabel("总学生人数：");
-        JLabel nameJlabelInfo=new JLabel("100");
+        JLabel nameJlabelInfo=new JLabel(ALL_STUDENT_NUM);
         studentNumJpanel.add(nameJlabel);
         studentNumJpanel.add(nameJlabelInfo);
 
         //2.已经填报人数
         JPanel alreadyFillNumJpanel=new JPanel();
         JLabel alreadyFillNumJLabel=new JLabel("已经填报人数：");
-        JLabel alreadyFillNumJLabelInfo=new JLabel("100");
+        JLabel alreadyFillNumJLabelInfo=new JLabel(ALREADY_STUDENT_NUM);
         alreadyFillNumJpanel.add(alreadyFillNumJLabel);
         alreadyFillNumJpanel.add(alreadyFillNumJLabelInfo);
         //3.未填报人数
         JPanel notFillNumJpanel=new JPanel();
         JLabel notFillNumJlabel=new JLabel("未填报人数：");
-        JLabel notFillNumJlabelInfo=new JLabel("100");
+        JLabel notFillNumJlabelInfo=new JLabel(ALL_NOT_FILL_STUDENT_NUM);
         notFillNumJpanel.add(notFillNumJlabel);
         notFillNumJpanel.add(notFillNumJlabelInfo);
         //4.教师个数
         JPanel teacherNumJpanel=new JPanel();
         JLabel teacherNumJlabel=new JLabel("教师人数：");
-        JLabel teacherNumJlabelInfo=new JLabel("100");
+        JLabel teacherNumJlabelInfo=new JLabel(ALL_TEACHER_NUM);
         teacherNumJpanel.add(teacherNumJlabel);
         teacherNumJpanel.add(teacherNumJlabelInfo);
         //5.毕业设计题目总数
         JPanel titleNumJpanel=new JPanel();
         JLabel titleNumJlabel=new JLabel("毕业设计题目总数：");
-        JLabel titleNumJlabelInfo=new JLabel("100");
+        JLabel titleNumJlabelInfo=new JLabel(ALL_DESIGN_TITLE_NUM);
         titleNumJpanel.add(titleNumJlabel);
         titleNumJpanel.add(titleNumJlabelInfo);
 
@@ -67,4 +97,10 @@ public class WishDateCountJpanel extends JPanel {
 
         add(mainJpanel,BorderLayout.CENTER);
     }
+
+    public void refreshData(){
+        getData();//获取数据
+        showView();//展现视图
+    }
+
 }

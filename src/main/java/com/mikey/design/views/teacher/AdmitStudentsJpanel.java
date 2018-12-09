@@ -1,8 +1,6 @@
 package com.mikey.design.views.teacher;
 
 import com.github.pagehelper.PageInfo;
-import com.mikey.design.entity.Design;
-import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.listerner.teacher.AdmitStudentButtonListener;
@@ -10,7 +8,7 @@ import com.mikey.design.service.DesignService;
 import com.mikey.design.service.StudentService;
 import com.mikey.design.service.TeacherService;
 import com.mikey.design.service.TitleOfStudentService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 import com.mikey.design.utils.ThreadLocalUtil;
 import com.mikey.design.views.renderer.AdmitStudentButtonRenderer;

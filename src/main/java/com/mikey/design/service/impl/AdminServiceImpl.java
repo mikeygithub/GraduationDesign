@@ -40,19 +40,10 @@ public class AdminServiceImpl implements AdminService {
     public long getStudentNum() {
         return studentMapper.countByExample(null);
     }
-
-    @Override
-    public long alreadyFillWishStudetnNum() {
-        //TODO:待完成查询
-        return 100l;
-    }
-
-    @Override
-    public long notFillWishStudetnNum() {
-        //TODO:待完成查询
-        return 0l;
-    }
-
+    /**
+     * 获取全部题目总数
+     * @return
+     */
     @Override
     public long allTitleNum() {
         return designMapper.countByExample(null);
@@ -68,8 +59,30 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.selectByPrimaryKey(adminId);
     }
 
+    /**
+     * 更新管理员
+     * @param admin
+     */
     @Override
     public void updataAdmin(Admin admin) {
         adminMapper.updateByPrimaryKey(admin);
+    }
+
+    /**
+     *统计已经填报志愿的学生个数
+     * @return
+     */
+    @Override
+    public long getAlreadyFillWishStudentNum() {
+        return teacherMapper.getAlreadyFillWishStudentNum();
+    }
+
+    /**
+     * 统计未填报志愿的学生个数
+     * @return
+     */
+    @Override
+    public long getNotFillWishStudentNum() {
+        return teacherMapper.getNotFillWishStudentNum();
     }
 }

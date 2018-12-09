@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Student;
 import com.mikey.design.entity.Teacher;
+import com.mikey.design.entity.TeacherExample;
 import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.mapper.TeacherMapper;
 import com.mikey.design.service.TeacherService;
@@ -130,5 +131,44 @@ public class TeacherServiceImpl implements TeacherService {
         PageInfo pageData=new PageInfo(titleOfStudentList,pageSize);
 
         return pageData;
+    }
+
+    /**
+     * 获取学生填报志愿状态
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo<TitleOfStudent> getAllStudentWishStateForAdmin(int currentPage, int pageSize) {
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<TitleOfStudent> titleOfStudentList=teacherMapper.getAllStudentWishStateForAdmin();
+
+        PageInfo pageData=new PageInfo(titleOfStudentList,pageSize);
+
+        return pageData;
+
+    }
+
+    /**
+     * 通过手机号回显新增教师
+     * @param teacherPhone
+     * @return
+     */
+    @Override
+    public Teacher getStudentByPhone(String teacherPhone) {
+        TeacherExample teacherExample=new TeacherExample();
+
+        TeacherExample.Criteria criteria = teacherExample.createCriteria();
+
+        criteria.andTeacherPhoneEqualTo(teacherPhone);
+
+        List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
+
+        if (teacherList.size()>0)return teacherList.get(0);
+
+        return new Teacher();
     }
 }

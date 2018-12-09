@@ -149,7 +149,7 @@ public class UpdatePanel extends JPanel {
                     /**
                      * 提交保存
                      */
-                    if (result == 0) {
+                    if (result == JOptionPane.YES_NO_OPTION) {
 
                         if (loginUser instanceof Student) {//学生
                             ((Student) loginUser).setStudentName(nameJtextField.getText());
@@ -230,6 +230,14 @@ public class UpdatePanel extends JPanel {
         }
         if(Pattern.matches(REGEX_MOBILE,userPhone)==false){
             JOptionPane.showMessageDialog(this,"请输入正确的移动电话号码","系统提示",JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        /**
+         * 判断手机号是否已经注册
+         */
+        Student studentByPhone = studentService.getStudentByPhone(userPhone);
+        if (studentByPhone!=null){
+            JOptionPane.showMessageDialog(this,"该手机号码已经被使用","系统提示",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;

@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Teacher;
 import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.service.TeacherService;
-import com.mikey.design.utils.MyTableCellRenderer;
+import com.mikey.design.views.renderer.MyTableCellRenderer;
 import com.mikey.design.utils.SpringUtil;
 import com.mikey.design.utils.ThreadLocalUtil;
 
