@@ -38,7 +38,7 @@ public class StudentWishStateJpanel extends JPanel {
     private Object[][] rowData=new Object[20][3];
     //分页
     private PageInfo pageData;
-
+    //s
     public void getData(){
         teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
         //进行分页、每页显示20行信息
