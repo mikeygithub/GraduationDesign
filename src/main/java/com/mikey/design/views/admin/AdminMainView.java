@@ -71,12 +71,14 @@ public class AdminMainView extends JFrame {
         menuChild1.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((LookTeacherJpanel) lookTeacherJpanel).refreshData();
                 cardLayout.show(center,"lookTeacherJpanel");
             }
         });
         menuChild2.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((LookStudentJpanel) lookStudentPanel).refreshData();
                 cardLayout.show(center,"lookStudentPanel");
             }
         });

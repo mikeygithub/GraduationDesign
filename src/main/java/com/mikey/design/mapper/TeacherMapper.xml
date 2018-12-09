@@ -263,4 +263,9 @@
     AND des_state = 1
     AND dd.design_of_teacher=#{teacherId}
   </select>
+  <select id="getAllStudentWishStateForAdmin" resultMap="WillAdmitStudentMesMap">
+    SELECT * FROM des_title_of_student dt,des_student ds,des_design  dd
+    WHERE dt.des_of_stu=ds.student_id
+    AND dd.design_id=dt.des_of_title
+  </select>
 </mapper>

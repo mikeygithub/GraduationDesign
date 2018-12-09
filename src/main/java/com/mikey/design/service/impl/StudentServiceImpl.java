@@ -1,11 +1,15 @@
 package com.mikey.design.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Student;
 import com.mikey.design.entity.StudentExample;
 import com.mikey.design.mapper.StudentMapper;
 import com.mikey.design.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Mikey
@@ -70,5 +74,17 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudent(int studentId) {
 
        return studentMapper.selectByPrimaryKey(studentId);
+    }
+
+    @Override
+    public PageInfo getAllTeacherByPage(int currentPage, int pageSize) {
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<Student> allBook=studentMapper.selectByExample(null);
+
+        PageInfo pageData = new PageInfo(allBook, pageSize);
+
+        return pageData;
     }
 }

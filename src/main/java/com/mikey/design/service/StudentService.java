@@ -1,5 +1,6 @@
 package com.mikey.design.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mikey.design.entity.Student;
 
 /**
@@ -17,4 +18,5 @@ public interface StudentService {
     public int getStudentNum();
     public Student getStudent(int studentId);
 
+    PageInfo getAllTeacherByPage(int currentPage, int pageSize);
 }
