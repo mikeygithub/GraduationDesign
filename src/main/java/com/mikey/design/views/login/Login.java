@@ -32,21 +32,20 @@ public class Login extends JFrame {
 
 
         login.setLayout(new GridLayout(7,1));//网格布局
-        JLabel nameJlabel=new JLabel("学号/工号：");
-//        nameJlabel.setBounds(10,10,300,18);
-        JTextField nameJtextField=new JTextField("请输入学号或者工号");
-//        nameJtextField.setBounds(310, 10, 300, 18);
+        JLabel nameJlabel=new JLabel("学号/工号:");
+        JTextField nameJtextField=new JTextField(20);
+        nameJtextField.setSize(220,20);//设置大小
         JPanel userNameJpanel=new JPanel();
+       nameJtextField.setText("请输入学号或者工号");
         userNameJpanel.add(nameJlabel);
         userNameJpanel.add(nameJtextField);
 
 
 
         JLabel pwdJlabel=new JLabel("密  码：");
-//        pwdJlabel.setBounds(10, 50, 300, 18);
-        JPasswordField pwdJtextField=new JPasswordField("请输入用密码");
-//        pwdJtextField.setBounds(250, 50, 350, 18);
+        JPasswordField pwdJtextField=new JPasswordField(19);
         JPanel pwdJpanel=new JPanel();
+        pwdJtextField.setText("请输入用密码");
         pwdJpanel.add(pwdJlabel);
         pwdJpanel.add(pwdJtextField);
 
@@ -59,6 +58,8 @@ public class Login extends JFrame {
         select.add(new Checkbox("student",group,true));
         select.add(new Checkbox("teacher",group,false));
         select.add(new Checkbox("admin",group,false));
+
+
 
 
         /**

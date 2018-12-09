@@ -10,7 +10,6 @@ import com.mikey.design.entity.TitleOfStudent;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-@Component
 public interface TeacherMapper {
     long countByExample(TeacherExample example);
 

@@ -236,7 +236,7 @@ public class UpdatePanel extends JPanel {
          * 判断手机号是否已经注册
          */
         Student studentByPhone = studentService.getStudentByPhone(userPhone);
-        if (studentByPhone!=null){
+        if (studentByPhone.getStudentPhone()!=null&&!studentByPhone.getStudentPhone().equals(loginUserPhone)){
             JOptionPane.showMessageDialog(this,"该手机号码已经被使用","系统提示",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
