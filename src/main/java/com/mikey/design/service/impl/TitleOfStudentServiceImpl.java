@@ -199,5 +199,7 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
 
         titleOfStudentMapper.updateByPrimaryKey(titleOfStudent);//提交更新
 
+        //TODO:将该学生的另一个志愿回档
+
     }
 }

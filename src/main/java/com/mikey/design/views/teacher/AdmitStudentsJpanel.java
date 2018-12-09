@@ -51,25 +51,20 @@ public class AdmitStudentsJpanel  extends JPanel {
     //当前登入教师
     private Teacher selfTeacher;
     //当前教师的毕设题目列表
-    private List<Design>  designList;
-    //填报当前教师的毕设题目学生列表
-    private List<Student>  studentList;
-    //当前教师的毕设题目列表
     private List<TitleOfStudent>  titleOfStudentList;
-    //数据表格
-    private  JTable table;
+    //
+    private JTable table;
+    //
+    private JPanel students;
 
     public void getData(){
-        //获取当前登入用户信息
-        selfTeacher = (Teacher) ThreadLocalUtil.get();
-        designService = (DesignService) SpringUtil.getBean("designServiceImpl");
-        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
-        teacherService=(TeacherService) SpringUtil.getBean("teacherServiceImpl");
-        titleOfStudentService = (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
+
 
         pageData=teacherService.getWillAdmitStudentMes(selfTeacher.getTeacherId(),currentPage,pageSize);//通过教师id获取志愿填报情况
 
         titleOfStudentList=pageData.getList();
+
+        AdmitStudentButtonListener.setTitleOfStudentList(titleOfStudentList);//同步到监听器
 
         System.out.println("MESSAGE------->>>>>>>"+titleOfStudentList.size());
 
@@ -107,13 +102,14 @@ public class AdmitStudentsJpanel  extends JPanel {
 
         //列表开始
 
-        JPanel students=new JPanel(new BorderLayout());
-        students.setBackground(Color.red);
+        students=new JPanel(new BorderLayout());
+//        students.setBackground(Color.red);
 
         //默认表格数据
         if (titleOfStudentList.size()<1){
             rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";rowData[0][4]="暂无";rowData[0][5]="暂无";
         }
+        //数据表格
 
         //表格
         table=new AdmitStudentTable(rowData,columnNames);
@@ -124,23 +120,16 @@ public class AdmitStudentsJpanel  extends JPanel {
             TableColumn tableColumn=table.getColumn(columnNames[i]);
             tableColumn.setCellRenderer(renderer);
         }
-//        if (titleOfStudentList.size()>0) {
             table.getColumnModel().getColumn(5).setCellEditor(
-                    new AdmitStudentButtonListener(table, titleOfStudentList, this));
+                    new AdmitStudentButtonListener(table,this));
 
             table.getColumnModel().getColumn(5).setCellRenderer(
                     new AdmitStudentButtonRenderer());
-//        }
 
         students.add(table.getTableHeader(),BorderLayout.NORTH);
         students.add(table,BorderLayout.CENTER);
 
         add(students,BorderLayout.CENTER);
-        //列表结束
-
-        //属性视图
-        table.validate();
-        table.updateUI();
 
         //分页按钮
         JButton firstPage=new JButton("首页");
@@ -148,6 +137,12 @@ public class AdmitStudentsJpanel  extends JPanel {
         JButton nextPage=new JButton("下一页");
         JButton endPage=new JButton("末页");
 
+        JPanel page=new JPanel();
+        page.add(firstPage);
+        page.add(upPage);
+        page.add(nextPage);
+        page.add(endPage);
+        add(page,BorderLayout.SOUTH);
         /**
          * 监听首页
          */
@@ -159,9 +154,9 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage=1;//设置为第一页
+                    table.removeAll();
+                    students.removeAll();
                     refreshData();//刷新数据
-                    table.validate();
-                    table.updateUI();
                 }
             }
         });
@@ -177,9 +172,9 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage--;//设置为上一页
+                    table.removeAll();
+                    students.removeAll();
                     refreshData();//刷新数据
-                    table.validate();
-                    table.updateUI();
                 }
             }
         });
@@ -195,9 +190,9 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage++;//设置为下一页
+                    table.removeAll();
+                    students.removeAll();
                     refreshData();//刷新数据
-                    table.validate();
-                    table.updateUI();
                 }
             }
         });
@@ -213,24 +208,22 @@ public class AdmitStudentsJpanel  extends JPanel {
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页
+                    table.removeAll();
+                    students.removeAll();
                     refreshData();//刷新数据
-                    //更新表格
-                    table.validate();
-                    table.updateUI();
                 }
             }
         });
 
+    }
 
-
-        JPanel page=new JPanel();
-        page.add(firstPage);
-        page.add(upPage);
-        page.add(nextPage);
-        page.add(endPage);
-        add(page,BorderLayout.SOUTH);
-
-
+    public AdmitStudentsJpanel() {
+        //获取当前登入用户信息
+        selfTeacher = (Teacher) ThreadLocalUtil.get();
+        designService = (DesignService) SpringUtil.getBean("designServiceImpl");
+        studentService = (StudentService) SpringUtil.getBean("studentServiceImpl");
+        teacherService=(TeacherService) SpringUtil.getBean("teacherServiceImpl");
+        titleOfStudentService = (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
     }
 
     /**

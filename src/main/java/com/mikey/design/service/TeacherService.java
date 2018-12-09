@@ -23,5 +23,6 @@ public interface TeacherService {
     List<Teacher> getAllTeacher();
     PageInfo getAllTeacherByPage(int currentPage, int pageSize);//分页获取所有教师
     PageInfo<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId, int currentPage, int pageSize);//通过教师id获取全部志愿信息分页
-//    List<TitleOfStudent>  getWillAdmitStudentMes();//通过教师id获取全部志愿信息不分页
+    //获取当前教师已经录取的学生信息
+    PageInfo<TitleOfStudent>  getAllAlreayAdmitStudent(Integer teacherId, int currentPage, int pageSize);
 }

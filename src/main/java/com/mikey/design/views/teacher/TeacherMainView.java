@@ -94,6 +94,7 @@ public class TeacherMainView extends JFrame {
         menuChild4.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ((AlrealyAdmitJpanel) alrealyAdmitJpanel).refreshData();//刷新数据
                 cardLayout.show(center,"alrealyAdmitJpanel");
             }
         });

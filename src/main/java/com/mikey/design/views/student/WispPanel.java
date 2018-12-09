@@ -58,6 +58,8 @@ public class WispPanel extends JPanel {
      */
     private boolean checkData(JComboBox teacherboBox, JComboBox teacherboBox2, JComboBox titleBox, JComboBox titleBox2){
 
+        //TODO:待添加限制第一第二志愿不能相同
+
         if(teacherboBox.getSelectedItem().toString().equals("请选择教师")||teacherboBox2.getSelectedItem().toString().equals("请选择教师")){
             JOptionPane.showMessageDialog(this,"请选择教师！","系统提示",JOptionPane.INFORMATION_MESSAGE);
             return false;

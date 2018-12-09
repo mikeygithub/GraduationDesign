@@ -26,20 +26,23 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
     private TitleOfStudentService titleOfStudentService;
 
     //当前教师的毕设题目列表
-//    private List<TitleOfStudent>  titleOfStudentList;
+    private static List<TitleOfStudent>  titleOfStudentList;
+
+    public static void setTitleOfStudentList(List<TitleOfStudent> titleOfStudentList) {
+        AdmitStudentButtonListener.titleOfStudentList = titleOfStudentList;
+    }
 
     private JPanel buttonJpanel;
 
     private JButton admitButton;
 
-    public AdmitStudentButtonListener(JTable table,List<TitleOfStudent> titleOfStudentList ,AdmitStudentsJpanel admitStudentsJpanel) {
+    public AdmitStudentButtonListener(JTable table,AdmitStudentsJpanel admitStudentsJpanel) {
 
         //获取当前登入用户信息
-//        Teacher selfTeacher = (Teacher) ThreadLocalUtil.get();
+        //Teacher selfTeacher = (Teacher) ThreadLocalUtil.get();
         titleOfStudentService = (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
-//        pageData=teacherService.getWillAdmitStudentMes(selfTeacher.getTeacherId(),currentPage,pageSize);//通过教师id获取志愿填报情况
-//
-//        titleOfStudentList=pageData.getList();
+
+
 
         buttonJpanel=new JPanel();
         buttonJpanel.setLayout(new BorderLayout());
@@ -50,7 +53,7 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
         admitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-System.out.println("Message=当前页数量"+titleOfStudentList.size());
+            System.out.println("Message=当前页数量"+titleOfStudentList.size());
                 int selectedRow = table.getSelectedRow();
 
                 System.out.println("选中的行--------------------》》》》》》》》》》》》"+selectedRow);

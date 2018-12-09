@@ -114,8 +114,21 @@ public class TeacherServiceImpl implements TeacherService {
         return pageData;
     }
 
-//    @Override
-//    public List<TitleOfStudent> getWillAdmitStudentMes() {
-//        return null;
-//    }
+    /**
+     * 获取当前教师已经录取的学生信息
+     * @param teacherId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo<TitleOfStudent> getAllAlreayAdmitStudent(Integer teacherId, int currentPage, int pageSize) {
+        PageHelper.startPage(currentPage,pageSize);
+
+        List<TitleOfStudent> titleOfStudentList=teacherMapper.getAllAlreayAdmitStudent(teacherId);
+
+        PageInfo pageData=new PageInfo(titleOfStudentList,pageSize);
+
+        return pageData;
+    }
 }

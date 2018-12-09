@@ -255,4 +255,12 @@
       <result column="design_require" jdbcType="VARCHAR" property="designRequire" />
     </association>
   </resultMap>
+  <!--获取当前教师已经录取的学生-->
+  <select id="getAllAlreayAdmitStudent"  parameterType="java.lang.Integer" resultMap="WillAdmitStudentMesMap">
+    SELECT * FROM des_title_of_student dt,des_student ds,des_design  dd
+    WHERE dt.des_of_stu=ds.student_id
+    AND dd.design_id=dt.des_of_title
+    AND des_state = 1
+    AND dd.design_of_teacher=#{teacherId}
+  </select>
 </mapper>

@@ -122,7 +122,7 @@ public class TeacherJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已经到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"已达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=1;//设置为第一页

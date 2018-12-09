@@ -35,6 +35,8 @@ public class UpdatePanel extends JPanel {
     private int loginUserSex;//0：女、1：男
     //当前登入用户联系方式
     private String loginUserPhone="";
+    //teaherInfo
+    private String loginUserTeacherInfo="请输入教师个人简介";
     //手机号码
     public static final String REGEX_MOBILE ="^[1](([3][0-9])|([4][5,7,9])|([5][^4,6,9])|([6][6])|([7][3,5,6,7,8])|([8][0-9])|([9][8,9]))[0-9]{8}$";
     //用户名
@@ -53,6 +55,8 @@ public class UpdatePanel extends JPanel {
             loginUserName=((Teacher) loginUser).getTeacherName();
             loginUserSex=((Teacher) loginUser).getTeacherSex();
             loginUserPhone=((Teacher) loginUser).getTeacherPhone();
+            loginUserTeacherInfo=((Teacher) loginUser).getTeacherInfo();
+
         }else if (loginUser instanceof Admin){//管理员
             loginUserName=((Admin) loginUser).getAdminName();
             loginUserSex=((Admin) loginUser).getAdminSex();
@@ -86,7 +90,7 @@ public class UpdatePanel extends JPanel {
 
         //更改个人信息
         JPanel mainJpanel=new JPanel();
-        mainJpanel.setLayout(new GridLayout(6,1));
+        mainJpanel.setLayout(new GridLayout(7,1));
         //1.名字
         JPanel username=new JPanel();
         JLabel nameJlabel=new JLabel("用户名：");
@@ -111,7 +115,9 @@ public class UpdatePanel extends JPanel {
         phone.add(phoneJlabel);
         phone.add(phoneJtextField);
 
-
+        //4.教师info
+        JPanel teacherInfoJpanel=new JPanel();
+        JTextArea teacherInfoJtextArea=new JTextArea(loginUserTeacherInfo,5,15);
         //提交按钮
         JPanel submits=new JPanel();
         JButton sunmit=new JButton("确认更改");
@@ -122,6 +128,14 @@ public class UpdatePanel extends JPanel {
         mainJpanel.add(username);
         mainJpanel.add(sex);
         mainJpanel.add(phone);
+
+        if (loginUser instanceof  Teacher){
+            JLabel teacherInfoJlabel=new JLabel("个人简介：");
+            teacherInfoJpanel.add(teacherInfoJlabel);
+            teacherInfoJpanel.add(teacherInfoJtextArea);
+            mainJpanel.add(teacherInfoJpanel);
+        }
+
         mainJpanel.add(submits);
         add(mainJpanel,BorderLayout.CENTER);
 
@@ -155,6 +169,7 @@ public class UpdatePanel extends JPanel {
                             ((Teacher) loginUser).setTeacherName(nameJtextField.getText());
                             ((Teacher) loginUser).setTeacherSex(sexboBox.getSelectedIndex());
                             ((Teacher) loginUser).setTeacherPhone(phoneJtextField.getText());
+                            ((Teacher) loginUser).setTeacherInfo(teacherInfoJtextArea.getText());
 
                             teacherService.updateTeacherNum((Teacher) loginUser);
 

@@ -33,6 +33,8 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
-
+    //获取填报当前登入教师的所有学生志愿信息
     List<TitleOfStudent> getWillAdmitStudentMes(Integer teacherId);
+    //获取当前教师已经录取的学生信息
+    List<TitleOfStudent> getAllAlreayAdmitStudent(Integer teacherId);
 }
