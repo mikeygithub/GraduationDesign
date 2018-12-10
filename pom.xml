@@ -70,6 +70,7 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
         <!--美化包-->
         <dependency>
             <groupId>com.beautyeye</groupId>
