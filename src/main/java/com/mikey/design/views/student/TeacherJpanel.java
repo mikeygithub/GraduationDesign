@@ -70,7 +70,7 @@ public class TeacherJpanel extends JPanel {
 
     public void showView() {
         setLayout(new BorderLayout());
-        setBackground(Color.GRAY);
+//        setBackground(Color.GRAY);
         /**
          * banner
          */

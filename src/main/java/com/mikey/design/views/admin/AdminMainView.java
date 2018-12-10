@@ -130,8 +130,4 @@ public class AdminMainView extends JFrame {
         setResizable(false);//禁用最大化
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public static void main(String[] args) {
-        AdminMainView testBorderLayout = new AdminMainView(null);
-
-    }
 }
