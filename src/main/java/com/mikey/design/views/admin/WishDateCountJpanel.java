@@ -34,10 +34,15 @@ public class WishDateCountJpanel extends JPanel {
     public void getData(){
         teacherService = (TeacherService) SpringUtil.getBean("teacherServiceImpl");
         adminService = (AdminService) SpringUtil.getBean("adminServiceImpl");
+        //总学生人数
         ALL_STUDENT_NUM=String.valueOf(adminService.getStudentNum());
+        //已经填报人数
         ALREADY_STUDENT_NUM=String.valueOf(adminService.getAlreadyFillWishStudentNum());
+        //未填报人数
         ALL_NOT_FILL_STUDENT_NUM=String.valueOf(adminService.getNotFillWishStudentNum());
+        //教师人数
         ALL_TEACHER_NUM=String.valueOf(adminService.getTeacherNum());
+        //毕业设计题目总数
         ALL_DESIGN_TITLE_NUM=String.valueOf(adminService.allTitleNum());
 
     }

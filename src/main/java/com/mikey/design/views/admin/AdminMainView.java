@@ -54,6 +54,12 @@ public class AdminMainView extends JFrame {
         menuBar.add(editMenu);
         menuBar.add(viewMenu);
         menuBar.add(aboutMenu);
+        /**
+         * logo
+         */
+        Toolkit took = Toolkit.getDefaultToolkit(); //设置窗口图标 //要用绝对路径
+        Image image = took.getImage("src/main/resources/Images/logo.png");
+        setIconImage(image);
 
         //添加各个组件
         JPanel center=new JPanel();

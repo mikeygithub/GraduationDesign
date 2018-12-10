@@ -118,6 +118,8 @@ public class UpdatePanel extends JPanel {
         //4.教师info
         JPanel teacherInfoJpanel=new JPanel();
         JTextArea teacherInfoJtextArea=new JTextArea(loginUserTeacherInfo,5,15);
+        JLabel teacherInfoJlabel=new JLabel("个人简介：");
+
         //提交按钮
         JPanel submits=new JPanel();
         JButton sunmit=new JButton("确认更改");
@@ -130,8 +132,9 @@ public class UpdatePanel extends JPanel {
         mainJpanel.add(phone);
 
         if (loginUser instanceof  Teacher){
-            JLabel teacherInfoJlabel=new JLabel("个人简介：");
-            teacherInfoJpanel.add(teacherInfoJlabel);
+            JPanel jPanel=new JPanel();
+            jPanel.add(teacherInfoJlabel);
+            mainJpanel.add(jPanel);
             teacherInfoJpanel.add(teacherInfoJtextArea);
             mainJpanel.add(teacherInfoJpanel);
         }
@@ -139,13 +142,14 @@ public class UpdatePanel extends JPanel {
         mainJpanel.add(submits);
         add(mainJpanel,BorderLayout.CENTER);
 
+        JPanel showTipMessageLocationJpanel=this;
         //确认更改
         sunmit.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkData(nameJtextField,sexboBox,phoneJtextField)) {
 
-                    int result = JOptionPane.showConfirmDialog(null, "确认更改信息？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(showTipMessageLocationJpanel, "确认更改信息？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                     /**
                      * 提交保存
                      */
@@ -158,7 +162,7 @@ public class UpdatePanel extends JPanel {
 
                             studentService.updateStudent((Student) loginUser);//更新
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
                             getData();//获取数据
 
@@ -173,7 +177,7 @@ public class UpdatePanel extends JPanel {
 
                             teacherService.updateTeacherNum((Teacher) loginUser);
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
                             getData();//获取数据
 
@@ -187,7 +191,7 @@ public class UpdatePanel extends JPanel {
 
                             adminService.updataAdmin((Admin) loginUser);
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
                             getData();//获取数据
 

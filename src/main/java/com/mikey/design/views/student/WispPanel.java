@@ -250,6 +250,8 @@ public class WispPanel extends JPanel {
          * 确认提交志愿
          */
 
+        JPanel showTipMessageLocationJpanel=this;
+
         submint.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -260,19 +262,19 @@ public class WispPanel extends JPanel {
                 /**
                  * 弹窗确认
                  */
-                int result = JOptionPane.showConfirmDialog(btnJpanel, "确认提交志愿？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog(showTipMessageLocationJpanel, "确认提交志愿？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                 /**
                  * 提交保存
                  */
                 if (result==0){
                     //保存志愿操作
                     if (submitWish(titleBox,titleBox2)){
-                        JOptionPane.showMessageDialog(btnJpanel,"提交成功！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"提交成功！","系统提示",JOptionPane.INFORMATION_MESSAGE);
                         System.out.println("志愿提交成功");
                         //TODO:隐藏填报志愿面板
                         menuChild1.doClick();
                     }else {
-                        JOptionPane.showMessageDialog(btnJpanel,"提交失败、请联系系统管理员！","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"提交失败、请联系系统管理员！","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
                }

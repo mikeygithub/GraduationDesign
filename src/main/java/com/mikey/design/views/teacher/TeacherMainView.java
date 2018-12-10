@@ -52,6 +52,12 @@ public class TeacherMainView extends JFrame {
         menuBar.add(viewMenu);
         menuBar.add(aboutMenu);
         /**
+         * logo
+         */
+        Toolkit took = Toolkit.getDefaultToolkit(); //设置窗口图标 //要用绝对路径
+        Image image = took.getImage("src/main/resources/Images/logo.png");
+        setIconImage(image);
+        /**
          * 中间布局
          */
         JPanel center=new JPanel();

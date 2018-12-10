@@ -68,7 +68,8 @@ public class AddTitlePanel extends JPanel {
         JPanel titleRequireJpanel=new JPanel();
         JLabel titleRequireJlabel=new JLabel("毕业设计要求：");
         JTextArea titleRequireJtextArea=new JTextArea("请输入毕业设计要求",5,15);
-        titleRequireJpanel.add(titleRequireJlabel);
+        JPanel titleRequireJlableJpanel=new JPanel();
+        titleRequireJlableJpanel.add(titleRequireJlabel);
         titleRequireJpanel.add(titleRequireJtextArea);
 
 
@@ -91,20 +92,23 @@ public class AddTitlePanel extends JPanel {
 
         mainJpanel.add(titleNameJpanel);
         mainJpanel.add(titleNumJpanel);
+        mainJpanel.add(titleRequireJlableJpanel);
         mainJpanel.add(titleRequireJpanel);
         mainJpanel.add(submits);
         add(mainJpanel,BorderLayout.CENTER);
+
+        JPanel showTipMessageLocationJpanel=this;
         //确认添加
         sunmit.addActionListener(new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (checkData(titleNameTextField,titleNumJtextField,titleRequireJtextArea)) {
 
-                int result = JOptionPane.showConfirmDialog(null, "确认添加毕设题目？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog(showTipMessageLocationJpanel, "确认添加毕设题目？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                 /**
                  * 提交保存
                  */
-                if (result == 0) {
+                if (result == JOptionPane.YES_OPTION) {
 
                     getDate();
 
@@ -116,7 +120,7 @@ public class AddTitlePanel extends JPanel {
 
                         designService.addDesign(design);//保存
 
-                        JOptionPane.showMessageDialog(null, "提交毕业设计题目成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "提交毕业设计题目成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
                         reselt.doClick();//重置文本输入框
 

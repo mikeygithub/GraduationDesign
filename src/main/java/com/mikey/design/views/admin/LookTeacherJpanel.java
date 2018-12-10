@@ -26,7 +26,7 @@ public class LookTeacherJpanel extends JPanel {
     //当前页
     private int currentPage=1;
     //每页显示条数
-    private int pageSize=20;
+    private int pageSize=12;
 
     //表头（列名）
     private Object[] columnNames = {"姓名", "性别", "联系方式", "教师简介"};
@@ -116,6 +116,8 @@ public class LookTeacherJpanel extends JPanel {
         JButton nextPage=new JButton("下一页");
         JButton endPage=new JButton("末页");
 
+        JPanel showTipMessageLocationJpanel=this;
+
         /**
          * 监听首页
          */
@@ -123,7 +125,7 @@ public class LookTeacherJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=1;//设置为第一页
@@ -141,7 +143,7 @@ public class LookTeacherJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage--;//设置为上一页
@@ -159,7 +161,7 @@ public class LookTeacherJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage++;//设置为下一页
@@ -177,7 +179,7 @@ public class LookTeacherJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页

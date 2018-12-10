@@ -141,6 +141,8 @@ public class AdmitStudentsJpanel  extends JPanel {
         page.add(nextPage);
         page.add(endPage);
         add(page,BorderLayout.SOUTH);
+
+        JPanel showTipMessageLocationJpanel=this;
         /**
          * 监听首页
          */
@@ -148,7 +150,7 @@ public class AdmitStudentsJpanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=1;//设置为第一页
@@ -166,7 +168,7 @@ public class AdmitStudentsJpanel  extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage--;//设置为上一页
@@ -184,7 +186,7 @@ public class AdmitStudentsJpanel  extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage++;//设置为下一页
@@ -202,7 +204,7 @@ public class AdmitStudentsJpanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//设置为末页

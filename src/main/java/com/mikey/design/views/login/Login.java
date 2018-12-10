@@ -29,6 +29,12 @@ public class Login extends JFrame {
         JLabel title=new JLabel("欢迎登陆毕业设计选题系统");
         title.setFont(new Font("华文彩云",Font.BOLD, 25));
         titleJpanel.add(title);
+        /**
+         * logo
+         */
+        Toolkit took = Toolkit.getDefaultToolkit(); //设置窗口图标 //要用绝对路径
+        Image image = took.getImage("src/main/resources/Images/logo.png");
+        setIconImage(image);
 
 
         login.setLayout(new GridLayout(7,1));//网格布局

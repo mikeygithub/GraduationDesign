@@ -125,6 +125,7 @@ public class UpPwdPanel extends JPanel {
             }
         });
 
+        JPanel showTipMessageLocationJpanel=this;
 
         sunmit.addActionListener(new AbstractAction() {
             @Override
@@ -132,7 +133,7 @@ public class UpPwdPanel extends JPanel {
 
                 if (checkData(oldPwdTextField,newPwdJtextField,reNewPwdJtextField)) {//数据校验
 
-                    int result = JOptionPane.showConfirmDialog(null, "确认更改密码？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(showTipMessageLocationJpanel, "确认更改密码？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                     /**
                      * 提交保存
                      */
@@ -144,7 +145,7 @@ public class UpPwdPanel extends JPanel {
 
                             studentService.updateStudent((Student) loginUser);//更新
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
 
                         } else if (loginUser instanceof Teacher) {//教师
@@ -153,7 +154,7 @@ public class UpPwdPanel extends JPanel {
 
                             teacherService.updateTeacherNum((Teacher) loginUser);
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
 
                         } else if (loginUser instanceof Admin) {//管理员
@@ -162,7 +163,7 @@ public class UpPwdPanel extends JPanel {
 
                             adminService.updataAdmin((Admin) loginUser);
 
-                            JOptionPane.showMessageDialog(null, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "更新成功", "系统提示", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                     }

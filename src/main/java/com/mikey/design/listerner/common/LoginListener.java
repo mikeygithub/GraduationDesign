@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
 
 /**
  * @author Mikey
@@ -41,6 +42,8 @@ public class LoginListener extends AbstractAction {
     private final static String STU="student";
 
     private final static String TEA="teacher";
+
+    private final  static String IS_NUM="^\\d+$";
 
     private JFrame login;
 
@@ -75,16 +78,23 @@ public class LoginListener extends AbstractAction {
         this.password=new String(passwordField.getPassword()).trim();//获取密码
         this.role=group.getSelectedCheckbox().getLabel();//获取角色
 
+        if(Pattern.matches(IS_NUM,username)==false){
+            JOptionPane.showMessageDialog(login, "学号或者工号错误");
+            return;
+        }
 
         if(username.length()==0||password.length()==0||username.equals("请输入学号或者工号")){
-            JOptionPane.showMessageDialog(null, "用户名密码不能为空");
+            JOptionPane.showMessageDialog(login, "用户名密码不能为空");
             return;
         }
 
         switch (role){
             case ADMIN://管理员登入
                 Admin admin=adminService.getAdmin(Integer.parseInt(username));
-
+                if (admin==null){
+                    JOptionPane.showMessageDialog(login, "用户不存在");
+                    return;
+                }
                 this.baseUserName=admin.getAdminId().toString();
                 this.basePassWord=admin.getAdminPassword();
                 //身份认证
@@ -96,12 +106,18 @@ public class LoginListener extends AbstractAction {
                     new AdminMainView(login);//进入管理员页面
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "用户名或密码错误");
+                    JOptionPane.showMessageDialog(login, "用户名或密码错误");
                 }
                 break;
             case STU://学生登入
 
                 Student student= this.studentService.getStudent(Integer.parseInt(username));
+
+                if (student==null){
+                    JOptionPane.showMessageDialog(login, "用户不存在");
+                    return;
+                }
+
                 this.baseUserName=student.getStudentId().toString();
                 this.basePassWord=student.getStudentPassword();
                 //身份认证
@@ -112,11 +128,16 @@ public class LoginListener extends AbstractAction {
                     new StudentMainView(login);//进入学生页面
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "用户名或密码错误");
+                    JOptionPane.showMessageDialog(login, "用户名或密码错误");
                 }
                 break;
             case TEA://教师登入
                     Teacher teacher=teacherService.getTeacher(Integer.parseInt(username));
+
+                if (teacher==null){
+                    JOptionPane.showMessageDialog(login, "用户不存在");
+                    return;
+                }
                     this.baseUserName=teacher.getTeacherId().toString();
                     this.basePassWord=teacher.getTeacherPassword();
                 //身份认证
@@ -127,7 +148,7 @@ public class LoginListener extends AbstractAction {
                     new TeacherMainView(login);//进入教师页面
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "用户名或密码错误");
+                    JOptionPane.showMessageDialog(login, "用户名或密码错误");
                 }
                 break;
         }

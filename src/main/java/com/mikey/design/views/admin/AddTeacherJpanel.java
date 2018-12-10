@@ -74,13 +74,17 @@ public class AddTeacherJpanel extends JPanel {
         //提交按钮
         JPanel submits=new JPanel();
         JButton sunmit=new JButton("确认添加");
+
+
+        JPanel showTipMessageLocationJpanel=this;
+
         sunmit.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //添加学生
                 if (checkData(nameJtextField,sexboBox,phoneJtextField)) {
 
-                    int result = JOptionPane.showConfirmDialog(null, "确认添加学生？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(showTipMessageLocationJpanel, "确认添加学生？", "系统提示", JOptionPane.YES_NO_CANCEL_OPTION);
                     /**
                      * 提交保存
                      */
@@ -95,7 +99,7 @@ public class AddTeacherJpanel extends JPanel {
 
                         Teacher teacherByPhone = teacherService.getStudentByPhone(phoneJtextField.getText());
 
-                        JOptionPane.showMessageDialog(null, "添加成功/学号为："+teacherByPhone.getTeacherId());
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "添加成功/学号为："+teacherByPhone.getTeacherId());
                         reselt.doClick();
                     }
                 }

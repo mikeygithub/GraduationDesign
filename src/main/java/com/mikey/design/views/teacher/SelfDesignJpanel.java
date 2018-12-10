@@ -28,7 +28,7 @@ public class SelfDesignJpanel extends JPanel {
     //当前页
     private int currentPage=1;
     //每页显示条数
-    private int pageSize=20;
+    private int pageSize=12;
     //表头（列名）TODO:待添加剩余人数
     private Object[] columnNames = {"毕设题目", "毕设人数", "毕设需求"};
     //列表内容
@@ -121,6 +121,8 @@ public class SelfDesignJpanel extends JPanel {
         JButton nextPage=new JButton("下一页");
         JButton endPage=new JButton("末页");
 
+        JPanel showTipMessageLocationJpanel=this;
+
         /**
          * 监听首页
          */
@@ -128,7 +130,7 @@ public class SelfDesignJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=1;//设置为第一页
@@ -146,7 +148,7 @@ public class SelfDesignJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(null,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage--;//设置上一页
@@ -164,7 +166,7 @@ public class SelfDesignJpanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage++;//设置为下一页
@@ -181,7 +183,7 @@ public class SelfDesignJpanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(null,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }else {
                     currentPage=pageData.getPages();//末页
