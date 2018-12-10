@@ -51,8 +51,8 @@ public class AddTeacherJpanel extends JPanel {
         JPanel sex=new JPanel();
         JLabel sexJlabel=new JLabel("性别：");
         JComboBox sexboBox=new JComboBox();//下拉框
-        sexboBox.addItem("男");
         sexboBox.addItem("女");
+        sexboBox.addItem("男");
         sex.add(sexJlabel);
         sex.add(sexboBox);
 
