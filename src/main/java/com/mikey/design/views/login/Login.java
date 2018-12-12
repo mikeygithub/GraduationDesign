@@ -35,7 +35,7 @@ public class Login extends JFrame {
          */
         //TODO:待修复打成jar包后logo路径生效
         Toolkit took = Toolkit.getDefaultToolkit(); //设置窗口图标 //要用绝对路径
-        Image image = took.getImage("./../Images/logo.png");
+        Image image = took.getImage("src/main/resources/Images/logo.png");
 
         setIconImage(image);
 

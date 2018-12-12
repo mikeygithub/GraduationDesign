@@ -27,4 +27,9 @@ public interface TitleOfStudentMapper {
     int updateByPrimaryKeySelective(TitleOfStudent record);
 
     int updateByPrimaryKey(TitleOfStudent record);
+
+    //回档第二志愿
+    void backSecondWish(Integer studentId);
+    //回档第一志愿
+    void backFirstWish(Integer studentId);
 }

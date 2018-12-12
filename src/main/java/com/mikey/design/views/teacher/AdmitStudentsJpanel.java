@@ -39,7 +39,7 @@ public class AdmitStudentsJpanel  extends JPanel {
     //当前页
     private int currentPage=1;
     //每页显示条数
-    private int pageSize=20;
+    private int pageSize=12;
     //表头（列名）
     private Object[] columnNames = {"姓名", "性别", "题目","志愿类型","联系方式", "操作"};
     //列表内容
@@ -64,7 +64,7 @@ public class AdmitStudentsJpanel  extends JPanel {
 
         AdmitStudentButtonListener.setTitleOfStudentList(titleOfStudentList);//同步到监听器
 
-        System.out.println("MESSAGE------->>>>>>>"+titleOfStudentList.size());
+        System.out.println("MESSAGE------->>>>>>>当前页：总数="+titleOfStudentList.size());
 
         rowData=new Object[pageData.getSize()][6];
 
@@ -99,9 +99,7 @@ public class AdmitStudentsJpanel  extends JPanel {
         add(titleJpanel,BorderLayout.NORTH);
 
         //列表开始
-
         students=new JPanel(new BorderLayout());
-//        students.setBackground(Color.red);
 
         //默认表格数据
         if (titleOfStudentList.size()<1){
@@ -155,7 +153,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                 }else {
                     currentPage=1;//设置为第一页
                     table.removeAll();
-                    students.removeAll();
+                    students.removeAll();students.validate();
                     refreshData();//刷新数据
                 }
             }
@@ -174,6 +172,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                     currentPage--;//设置为上一页
                     table.removeAll();
                     students.removeAll();
+                    students.validate();
                     refreshData();//刷新数据
                 }
             }
@@ -191,7 +190,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                 }else {
                     currentPage++;//设置为下一页
                     table.removeAll();
-                    students.removeAll();
+                    students.removeAll();students.validate();
                     refreshData();//刷新数据
                 }
             }
@@ -209,7 +208,7 @@ public class AdmitStudentsJpanel  extends JPanel {
                 }else {
                     currentPage=pageData.getPages();//设置为末页
                     table.removeAll();
-                    students.removeAll();
+                    students.removeAll();students.validate();
                     refreshData();//刷新数据
                 }
             }
@@ -246,5 +245,6 @@ public class AdmitStudentsJpanel  extends JPanel {
         showView();//展现视图
         table.validate();
         table.updateUI();
+        System.out.println("模型数据="+table.getModel());
     }
 }

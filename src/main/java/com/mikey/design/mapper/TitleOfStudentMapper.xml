@@ -208,4 +208,12 @@
       des_wish_order = #{desWishOrder,jdbcType=INTEGER}
     where des_of_stu_id = #{desOfStuId,jdbcType=INTEGER}
   </update>
+  <!--回档第一志愿-->
+  <update id="backFirstWish" parameterType="java.lang.Integer">
+    update des_title_of_student set des_state =2 where des_of_stu =#{studentId} and des_wish_order =0
+  </update>
+  <!--回档第二志愿-->
+  <update id="backSecondWish" parameterType="java.lang.Integer">
+    update des_title_of_student set des_state =2 where des_of_stu =#{studentId} and des_wish_order =1
+  </update>
 </mapper>

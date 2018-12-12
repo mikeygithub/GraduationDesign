@@ -39,7 +39,7 @@ public class WelcomeJpanel extends JPanel {
         //banner
         JPanel titleJpanel=new JPanel();
 //        titleJpanel.setBackground(Color.LIGHT_GRAY);
-        JLabel title=new JLabel("欢迎登入毕业设计选题系统");
+        JLabel title=new JLabel("欢迎使用毕业设计选题系统");
         title.setFont(new Font("宋体",Font.BOLD, 20));
         titleJpanel.add(title);
         add(titleJpanel,BorderLayout.NORTH);

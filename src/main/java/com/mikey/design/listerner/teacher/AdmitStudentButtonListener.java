@@ -39,10 +39,8 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
     public AdmitStudentButtonListener(JTable table,AdmitStudentsJpanel admitStudentsJpanel) {
 
         //获取当前登入用户信息
-        //Teacher selfTeacher = (Teacher) ThreadLocalUtil.get();
+
         titleOfStudentService = (TitleOfStudentService) SpringUtil.getBean("titleOfStudentServiceImpl");
-
-
 
         buttonJpanel=new JPanel();
         buttonJpanel.setLayout(new BorderLayout());
@@ -54,16 +52,17 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
             @Override
             public void actionPerformed(ActionEvent e) {
             System.out.println("Message=当前页数量"+titleOfStudentList.size());
+
                 int selectedRow = table.getSelectedRow();
 
                 System.out.println("选中的行--------------------》》》》》》》》》》》》"+selectedRow);
 
                 if (selectedRow>titleOfStudentList.size()){
-                    JOptionPane.showMessageDialog(null, "该行无数据");
+                    JOptionPane.showMessageDialog(admitStudentsJpanel, "该行无数据");
                     return;
                 }
 
-                int result = JOptionPane.showConfirmDialog(null,
+                int result = JOptionPane.showConfirmDialog(admitStudentsJpanel,
                         "您确定要录取这位学生吗?", "确认录取",
                         JOptionPane.YES_NO_OPTION);
 
@@ -76,9 +75,9 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
 
                     titleOfStudentList.remove(selectedRow);//移除
 
-                    JOptionPane.showMessageDialog(null, "录取学生成功");
-
                     admitStudentsJpanel.refreshData();//刷新数据
+
+                    JOptionPane.showMessageDialog(admitStudentsJpanel, "录取学生成功");
 
                     System.out.println("录取学生成功===================》》》》》》》》》");
                 }

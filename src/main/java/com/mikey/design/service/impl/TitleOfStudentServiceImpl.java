@@ -125,8 +125,8 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
         criteria.andDesWishOrderEqualTo(0);//第一志愿
         List<TitleOfStudent> titleOfStudent=titleOfStudentMapper.selectByExample(titleOfStudentExample);
 
-        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==0)return 0;
-        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==1)return 1;
+        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==0)return 0;//第一志愿待录取
+        if(titleOfStudent.size()>0&&titleOfStudent.get(0).getDesState()==1)return 1;//第一志愿已经录取
 
         TitleOfStudentExample titleOfStudentExample2 = new TitleOfStudentExample();
         TitleOfStudentExample.Criteria criteria2 = titleOfStudentExample.createCriteria();
@@ -200,6 +200,15 @@ public class TitleOfStudentServiceImpl implements TitleOfStudentService {
         titleOfStudentMapper.updateByPrimaryKey(titleOfStudent);//提交更新
 
         //TODO:将该学生的另一个志愿回档
+
+        switch (titleOfStudent.getDesWishOrder()){
+            case 0://第一志愿被录取、将第二志愿回档
+                titleOfStudentMapper.backSecondWish(titleOfStudent.getStudent().getStudentId());
+                break;
+            case 1://第一志愿被录取、将第二志愿回档
+                titleOfStudentMapper.backFirstWish(titleOfStudent.getStudent().getStudentId());
+                break;
+        }
 
     }
 }
