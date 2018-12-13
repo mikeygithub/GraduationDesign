@@ -29,11 +29,11 @@ public class GraduationdesignsystemApplication {
 
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
             //加载美化包
+            BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
             //关闭设置功能
             UIManager.put("RootPane.setupButtonVisible", false);
             //设置此开关量为false即表示关闭之，BeautyEye LNF中默认是true
-            BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
         }
         catch(Exception e)
         {

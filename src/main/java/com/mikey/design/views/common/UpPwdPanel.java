@@ -82,21 +82,21 @@ public class UpPwdPanel extends JPanel {
         //1.原登入密码
         JPanel oldPwdJpanel=new JPanel();
         JLabel oldPwdJlabel=new JLabel("原登入密码：");
-        JTextField oldPwdTextField=new JTextField("请输入原登入密码");
+        JTextField oldPwdTextField=new JTextField("请输入原登入密码",19);
         oldPwdJpanel.add(oldPwdJlabel);
         oldPwdJpanel.add(oldPwdTextField);
 
         //2.新登入密码
         JPanel newPwdJpanel=new JPanel();
         JLabel newPwdJlabel=new JLabel("新登入密码：");
-        JTextField newPwdJtextField=new JTextField("请输入新登入密码");
+        JTextField newPwdJtextField=new JTextField("请输入新登入密码",19);
         newPwdJpanel.add(newPwdJlabel);
         newPwdJpanel.add(newPwdJtextField);
 
         //3.重复新登入密码
         JPanel reNewPwdJpanel=new JPanel();
         JLabel reNewPwdJlabel=new JLabel("新登入密码：");
-        JTextField reNewPwdJtextField=new JTextField("请再次输入新密码");
+        JTextField reNewPwdJtextField=new JTextField("请再次输入新密码",19);
         reNewPwdJpanel.add(reNewPwdJlabel);
         reNewPwdJpanel.add(reNewPwdJtextField);
 

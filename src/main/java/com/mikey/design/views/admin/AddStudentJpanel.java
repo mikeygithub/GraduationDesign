@@ -96,7 +96,7 @@ public class AddStudentJpanel extends JPanel {
 
                         Student studentByPhone = studentService.getStudentByPhone(student.getStudentPhone());
 
-                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "添加成功/学号为："+studentByPhone.getStudentId());
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "添加成功学号为："+studentByPhone.getStudentId());
                         reselt.doClick();
                     }
                 }
