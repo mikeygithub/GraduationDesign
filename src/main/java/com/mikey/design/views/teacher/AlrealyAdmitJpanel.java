@@ -107,6 +107,12 @@ public class AlrealyAdmitJpanel extends JPanel {
                 TableColumn tableColumn=table.getColumn(columnNames[i]);
                 tableColumn.setCellRenderer(renderer);
             }
+        }else {
+            rowData[0][0]="暂无";rowData[0][1]="暂无";rowData[0][2]="暂无";rowData[0][3]="暂无";
+            for (int i=0;i<columnNames.length;i++){
+                TableColumn tableColumn=table.getColumn(columnNames[i]);
+                tableColumn.setCellRenderer(renderer);
+            }
         }
 
 

@@ -93,6 +93,7 @@ public class TeacherMainView extends JFrame {
         menuChild3.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+//                ((AdmitStudentsJpanel) admitStudentsJpanel).listenerPageButton();//添加监听按钮
                 ((AdmitStudentsJpanel) admitStudentsJpanel).refreshData();//刷新数据
                 cardLayout.show(center,"admitStudentsJpanel");
             }

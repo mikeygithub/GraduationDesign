@@ -1,11 +1,10 @@
 package com.mikey.design.listerner.teacher;
 
-import com.mikey.design.entity.Teacher;
 import com.mikey.design.entity.TitleOfStudent;
 import com.mikey.design.service.TitleOfStudentService;
 import com.mikey.design.utils.SpringUtil;
-import com.mikey.design.utils.ThreadLocalUtil;
 import com.mikey.design.views.teacher.AdmitStudentsJpanel;
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
@@ -45,6 +44,7 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
         buttonJpanel=new JPanel();
         buttonJpanel.setLayout(new BorderLayout());
         admitButton=new JButton("录取");
+        admitButton.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
         buttonJpanel.add(admitButton,BorderLayout.CENTER);
 
 
@@ -62,22 +62,21 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
                     return;
                 }
 
-                int result = JOptionPane.showConfirmDialog(admitStudentsJpanel,
-                        "您确定要录取这位学生吗?", "确认录取",
-                        JOptionPane.YES_NO_OPTION);
+                int result = JOptionPane.showConfirmDialog(admitStudentsJpanel, "您确定要录取这位学生吗?", "确认录取", JOptionPane.YES_NO_OPTION);
 
                 if(result ==  JOptionPane.YES_OPTION){
                     //进行录取操作、调用service执行sql语句
                     TitleOfStudent titleOfStudent = titleOfStudentList.get(selectedRow);
+                    //
                     System.out.println("将要录取的学生姓名="+titleOfStudent.getStudent().getStudentName());
                     //录取
                     titleOfStudentService.admitStudentWish(titleOfStudent);
 
                     titleOfStudentList.remove(selectedRow);//移除
 
-                    admitStudentsJpanel.refreshData();//刷新数据
-
                     JOptionPane.showMessageDialog(admitStudentsJpanel, "录取学生成功");
+
+                    admitStudentsJpanel.refreshData();//刷新数据
 
                     System.out.println("录取学生成功===================》》》》》》》》》");
                 }
@@ -85,10 +84,6 @@ public class AdmitStudentButtonListener extends AbstractCellEditor implements Ta
             }
         });
     }
-    public AdmitStudentButtonListener(Integer studnetNum) {//录取学生
-
-    }
-
     /**
      * 为编辑器设置初始值
      * @param table

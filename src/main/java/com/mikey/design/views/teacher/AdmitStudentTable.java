@@ -1,6 +1,7 @@
 package com.mikey.design.views.teacher;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.util.Vector;
@@ -24,7 +25,20 @@ public class AdmitStudentTable extends JTable {
         }
     }
 
+    /**
+     *
+     * @param rowData
+     * @param columnNames
+     */
     public AdmitStudentTable(final Object[][] rowData, final Object[] columnNames) {
         super( rowData, columnNames);
+    }
+
+    /**
+     *
+     * @param tableModel
+     */
+    public AdmitStudentTable(DefaultTableModel tableModel) {
+        super(tableModel);
     }
 }

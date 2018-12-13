@@ -14,6 +14,7 @@ import com.mikey.design.utils.ThreadLocalUtil;
 import com.mikey.design.views.renderer.AdmitStudentButtonRenderer;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -54,9 +55,12 @@ public class AdmitStudentsJpanel  extends JPanel {
     private JTable table;
     //
     private JPanel students;
+    //
+    DefaultTableModel tableModel;
+    //
+    public int flag=0;
 
     public void getData(){
-
 
         pageData=teacherService.getWillAdmitStudentMes(selfTeacher.getTeacherId(),currentPage,pageSize);//通过教师id获取志愿填报情况
 
@@ -66,7 +70,7 @@ public class AdmitStudentsJpanel  extends JPanel {
 
         System.out.println("MESSAGE------->>>>>>>当前页：总数="+titleOfStudentList.size());
 
-        rowData=new Object[pageData.getSize()][6];
+        rowData=new Object[pageData.getSize()==0?1:pageData.getSize()][6];
 
         clearRowData(rowData);//清空数据表格
         /**
@@ -107,8 +111,11 @@ public class AdmitStudentsJpanel  extends JPanel {
         }
         //数据表格
 
+//        tableModel=new DefaultTableModel(rowData,columnNames);
         //表格
         table=new AdmitStudentTable(rowData,columnNames);
+
+//        table=new AdmitStudentTable(tableModel);
 
         MyTableCellRenderer renderer=new MyTableCellRenderer();
 
@@ -140,79 +147,81 @@ public class AdmitStudentsJpanel  extends JPanel {
         page.add(endPage);
         add(page,BorderLayout.SOUTH);
 
-        JPanel showTipMessageLocationJpanel=this;
-        /**
-         * 监听首页
-         */
-        firstPage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }else {
-                    currentPage=1;//设置为第一页
-                    table.removeAll();
-                    students.removeAll();students.validate();
-                    refreshData();//刷新数据
-                }
-            }
-        });
-        /**
-         * 监听上一页
-         */
-        upPage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("当前页="+pageData.getPageNum()+"共"+pageData.getPages()+"data="+rowData);
-                if (currentPage==1||pageData.getPageNum()==1){
-                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达首页","系统提示",JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }else {
-                    currentPage--;//设置为上一页
-                    table.removeAll();
-                    students.removeAll();
-                    students.validate();
-                    refreshData();//刷新数据
-                }
-            }
-        });
-        /**
-         * 监听下页
-         */
-        nextPage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        if (flag==0) {
 
-                if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }else {
-                    currentPage++;//设置为下一页
-                    table.removeAll();
-                    students.removeAll();students.validate();
-                    refreshData();//刷新数据
+            JPanel showTipMessageLocationJpanel = this;
+            /**
+             * 监听首页
+             */
+            firstPage.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (currentPage == 1 || pageData.getPageNum() == 1) {
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "已到首页", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    } else {
+                        currentPage = 1;//设置为第一页
+                        table.removeAll();
+                        students.removeAll();
+                        refreshData();//刷新数据
+                    }
                 }
-            }
-        });
+            });
+            /**
+             * 监听上一页
+             */
+            upPage.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("当前页=" + pageData.getPageNum() + "共" + pageData.getPages() + "data=" + rowData);
+                    if (currentPage == 1 || pageData.getPageNum() == 1) {
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "已到达首页", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    } else {
+                        currentPage--;//设置为上一页
+                        table.removeAll();
+                        students.removeAll();
+                        refreshData();//刷新数据
+                    }
+                }
+            });
+            /**
+             * 监听下页
+             */
+            nextPage.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-        /**
-         * 监听末页
-         */
-        endPage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (pageData.getPageNum()==pageData.getPages()){
-                    JOptionPane.showMessageDialog(showTipMessageLocationJpanel,"已到达末页","系统提示",JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }else {
-                    currentPage=pageData.getPages();//设置为末页
-                    table.removeAll();
-                    students.removeAll();students.validate();
-                    refreshData();//刷新数据
+                    if (pageData.getPageNum() == pageData.getPages()) {
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "已到达末页", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    } else {
+                        currentPage++;//设置为下一页
+                        table.removeAll();
+                        students.removeAll();
+                        refreshData();//刷新数据
+                    }
                 }
-            }
-        });
+            });
+
+            /**
+             * 监听末页
+             */
+            endPage.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (pageData.getPageNum() == pageData.getPages()) {
+                        JOptionPane.showMessageDialog(showTipMessageLocationJpanel, "已到达末页", "系统提示", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    } else {
+                        currentPage = pageData.getPages();//设置为末页
+                        table.removeAll();
+                        students.removeAll();
+                        refreshData();//刷新数据
+                    }
+                }
+            });
+        }
 
     }
 
@@ -244,7 +253,7 @@ public class AdmitStudentsJpanel  extends JPanel {
         getData();//获取数据
         showView();//展现视图
         table.validate();
-        table.updateUI();
-        System.out.println("模型数据="+table.getModel());
+//        tableModel.fireTableDataChanged();
+        students.updateUI();
     }
 }

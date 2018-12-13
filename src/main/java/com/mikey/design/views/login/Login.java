@@ -1,6 +1,7 @@
 package com.mikey.design.views.login;
 
 import com.mikey.design.listerner.common.LoginListener;
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,8 +76,10 @@ public class Login extends JFrame {
          * btn
          */
         JButton loginbtn=new JButton("登入");
+        loginbtn.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.green));
         loginbtn.addActionListener(new LoginListener(nameJtextField,pwdJtextField,group,this));
         JButton reset=new JButton("重置");
+        reset.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.lightBlue));
         JPanel btn=new JPanel();
         btn.add(loginbtn);
         btn.add(reset);

@@ -26,10 +26,12 @@ public class GraduationdesignsystemApplication {
 //            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
 //            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencySmallShadow;
 //            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
+
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
             //加载美化包
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-            UIManager.put("RootPane.setupButtonVisible", false);//关闭设置功能
+            //关闭设置功能
+            UIManager.put("RootPane.setupButtonVisible", false);
             //设置此开关量为false即表示关闭之，BeautyEye LNF中默认是true
             BeautyEyeLNFHelper.translucencyAtFrameInactive = false;
         }
