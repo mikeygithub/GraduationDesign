@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public void addStudent(Student student) {
-        studentMapper.insert(student);
+        studentMapper.insertSelective(student);
     }
 
     /**

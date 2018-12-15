@@ -42,7 +42,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void addTeacher(Teacher teacher) {
 
-        teacherMapper.insert(teacher);
+        teacherMapper.insertSelective(teacher);
+
     }
     /**
      * 修改教师
