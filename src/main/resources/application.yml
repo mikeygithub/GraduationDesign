@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
       name: graduationdesign
-      url: jdbc:mysql://47.106.210.183:3306/graduationdesign?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://127.0.0.1:3306/graduationdesign?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
       username: root
-      password: goyb578247520
+      password: 123456
       # 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.jdbc.Driver
