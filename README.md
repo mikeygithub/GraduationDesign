@@ -22,12 +22,12 @@
 
 ## 使用技术
 
-- [SpringBoot]()
-- [Java Swing]()
+- [SpringBoot]()  
+- [Java Swing]()  
 - [Beautyeye](https://github.com/JackJiang2011/beautyeye)
 
 ## 部署方法
 
-1.通过maven安装依赖
-2.导入db文件夹下的数据库文件
-3.运行主类即可
+1.通过maven安装依赖  
+2.导入db文件夹下的数据库文件  
+3.运行主类即可  
