@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mikey</groupId>
-    <artifactId>graduationdesignsystem</artifactId>
+    <artifactId>graduation-design-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -76,6 +76,8 @@
             <groupId>com.beautyeye</groupId>
             <artifactId>beautyeye</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/beautyeye_lnf.jar</systemPath>
         </dependency>
     </dependencies>
     <build>
@@ -90,6 +92,12 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>lib</directory>
+                <includes>
+                    <include>**/*.jar</include>
                 </includes>
             </resource>
         </resources>

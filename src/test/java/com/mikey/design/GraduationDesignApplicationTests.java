@@ -20,7 +20,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GraduationdesignsystemApplicationTests {
+public class GraduationDesignApplicationTests {
 
     @Autowired
     private StudentMapper studentMapper;
